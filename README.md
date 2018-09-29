@@ -2,7 +2,7 @@
 
 IPLATFORM-BOOT 是以 SpringCloud Brixton.RELEASE 为核心的微服务开发框架
 
-## 重要资源
+## 资源
 * [快速开始](QuickStart.md) 
 
   > 注册服务、认证服务搭建
@@ -21,13 +21,15 @@ IPLATFORM-BOOT 是以 SpringCloud Brixton.RELEASE 为核心的微服务开发框
 
 * Kafka集成开发手册
 
+* ElasticSearch集成开发手册
+
 * 集中文档存储集成开发手册
 
-* 集中日志配置手册
+* 集中日志配置开发手册
 
-* 配置文件加密配置手册
+* 配置文件加密配置开发手册
 
-* 分布式锁配置手册
+* 分布式锁配置开发手册
 
 * 负载均衡、流控、租户、路由标签配置手册
 
