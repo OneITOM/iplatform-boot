@@ -3,7 +3,7 @@
 IPLATFORM-BOOT 是以 SpringCloud Brixton.RELEASE 为核心的微服务开发框架
 
 ## 重要资源
-* 快速开始 
+* [快速开始](QuickStart.md) 
 
   > 基于Docker快速体验注册服务、认证服务、样例服务
 
