@@ -92,4 +92,4 @@ String[] value() default {";","'","\"","\\(","\\)","and","or","union","where","l
 ### SpringBoot配置不当敏感信息泄漏 <span id="2.6">2.6</span> 
 ### Slow HTTP Denial of Service Attack漏洞
 
-<span id="2.7"></span>
+<span id="2.7">2.7</span>
