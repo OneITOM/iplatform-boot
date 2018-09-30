@@ -2,7 +2,7 @@
 
 本文档主要讲解于项目安全相关的配置和开发指南
 
-- [配置文件加密](#1)
+- [配置文件加密](#配置文件加密)
 - [安全漏洞](#2)
   - [SQL注入漏洞](#2.1)
   - [CSRF跨站请求伪造](#2.2)
@@ -14,7 +14,7 @@
 
 
 
-## <span id="1"/>配置文件加密
+## 配置文件加密
 
 > 配置文件中或者启动参数的参数值可以使用加密方式配置
 
@@ -27,7 +27,8 @@ spring.datasource.password=123456
 可以使用密码生成工具生成明文对应的密文后配置成密文格式
 
 ```shell
-java -jar enctool-0.0.1-SNAPSHOT.jar "123456" ======================================================================  
+java -jar enctool-0.0.1-SNAPSHOT.jar "123456" 
+======================================================================  
 微服务配置文件密文生成工具  java -jar enctool-0.0.1-SNAPSHOT.jar 要加密的明文 
 ----------------------------------------------------------------------         
 Copyright© BOCO  
@@ -90,4 +91,4 @@ String[] value() default {";","'","\"","\\(","\\)","and","or","union","where","l
 ### <span id="2.4"/>不安全的HTTP方法
 ### <span id="2.5"/>SSL/TLS受诫礼(BAR-MITZVAH)攻击漏洞
 ### <span id="2.6"/>SpringBoot配置不当敏感信息泄漏 
-### <span id="2.7"/>Slow HTTP Denial of Service Attack漏洞
+### Slow HTTP Denial of Service Attack漏洞
