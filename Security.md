@@ -5,6 +5,8 @@
 本文档主要讲解于项目安全相关的配置和开发指南
 
 - [配置文件加密](#user-content-1)
+- Token
+- 角色鉴权
 - [安全漏洞](#user-content-2)
   - [SQL注入漏洞](#user-content-2.1)
   - [CSRF跨站请求伪造](#user-content-2.2)
