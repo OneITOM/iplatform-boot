@@ -27,7 +27,9 @@ IPLATFORM-BOOT 是以 SpringCloud Brixton.RELEASE 为核心的微服务开发框
 
 * 集中日志配置开发手册
 
-* 配置文件加密配置开发手册
+* [安全相关配置手册](Security.md)
+
+  > 于项目安全有关的配置说明，例如配置文件加密、漏洞应对等
 
 * 分布式锁配置开发手册
 
