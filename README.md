@@ -21,6 +21,7 @@ IPLATFORM-BOOT 是以 SpringCloud Brixton.RELEASE 为核心的微服务开发框
 * [Storm](middleware/Storm.md)
 * [MySQL](middleware/MysQL.md)
 * [Redis](middleware/Redis.md)
+* [Nginx](Nginx.md)
 
 ## 3. 开发手册
 
