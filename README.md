@@ -6,7 +6,7 @@ IPLATFORM-BOOT 是以 SpringCloud Brixton.RELEASE 为核心的微服务开发框
 
 ## 1. 公共服务部署手册
 
-* [注册服务部署手册](iplatfrom-common/DiscoveryService.md)
+* [注册服务部署手册](iplatform-common/DiscoveryService.md)
 * [认证服务部署手册](iplatform-common/AuthService.md)
 * [文档服务部署手册](iplatfrom-common/DfssService.md)
 * [跟踪服务部署手册](iplatfrom-common/TraceService.md)
