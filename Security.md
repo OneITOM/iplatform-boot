@@ -10,7 +10,7 @@
   - [不安全的HTTP方法](#2.4)
   - [SSL/TLS受诫礼(BAR-MITZVAH)攻击漏洞](#2.5)
   - [SpringBoot配置不当敏感信息泄漏](#2.6)
-  - [Slow HTTP Denial of Service Attack漏洞](#2.7)
+  - [Slow HTTP Denial of Service Attack漏洞](#user-content-2.7)
 
 
 
