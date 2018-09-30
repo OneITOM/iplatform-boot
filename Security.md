@@ -15,7 +15,6 @@
 
 
 ## 配置文件加密
-<span id="1"/>
 > 配置文件中或者启动参数的参数值可以使用加密方式配置
 
 例如以下是未加密的数据库密码配置参数
@@ -92,3 +91,4 @@ String[] value() default {";","'","\"","\\(","\\)","and","or","union","where","l
 ### <span id="2.5"/>SSL/TLS受诫礼(BAR-MITZVAH)攻击漏洞
 ### <span id="2.6"/>SpringBoot配置不当敏感信息泄漏 
 ### Slow HTTP Denial of Service Attack漏洞
+<span id="2.7></span>
