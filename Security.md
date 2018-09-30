@@ -90,6 +90,5 @@ String[] value() default {";","'","\"","\\(","\\)","and","or","union","where","l
 ### <span id="2.4"/>不安全的HTTP方法
 ### <span id="2.5"/>SSL/TLS受诫礼(BAR-MITZVAH)攻击漏洞
 ### SpringBoot配置不当敏感信息泄漏 <span id="2.6">2.6</span> 
-### Slow HTTP Denial of Service Attack漏洞
+### <a id="2.7">2.7</a> Slow HTTP Denial of Service Attack漏洞
 
-<a id="2.7">2.7</a>
