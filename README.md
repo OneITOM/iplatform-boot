@@ -6,21 +6,21 @@ IPLATFORM-BOOT 是以 SpringCloud Brixton.RELEASE 为核心的微服务开发框
 
 ## 1. 公共服务部署手册
 
-* 注册服务部署手册
-* 认证服务部署手册
-* 文档服务部署手册
-* 跟踪服务部署手册
-* 监控服务部署手册
-* 消息服务部署手册
+* [注册服务部署手册](iplatfrom-common/DiscoveryService.md)
+* [认证服务部署手册](iplatform-common/AuthService.md)
+* [文档服务部署手册](iplatfrom-common/DfssService.md)
+* [跟踪服务部署手册](iplatfrom-common/TraceService.md)
+* [监控服务部署手册](iplatfrom-common/AdminService.md)
+* [消息服务部署手册](iplatfrom-common/NotifyService.md)
 
 ## 2. 中间件部署手册
 
-* ActiveMQ
-* Kafka
-* ELK
-* Storm
-* MySQL
-* Redis
+* [ActiveMQ](middleware/ActiveMQ.md)
+* [Kafka](middleware/Kafka.md)
+* [ELK](middleware/ELK.md)
+* [Storm](middleware/Storm.md)
+* [MySQL](middleware/MysQL.md)
+* [Redis](middleware/Redis.md)
 
 ## 3. 开发手册
 
@@ -70,6 +70,6 @@ IPLATFORM-BOOT 是以 SpringCloud Brixton.RELEASE 为核心的微服务开发框
 
 ## 附件
 
-* 框架参数说明
+* [框架参数说明](Properties.md)
 * [版本跟踪](ChangeLog.md)
 
