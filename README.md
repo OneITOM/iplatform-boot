@@ -20,6 +20,7 @@ IPLATFORM-BOOT 是以 SpringCloud Brixton.RELEASE 为核心的微服务开发框
 * ELK
 * Storm
 * MySQL
+* Redis
 
 ## 3. 开发手册
 
@@ -59,13 +60,16 @@ IPLATFORM-BOOT 是以 SpringCloud Brixton.RELEASE 为核心的微服务开发框
 
   > 项目安全有关的配置说明，配置文件加密、单点认证、服务鉴权、漏洞应对等
 
+## 产品手册
+
+- [采集产品手册](product/octopus/README.md)
+- 云管平台手册
+- CMDB产品手册
+- 自动化部署手册
+- 自动化运维手册
+
 ## 附件
 
-* 采集产品部署手册
-* 云管平台部署手册
-* CMDB部署手册
-* 自动化部署部署手册
-* 自动化运维部署手册
 * 框架参数说明
 * [版本跟踪](ChangeLog.md)
 
