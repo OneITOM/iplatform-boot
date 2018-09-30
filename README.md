@@ -33,19 +33,21 @@ IPLATFORM-BOOT 是以 SpringCloud Brixton.RELEASE 为核心的微服务开发框
 
 * [应用打包部署手册](ProjectBuild.md)
 
-* 数据库开发手册
+* 中间件相关开发手册
 
-  * 中间件相关开发手册
+  * 数据库开发手册
   * ActiveMQ开发手册
   * Flume开发手册
   * Kafka开发手册
   * ElasticSearch开发手册
+  * Redis开发手册
 
 * 分布式相关开发手册
 
   * 文档服务集成手册
   * 集中日志集成手册
   * 分布式锁开发手册
+  * 集中式缓存开发手册
   * 服务跟踪配置手册
   * 负载均衡、流控、租户、路由标签配置手册
   * 消息总线集成手册
@@ -59,6 +61,11 @@ IPLATFORM-BOOT 是以 SpringCloud Brixton.RELEASE 为核心的微服务开发框
 
 ## 附件
 
+* 采集产品部署手册
+* 云管平台部署手册
+* CMDB部署手册
+* 自动化部署部署手册
+* 自动化运维部署手册
 * 框架参数说明
 * [版本跟踪](ChangeLog.md)
 
