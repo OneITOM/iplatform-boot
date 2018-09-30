@@ -67,9 +67,9 @@ IPLATFORM-BOOT 是以 SpringCloud Brixton.RELEASE 为核心的微服务开发框
 
 - [采集产品手册](product/octopus/README.md)
 - 云管平台手册
-- CMDB产品手册
-- 自动化部署手册
-- 自动化运维手册
+- [CMDB产品手册](product/cmdb/README.md)
+- [自动化部署手册](product/autodeploy/README.md)
+- [自动化运维手册](product/automatic/README.md)
 
 ## 附件
 
