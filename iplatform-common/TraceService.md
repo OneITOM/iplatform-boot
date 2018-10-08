@@ -55,6 +55,10 @@ sh run.sh restart
 | zipkin.storage.elasticsearch.index-shards   |      | 1             | 设置默认索引分片个数，默认为1片                              |
 | zipkin.storage.elasticsearch.index-replicas |      | 1             | 设置默认索引副本个数，默认为1个副本                          |
 
+## 跟踪服务集成
+
+> 其他微服务产品如果要集成跟踪服务请参考[服务跟踪配置手册](../developer/trace/README.md)
+
 ## Kibana
 
 > 可以通过Kibana查看ES中存储的调用链
