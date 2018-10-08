@@ -11,29 +11,30 @@ IPLATFORM-BOOT 是以 SpringCloud Brixton.RELEASE 为核心的微服务开发框
 * [文档服务部署手册](iplatfrom-common/DfssService.md)
 * [跟踪服务部署手册](iplatform-common/TraceService.md)
 * [监控服务部署手册](iplatform-common/AdminService.md)
-* [消息服务部署手册](iplatform-common/NotifyService.md)-未开始
+* [消息服务部署手册](iplatform-common/NotifyService.md)-王立松
 
 ## 2. 中间件部署手册
 
-* [ActiveMQ](middleware/ActiveMQ.md)-未开始
-* [Kafka](middleware/Kafka.md)-未开始
-* [ELK](middleware/ELK.md)-未开始
-* [Storm](middleware/Storm.md)-未开始
-* [MySQL](middleware/MysQL.md)-未开始
-* [Redis](middleware/Redis.md)-未开始
-* [Nginx](Nginx.md)-未开始
+* [ActiveMQ](middleware/ActiveMQ.md)-李光辉
+* [Kafka](middleware/Kafka.md)-李光辉
+* [ELK](middleware/ELK.md)-于胜强
+* [Storm](middleware/Storm.md)-于胜强
+* [MySQL](middleware/MysQL.md)-李晓琴
+* [Redis](middleware/Redis.md)-于胜强
+* [Nginx](middleware/Nginx.md)-杜臻
+* [Mongo](middleware/Mongo.md)-于胜强
 
 ## 3. 开发手册
 
-* [快速开始](QuickStart.md)-未开始
+* [快速开始](QuickStart.md)-王立松
 
   > 注册服务、认证服务搭建
 
-* [项目构建手册](YourFirstProject.md)-未开始
+* [项目构建手册](YourFirstProject.md)-王立送
 
   > 快速构建一个SERVICE、UI的服务框架
 
-* [应用打包部署手册](ProjectBuild.md)-未开始
+* [应用打包部署手册](ProjectBuild.md)-王立松
 
 * 编码规约
 
@@ -86,5 +87,5 @@ IPLATFORM-BOOT 是以 SpringCloud Brixton.RELEASE 为核心的微服务开发框
 
 * [框架参数说明](Properties.md)
 * [版本跟踪](ChangeLog.md)
-* [Spring Boot Reference Guid](https://docs.spring.io/spring-boot/docs/1.3.5.RELEASE/reference/html/)
+* [Spring Boot 1.3.5 Reference Guid](https://docs.spring.io/spring-boot/docs/1.3.5.RELEASE/reference/html/)
 

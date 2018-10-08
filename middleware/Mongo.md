@@ -1,4 +1,4 @@
-# MySQL部署手册
+# Mongo部署手册
 
 > 作者 xx
 
@@ -44,26 +44,24 @@
 
 ```yaml
 version: '3.2'
-services:
-  oneitom-mysql:
-    image: boco/alpine-mysql:10.1.28
-    hostname: oneitom-mysql
-    container_name: oneitom-mysql
+services:      
+  oneitom-mongo:
+    image: boco/alpine-mongo:3.4.10
+    hostname: oneitom-mongo
+    container_name: oneitom-mongo
     restart: always
     networks:
       - oneitom-network
     ports:
-      - '3306:3306'
+      - '27017:27017'
     volumes:
-      - ${ONEITOM_VOLUME_PATH}/oneitom-mysql:/app:rw
+      - ${ONEITOM_VOLUME_PATH}/oneitom-mongo:/data/db:rw
     environment:
-      - TZ=Asia/Shanghai
-      - MYSQL_ROOT_PASSWORD=root
-      - MYSQL_DATABASE=authdb,notifydb,gulfdataflowdb
-      - MYSQL_USER=authdb-user,notifydb-user,gulfdataflowdb-user
-      - MYSQL_PASSWORD=authdb-password,notifydb-password,gulfdataflowdb-password
+      - 'MONGO_USERNAME=root'
+      - 'MONGO_PASSWORD=root'
+      - 'MONGO_DATABASE=dfss:dfss-user:dfss-password,cmdb:cmdb-user:cmdb-password,datashare:datashare-user:datashare-password,configdb:configdb-user:configdb-password,'
     labels:
-     - oneitom-mysql-cluster
+     - oneitom-mongo-cluster       
 networks:
   oneitom-network:
     external: true
