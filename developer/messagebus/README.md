@@ -13,7 +13,7 @@
 
 ## 2. 验证绑定
 
-> 本服务启动时可以通过日志查看是否已经绑定了消息总线服务
+> 服务启动后会通过集中配置获取ActiveMQ链接地址并创建链接，链接创建完毕后会打印一下日志。
 
 ```shell
 o.i.m.core.messagebus.MessageBusService.initActiveQM : 框架消息总线初始化完成
