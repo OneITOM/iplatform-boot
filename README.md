@@ -8,7 +8,7 @@ IPLATFORM-BOOT 是以 SpringCloud Brixton.RELEASE 为核心的微服务开发框
 
 * [注册服务部署手册](iplatform-common/DiscoveryService.md)
 * [认证服务部署手册](iplatform-common/AuthService.md)
-* [文档服务部署手册](iplatfrom-common/DfssService.md)
+* [文档服务部署手册](iplatfrom-common/DfssService.md)-于胜强
 * [跟踪服务部署手册](iplatform-common/TraceService.md)
 * [监控服务部署手册](iplatform-common/AdminService.md)
 * [消息服务部署手册](iplatform-common/NotifyService.md)-王立松
@@ -50,23 +50,23 @@ IPLATFORM-BOOT 是以 SpringCloud Brixton.RELEASE 为核心的微服务开发框
 
 * 中间件相关开发手册
 
-  * [数据库开发手册](developer/database/README.md)-未开始
-  * [ActiveMQ开发手册](developer/activemq/README.md)-未开始
+  * [数据库开发手册](developer/database/README.md)-王立松
+  * [ActiveMQ开发手册](developer/activemq/README.md)-王立松
   * [Flume开发手册](developer/flume/README.md)
-  * [Kafka开发手册](developer/kafka/README.md)-未开始
-  * [ElasticSearch开发手册](developer/elasticsearch/README.md)-未开始
-  * [Redis开发手册](developer/redis/README.md)-未开始
-  * Tomcat配置手册
+  * [Kafka开发手册](developer/kafka/README.md)-王立松
+  * [ElasticSearch开发手册](developer/elasticsearch/README.md)-于胜强
+  * [Redis开发手册](developer/redis/README.md)-王立松
+  * [Tomcat开发手册](developer/tomcat/README.md)-张磊
 
 * 分布式相关开发手册
 
-  * 文档服务集成手册
+  * [文档服务集成手册](/developer/dfss/README.md)-于胜强
   * [集中日志开发手册](/developer/logger/README.md)
   * [分布式锁开发手册](developer/distributedlock/README.md)
   * [集中式缓存开发手册](developer/distributedcache/README.md)-未开始
   * [服务跟踪配置手册](developer/trace/README.md)
-  * 负载均衡、流控、租户、路由标签配置手册
-  * 消息总线集成手册
+  * 负载均衡、流控、租户、路由标签配置手册-张磊
+  * [消息总线集成手册](developer/messagebus/README.md)-张磊
 
 * 其他
 
