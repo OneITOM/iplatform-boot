@@ -60,7 +60,7 @@ sh run.sh restart
 > 可以通过Kibana查看ES中存储的调用链
 
 ```http
-http://10.22.1.234:5601
+http://127.0.0.1:5601
 ```
 
 > 在Settings中增加ES索引 zipkin-*
