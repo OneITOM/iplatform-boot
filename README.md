@@ -86,6 +86,7 @@ IPLATFORM-BOOT 是以 SpringCloud Brixton.RELEASE 为核心的微服务开发框
 ## 5. 附件
 
 * [框架参数说明](Properties.md)
+* [IPv6 Support](IPv6.md)
 * [版本跟踪](ChangeLog.md)
 * [Spring Boot 1.3.5 Reference Guid](https://docs.spring.io/spring-boot/docs/1.3.5.RELEASE/reference/html/)
 
