@@ -595,16 +595,15 @@ eureka.instance.metadataMap.trackSampling=1
 
 > 这个数据样例描述了一个调用链，这个调用链包含了3个调用过程
 
+样例说明
 
-
-| ID               | Local Component | Name                               |      |
-| ---------------- | --------------- | ----------------------------------                                   |      |
+| ID | 组件类型 | 名称 | 说明 |
+| ---| ----- | ----- | -----|
 | b1ce90a546e67ba5 | httpservice     | http:/api/v1/test/testmethodwithdb | 服务端受到请求 |
 | c0e7a6f66745b037 | httpclient      | https:/auth/user                   | 服务端向认证服务鉴权 |
 | d3b277175669b1f6 | jdbc            | o.i.m.e.s.d.testmapper.create      | 服务端调用SQL |
 
-
-
+样例数据
 
 ```json
 [{
