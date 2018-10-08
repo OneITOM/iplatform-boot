@@ -55,11 +55,52 @@ sh run.sh restart
 | zipkin.storage.elasticsearch.index-shards   |      | 1             | 设置默认索引分片个数，默认为1片                              |
 | zipkin.storage.elasticsearch.index-replicas |      | 1             | 设置默认索引副本个数，默认为1个副本                          |
 
-## 跟踪服务集成
+## 5. 跟踪服务集成
 
 > 其他微服务产品如果要集成跟踪服务请参考[服务跟踪配置手册](../developer/trace/README.md)
 
-## Kibana
+## 6. Docker
+
+```yaml
+version: '3.2'
+services:   
+  oneitom-trace:
+    image: boco/oneitom-trace:0.0.2
+    hostname: oneitom-trace
+    container_name: oneitom-trace
+    restart: always
+    networks:
+      - oneitom-network
+    ports:
+      - '8763:8763'
+    volumes:
+      - ${ONEITOM_VOLUME_PATH}/oneitom-trace/logs:/trace-server/logs      
+    environment:
+      - 'JAVA_OPTIONS=-Xmx512m -Xms512m'
+      - 'discovery.server.address=https://oneitom-discovery:8761/eureka/'
+      - 'server.host=oneitom-trace'
+      - 'spring.cloud.config.enabled=true'
+      - 'spring.cloud.config.profile=测试'
+      - 'spring.zipkin.type=activemq'
+      - 'zipkin.storage.type=elasticsearch'
+      - 'zipkin.storage.elasticsearch.cluster=elasticsearch'
+      - 'zipkin.storage.elasticsearch.hosts=oneitom-elk:9300'
+      - 'zipkin.storage.elasticsearch.max-requests=64'
+      - 'zipkin.storage.elasticsearch.index=zipkin'
+      - 'zipkin.storage.elasticsearch.index-shards=1'
+      - 'zipkin.storage.elasticsearch.index-replicas=1'      
+      - 'eureka.instance.metadataMap.iplatformtype=平台服务'
+    labels:
+     - oneitom-trace-cluster                   
+
+networks:
+  oneitom-network:
+    external: true
+```
+
+
+
+## 7. Kibana
 
 > 可以通过Kibana查看ES中存储的调用链
 
