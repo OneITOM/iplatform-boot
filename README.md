@@ -70,7 +70,7 @@ IPLATFORM-BOOT 是以 SpringCloud Brixton.RELEASE 为核心的微服务开发框
 
 * 其他
 
-  * [日志](Logs.md)-未开始
+  * [日志](Logs.md)
   * [安全开发手册](Security.md)
 
   > 项目安全有关的配置说明，配置文件加密、单点认证、服务鉴权、漏洞应对等
