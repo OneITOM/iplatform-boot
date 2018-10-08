@@ -17,7 +17,7 @@
 # 数据库类型(必填)
 spring.datasource.platform=mysql
 # JDBC驱动(必填)
-spring.datasource.dataSourceClassName=com.mysql.jdbc.Driver'
+spring.datasource.dataSourceClassName=com.mysql.jdbc.Driver
 # JDBC URL(必填)
 spring.datasource.url='jdbc:mysql://oneitom-mysql:3306/authdb?useUnicode=true&characterEncoding=utf-8&autoReconnect=true'
 # 数据库用户名(必填)
