@@ -2,7 +2,7 @@
 
 > 作者 张磊
 >
-> 框架基于Zipkin内置调用链跟踪功能，实现HTTP Request、Http Response，定时@Scheduled，Mybatis的调用链跟踪记录功能，每个服务调用链消息将通过集中配置的消息总线（ActiveMQ）发送到默认对列Q_MS_TRACK中，再由跟踪服务统一收集并记录到ElasticSearch中
+> 框架基于Zipkin内置调用链跟踪功能，实现HTTP Request、Http Response，定时@Scheduled，Mybatis的调用链跟踪记录功能，每个服务调用链消息将通过集中配置的消息总线（ActiveMQ）发送到默认对列Q_MS_TRACK中，再由[跟踪服务](../../iplatform-common/TraceService.md)统一收集并记录到ElasticSearch中
 
 ## 前提
 
