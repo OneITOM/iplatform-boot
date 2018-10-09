@@ -2,17 +2,17 @@
 
 > IPv6支持列表
 
-| 名称            | 版本 | 支持 |
-| --------------- | ---- | ---- |
-| ActiveMQ        |      | Y    |
-| [MySQL](#mysql) |      |      |
-| Redis           |      |      |
-| Kafka           |      |      |
-| Zookeeper       |      |      |
-| MongoDB         |      |      |
-|                 |      |      |
-|                 |      |      |
-|                 |      |      |
+| 名称                         | 版本 | 支持 |
+| ---------------------------- | ---- | ---- |
+| ActiveMQ                     |      | Y    |
+| [MySQL](#user-content-mysql) |      |      |
+| Redis                        |      |      |
+| Kafka                        |      |      |
+| Zookeeper                    |      |      |
+| MongoDB                      |      |      |
+|                              |      |      |
+|                              |      |      |
+|                              |      |      |
 
 ## MySQL
 
