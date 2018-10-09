@@ -13,7 +13,7 @@
 
 ## 2. 项目构建
 
-### SERVICE创建
+* SERVICE创建
 
 1. 打开Spring Tool Suite，创建Spring Starter Project
 
@@ -23,13 +23,9 @@
    
    ![](images/QuickStart/createpro3.png)
    
-2. 更改pom.xml依赖
-   
-   
-  
+2. 更改pom.xml依赖，更改后文件内容如下
 
-
-### UI创建
+* UI创建
 
 ## 3. 添加依赖
 
