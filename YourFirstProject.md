@@ -178,36 +178,208 @@ public class DemoServiceApplication extends IPlatformServiceApplication {
 ```java
 package org.iplatform.microservices.demoservice.service;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.iplatform.microservices.core.http.RestResponse;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @Service
 @RestController
 @RequestMapping("/api/v1/test")
 public class TestService {
-	private static final Logger logger = LoggerFactory.getLogger(TestService.class);
-	
+
 	@RequestMapping(value = "/hello", method = RequestMethod.GET)
-	public void hello(){
-		logger.info("hello");
+	public ResponseEntity<RestResponse<String>> hello(@RequestParam(value="param") String param){
+		RestResponse<String> response = new RestResponse<String>();
+		response.setData("hello "+param+", I am TestService");
+	    response.setSuccess(Boolean.TRUE);
+	    return new ResponseEntity<>(response, HttpStatus.OK);
 	}
+	
 }
 ```
 
 * UI创建
 
-1. 创建UI项目与SERVICE项目一致，只是名称不同，demo-service需替换为demo-ui
+1. 创建UI项目与SERVICE项目一致，只是名称和包名不同，service相关的内容需替换为ui
 
 2. demo-ui/pom.xml调整，调整后内容如下
 
 ```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>org.iplatform</groupId>
+	<artifactId>demo-ui</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<packaging>jar</packaging>
+
+	<name>demo-ui</name>
+	<description>demo-ui</description>
+
+	<parent>
+		<groupId>org.iplatform</groupId>
+		<artifactId>iplatform-parent</artifactId>
+		<version>0.0.7-SNAPSHOT</version>
+		<relativePath></relativePath>
+	</parent>
+	
+	<dependencies>
+		<dependency>
+			<groupId>org.iplatform</groupId>
+			<artifactId>iplatform-util</artifactId>
+			<exclusions>
+				<exclusion>
+					<artifactId>slf4j-log4j12</artifactId>
+					<groupId>org.slf4j</groupId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+        <dependency>
+            <groupId>org.iplatform</groupId>
+            <artifactId>iplatform-ui</artifactId>
+        </dependency>       
+	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<configuration>
+					<skipTests>true</skipTests>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
+	<repositories>
+		<repository>
+			<id>boco-nexus-public</id>
+			<name>Team Nexus Repository</name>
+			<url>http://111.204.35.232/nexus/content/groups/public</url>
+		</repository>
+	</repositories>
+
+</project>
+
+```
+3. demo-ui/src/main/resources/application.properties调整为application.yml，配置内容如下
+
+```
+discovery.server.address: https://localhost:8761/eureka/
+server:
+  port: 50091
+  host: localhost
+  contextPath: /demoui
+```                                              |
+
+4. demo-service/src/main/resources下新增bootstrap.yml，配置内容如下
+
+```
+info:
+  app:
+    name: demoUI层
+    description: demoUI层
+    version: 0.0.1
+spring:
+  application:
+    name: demo-ui
+```
+
+5. 删除测试类DemoUiApplicationTests
+
+6. 主启动类DemoUiApplication调整，调整后内容如下
+
+```java
+package org.iplatform.microservices.demoui;
+
+import org.iplatform.microservices.ui.IPlatformUIApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cache.annotation.EnableCaching;
+import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
+import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
+import org.springframework.cloud.netflix.feign.EnableFeignClients;
+import org.springframework.cloud.netflix.hystrix.EnableHystrix;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.EnableAspectJAutoProxy;
+import org.springframework.jms.annotation.EnableJms;
+import org.springframework.security.oauth2.config.annotation.web.configuration.EnableOAuth2Client;
+import org.springframework.security.oauth2.config.annotation.web.configuration.EnableResourceServer;
+import org.springframework.web.bind.annotation.RestController;
+
+@Configuration
+@SpringBootApplication
+@EnableDiscoveryClient
+@EnableEurekaClient
+@EnableResourceServer
+@EnableFeignClients
+@RestController
+@EnableHystrix
+@EnableOAuth2Client
+@EnableCaching
+@EnableJms
+@EnableAspectJAutoProxy
+@ComponentScan(basePackages = {"org.iplatform.microservices"})
+public class DemoUiApplication extends IPlatformUIApplication{
+
+	public static void main(String[] args) throws Exception {
+		run(DemoUiApplication.class, args);
+	}
+}
 
 ```
 
+7. 新增IndexController和对应的index.html
+
+```java
+package org.iplatform.microservices.demoservice.service;
+
+import org.iplatform.microservices.core.http.RestResponse;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
+@Service
+@RestController
+@RequestMapping("/api/v1/test")
+public class TestService {
+
+	@RequestMapping(value = "/hello", method = RequestMethod.GET)
+	public ResponseEntity<RestResponse<String>> hello(@RequestParam(value="param") String param){
+		RestResponse<String> response = new RestResponse<String>();
+		response.setData("hello "+param+", I am TestService");
+	    response.setSuccess(Boolean.TRUE);
+	    return new ResponseEntity<>(response, HttpStatus.OK);
+	}
+	
+}
+```
+
+```html
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org" 
+	xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout">
+<body>
+	<div th:text="${returndata}"></div>
+</body>
+</html>
+```
 
 ## 3. 添加依赖
 
