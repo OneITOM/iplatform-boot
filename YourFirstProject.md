@@ -11,7 +11,9 @@
 * 开发环境 JDK1.8+
 * 开发工具 Spring Tool Suite
 
-## 2. 项目创建
+## 2. 项目构建
+
+### SERVICE创建
 
 1. 打开Spring Tool Suite，创建Spring Starter Project
 
@@ -21,7 +23,13 @@
    
    ![](images/QuickStart/createpro3.png)
    
-2. 
+2. 更改pom.xml依赖
+   
+   
+  
+
+
+### UI创建
 
 ## 3. 添加依赖
 
