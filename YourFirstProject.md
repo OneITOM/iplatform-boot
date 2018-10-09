@@ -117,11 +117,30 @@ spring:
     name: demo-service
 ```
 
-5. 测试类DemoServiceApplicationTests中@RunWith(SpringRunner.class)更改为@RunWith(SpringJUnit4ClassRunner.class)
+5. 测试类DemoServiceApplicationTests调整，调整后内容如下
+
+```java
+package org.iplatform.microservices.demoservice;
+
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+
+@RunWith(SpringJUnit4ClassRunner.class)
+@SpringBootTest
+public class DemoServiceApplicationTests {
+
+	@Test
+	public void contextLoads() {
+	}
+
+}
+```
 
 6. 主启动类DemoServiceApplication调整，调整后内容如下
 
-```
+```java
 package org.iplatform.microservices.demoservice;
 
 import org.iplatform.microservices.service.IPlatformServiceApplication;
@@ -156,7 +175,7 @@ public class DemoServiceApplication extends IPlatformServiceApplication {
 
 7. 新增TestService类，提供对外接口
 
-```
+```java
 package org.iplatform.microservices.demoservice.service;
 
 import org.slf4j.Logger;
@@ -180,6 +199,15 @@ public class TestService {
 ```
 
 * UI创建
+
+1. 创建UI项目与SERVICE项目一致，只是名称不同，demo-service需替换为demo-ui
+
+2. demo-ui/pom.xml调整，调整后内容如下
+
+```xml
+
+```
+
 
 ## 3. 添加依赖
 
