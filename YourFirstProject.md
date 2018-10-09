@@ -89,7 +89,7 @@
 
 </project>
 ```
-3. demo-service/src/main/resources/application.properties调整为application.yml，具体配置如下
+3. demo-service/src/main/resources/application.properties调整为application.yml，配置内容如下
 
 ```
 discovery.server.address: https://localhost:8761/eureka/
@@ -104,9 +104,22 @@ server:
 | server.host                 | 服务绑定IP                                                    |
 | server.port                 | 服务绑定端口                                                  |
 
-4. 测试类DemoServiceApplicationTests中@RunWith(SpringRunner.class)更改为@RunWith(SpringJUnit4ClassRunner.class)
+4. demo-service/src/main/resources下新增bootstrap.yml，配置内容如下
 
-5. 主启动类DemoServiceApplication调整，调整后内容如下
+```
+info:
+  app:
+    name: demo服务层
+    description: demo服务层
+    version: 0.0.1
+spring:
+  application:
+    name: demo-service
+```
+
+5. 测试类DemoServiceApplicationTests中@RunWith(SpringRunner.class)更改为@RunWith(SpringJUnit4ClassRunner.class)
+
+6. 主启动类DemoServiceApplication调整，调整后内容如下
 
 ```
 package org.iplatform.microservices.demoservice;
@@ -137,6 +150,31 @@ public class DemoServiceApplication extends IPlatformServiceApplication {
 
 	public static void main(String[] args) throws Exception {
 		run(DemoServiceApplication.class, args);
+	}
+}
+```
+
+7. 新增TestService类，提供对外接口
+
+```
+package org.iplatform.microservices.demoservice.service;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
+
+@Service
+@RestController
+@RequestMapping("/api/v1/test")
+public class TestService {
+	private static final Logger logger = LoggerFactory.getLogger(TestService.class);
+	
+	@RequestMapping(value = "/hello", method = RequestMethod.GET)
+	public void hello(){
+		logger.info("hello");
 	}
 }
 ```
