@@ -86,6 +86,8 @@
 			<url>http://111.204.35.232/nexus/content/groups/public</url>
 		</repository>
 	</repositories>
+
+</project>
 ```
 
 
