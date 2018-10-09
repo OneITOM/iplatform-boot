@@ -15,6 +15,8 @@
 
 1. 打开Spring Tool Suite，创建Spring Starter Project
 
+   ![](images/QuickStart/createpro.png)
+
 ## 3. 添加依赖
 
 ## 4. 服务配置
