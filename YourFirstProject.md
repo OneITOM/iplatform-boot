@@ -15,7 +15,13 @@
 
 1. 打开Spring Tool Suite，创建Spring Starter Project
 
-   ![](images/QuickStart/createpro.png)
+   ![](images/QuickStart/createpro1.png)
+   
+   ![](images/QuickStart/createpro2.png)
+   
+   ![](images/QuickStart/createpro3.png)
+   
+2. 
 
 ## 3. 添加依赖
 
