@@ -13,6 +13,8 @@
 
 ## 2. 项目创建
 
+1. 打开Spring Tool Suite，创建Spring Starter Project
+
 ## 3. 添加依赖
 
 ## 4. 服务配置
