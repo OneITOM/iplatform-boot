@@ -400,5 +400,9 @@ public interface TestClient {
 ```
 
 ## 3. 服务启动
+先启动demo-service，然后再启动demo-ui，启动方法：选中项目鼠标右键，选择Run As->Spring Boot App
 
 ## 4. 服务验证
+1. 访问服务发现链接 https://localhost:8761 在已注册的服务列表中可看到注册的demo-service和demo-ui服务
+2. 访问认证服务链接 https://localhost:9999/auth 会跳到登录页面，通过admin/admin登录后可查看demo-service和demo-ui服务
+3. 认证页面找到demo-ui服务，点击进入会调用service服务，同时将返回值展示到index.html中
