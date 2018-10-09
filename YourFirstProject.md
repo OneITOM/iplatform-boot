@@ -13,7 +13,7 @@
 
 ## 2. 项目构建
 
-* SERVICE创建
+* *SERVICE创建*
 
 1. 打开Spring Tool Suite，创建Spring Starter Project
 
