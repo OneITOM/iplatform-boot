@@ -100,6 +100,11 @@ server:
   host: localhost
   contextPath: /demoservice
 ```
+| 参数名                       | 说明                                                         |
+| --------------------------- | ------------------------------------------------------------ |
+| discovery.server.address    | 定义注册服务的地址，当集群模式时配置多个地址逗号分隔              |
+| server.host                 | 服务绑定IP                                                    |
+| server.port                 | 服务绑定端口                                                  |
 
 * UI创建
 
