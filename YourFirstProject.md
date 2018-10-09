@@ -11,9 +11,9 @@
 * 开发环境 JDK1.8+
 * 开发工具 Spring Tool Suite
 
-## 2. 项目构建
+## 2. 项目创建
 
-* *SERVICE创建*
+### SERVICE创建
 
 1. 打开Spring Tool Suite，创建Spring Starter Project
 
@@ -203,7 +203,7 @@ public class TestService {
 }
 ```
 
-* UI创建
+### UI创建
 
 1. 创建UI项目与SERVICE项目一致，只是名称和包名不同，service相关的内容需替换为ui
 
@@ -399,10 +399,6 @@ public interface TestClient {
 }
 ```
 
-## 3. 添加依赖
+## 3. 服务启动
 
-## 4. 服务配置
-
-## 5. 服务启动
-
-## 6. 服务验证
+## 4. 服务验证
