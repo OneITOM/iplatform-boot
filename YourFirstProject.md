@@ -272,19 +272,18 @@ public class TestService {
 	</repositories>
 
 </project>
-
 ```
 3. demo-ui/src/main/resources/application.properties调整为application.yml，配置内容如下
-
+  
 ```
 discovery.server.address: https://localhost:8761/eureka/
 server:
   port: 50091
   host: localhost
   contextPath: /demoui
-```                                              |
+```
 
-4. demo-service/src/main/resources下新增bootstrap.yml，配置内容如下
+4. demo-ui/src/main/resources下新增bootstrap.yml，配置内容如下
 
 ```
 info:
@@ -341,7 +340,7 @@ public class DemoUiApplication extends IPlatformUIApplication{
 
 ```
 
-7. 新增IndexController和对应的index.html
+7. 新增IndexController和对应的demo-ui/src/main/resources/templates/index.html
 
 ```java
 package org.iplatform.microservices.demoservice.service;
@@ -379,6 +378,25 @@ public class TestService {
 	<div th:text="${returndata}"></div>
 </body>
 </html>
+```
+8. 新增TestClient类，提供对service的访问
+```java
+package org.iplatform.microservices.demoui.feign;
+
+import org.iplatform.microservices.core.http.RestResponse;
+import org.springframework.cloud.netflix.feign.FeignClient;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+
+@FeignClient("demo-service")
+public interface TestClient {
+	
+	@RequestMapping(value = "demoservice/api/v1/test/hello", method = RequestMethod.GET)
+	public ResponseEntity<RestResponse<String>> hello(@RequestParam(value = "param") String param);
+	
+}
 ```
 
 ## 3. 添加依赖
