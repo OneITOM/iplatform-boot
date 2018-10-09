@@ -23,7 +23,9 @@
    
    ![](images/QuickStart/createpro3.png)
    
-2. pom.xml更改
+2. 测试类DemoServiceApplicationTests中@RunWith(SpringRunner.class)更改为@RunWith(SpringJUnit4ClassRunner.class)
+   
+3. demo-service/pom.xml调整，调整后内容如下
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
@@ -89,7 +91,15 @@
 
 </project>
 ```
+4. demo-service/src/main/resources/application.properties调整为application.yml，具体配置如下
 
+```
+discovery.server.address: https://localhost:8761/eureka/
+server:
+  port: 50090
+  host: localhost
+  contextPath: /demoservice
+```
 
 * UI创建
 
