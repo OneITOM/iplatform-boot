@@ -23,9 +23,7 @@
    
 ![](images/QuickStart/createpro3.png)
    
-2. 测试类DemoServiceApplicationTests中@RunWith(SpringRunner.class)更改为@RunWith(SpringJUnit4ClassRunner.class)
-   
-3. demo-service/pom.xml调整，调整后内容如下
+2. demo-service/pom.xml调整，调整后内容如下
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
@@ -91,7 +89,7 @@
 
 </project>
 ```
-4. demo-service/src/main/resources/application.properties调整为application.yml，具体配置如下
+3. demo-service/src/main/resources/application.properties调整为application.yml，具体配置如下
 
 ```
 discovery.server.address: https://localhost:8761/eureka/
@@ -105,6 +103,43 @@ server:
 | discovery.server.address    | 定义注册服务的地址，当集群模式时配置多个地址逗号分隔              |
 | server.host                 | 服务绑定IP                                                    |
 | server.port                 | 服务绑定端口                                                  |
+
+4. 测试类DemoServiceApplicationTests中@RunWith(SpringRunner.class)更改为@RunWith(SpringJUnit4ClassRunner.class)
+
+5. 主启动类DemoServiceApplication调整，调整后内容如下
+
+```
+package org.iplatform.microservices.demoservice;
+
+import org.iplatform.microservices.service.IPlatformServiceApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cache.annotation.EnableCaching;
+import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
+import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.EnableAspectJAutoProxy;
+import org.springframework.jms.annotation.EnableJms;
+import org.springframework.security.oauth2.config.annotation.web.configuration.EnableOAuth2Client;
+import org.springframework.security.oauth2.config.annotation.web.configuration.EnableResourceServer;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
+
+@EnableOAuth2Client
+@SpringBootApplication
+@EnableTransactionManagement
+@EnableDiscoveryClient
+@EnableEurekaClient
+@EnableResourceServer
+@EnableJms
+@EnableCaching
+@EnableAspectJAutoProxy
+@ComponentScan(basePackages = {"org.iplatform.microservices"})
+public class DemoServiceApplication extends IPlatformServiceApplication {
+
+	public static void main(String[] args) throws Exception {
+		run(DemoServiceApplication.class, args);
+	}
+}
+```
 
 * UI创建
 
