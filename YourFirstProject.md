@@ -23,7 +23,71 @@
    
    ![](images/QuickStart/createpro3.png)
    
-2. 更改pom.xml依赖，更改后文件内容如下
+2. pom.xml更改
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>org.iplatform</groupId>
+	<artifactId>demo-service</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<packaging>jar</packaging>
+
+	<name>demo-service</name>
+	<description>demo-service</description>
+	
+	<parent>
+		<groupId>org.iplatform</groupId>
+		<artifactId>iplatform-parent</artifactId>
+		<version>0.0.7-SNAPSHOT</version>
+		<relativePath></relativePath>
+	</parent>
+	
+	<dependencies>
+		<dependency>
+			<groupId>org.iplatform</groupId>
+			<artifactId>iplatform-util</artifactId>
+			<exclusions>
+				<exclusion>
+					<artifactId>slf4j-log4j12</artifactId>
+					<groupId>org.slf4j</groupId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+        <dependency>
+            <groupId>org.iplatform</groupId>
+            <artifactId>iplatform-service</artifactId>
+        </dependency>       
+	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<configuration>
+					<skipTests>true</skipTests>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
+	<repositories>
+		<repository>
+			<id>boco-nexus-public</id>
+			<name>Team Nexus Repository</name>
+			<url>http://111.204.35.232/nexus/content/groups/public</url>
+		</repository>
+	</repositories>
+```
+
 
 * UI创建
 
