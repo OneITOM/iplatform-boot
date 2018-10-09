@@ -17,11 +17,11 @@
 
 1. 打开Spring Tool Suite，创建Spring Starter Project
 
-   ![](images/QuickStart/createpro1.png)
+![](images/QuickStart/createpro1.png)
    
-   ![](images/QuickStart/createpro2.png)
+![](images/QuickStart/createpro2.png)
    
-   ![](images/QuickStart/createpro3.png)
+![](images/QuickStart/createpro3.png)
    
 2. 测试类DemoServiceApplicationTests中@RunWith(SpringRunner.class)更改为@RunWith(SpringJUnit4ClassRunner.class)
    
