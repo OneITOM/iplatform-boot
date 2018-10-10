@@ -9,7 +9,7 @@
 | Redis                        |  4.0.8    |    Y  |
 | Kafka                        |   2.11-1.1.1   | Y     |
 | Zookeeper                    |   3.4.13   | Y     |
-| MongoDB                      |      |      |
+| MongoDB                      |      |   N   |
 |                              |      |      |
 |                              |      |      |
 |                              |      |      |
