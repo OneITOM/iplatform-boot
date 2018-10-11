@@ -15,7 +15,7 @@
 
 - 模板信息
 
-  ```sh
+  ```bash
   groupId=org.iplatform.myproject
   artifactId=myproject
   package=org.iplatform.myproject
@@ -24,7 +24,7 @@
 
 - 创建脚本
 
-  ```sh
+  ```bash
   mvn org.apache.maven.plugins:maven-archetype-plugin:2.4:generate \
   -DgroupId=org.iplatform.myproject \
   -DartifactId=myproject \
@@ -52,7 +52,7 @@
 
 > 修改启停脚本run.sh，配置服务发现地址、服务IP、服务端口等
 
-```sh
+```bash
 nohup java -jar ${PRONAMESERVICE} \
 	--discovery.server.address="https://127.0.0.1:8761/eureka/" \
     --server.host=127.0.0.1 \
@@ -107,7 +107,7 @@ nohup java -jar ${PRONAMESERVICE} \
 
 > 修改启停脚本run.sh，配置服务发现地址、服务IP、服务端口等
 
-```sh
+```bash
 nohup java -jar ${PRONAMEUI} \
 	--discovery.server.address="https://127.0.0.1:8761/eureka/" \
     --server.host=127.0.0.1 \
