@@ -15,22 +15,20 @@ IPLATFORM-BOOT 是以 SpringCloud Brixton.RELEASE 为核心的微服务开发框
 
 ## 2. 中间件部署手册
 
-* [ActiveMQ](middleware/ActiveMQ.md)-李光辉
-* [Kafka](middleware/Kafka.md)-李光辉
-* [ELK](middleware/ELK.md)-于胜强
-* [Storm](middleware/Storm.md)-于胜强
-* [MySQL](middleware/MysQL.md)-李晓琴
-* [Redis](middleware/Redis.md)-于胜强
-* [Nginx](middleware/Nginx.md)-杜臻
-* [Mongo](middleware/Mongo.md)-于胜强
+* [ActiveMQ](middleware/ActiveMQ.md)-(未开始)
+* [Kafka](middleware/Kafka.md)-(未开始)
+* [ELK](middleware/ELK.md)-(未开始)
+* [Storm](middleware/Storm.md)-(未开始)
+* [MySQL](middleware/MysQL.md)-(未开始)
+* [Redis](middleware/Redis.md)-(未开始)
+* [Nginx](middleware/Nginx.md)-(未开始)
+* [Mongo](middleware/Mongo.md)-(未开始)
 
 ## 3. 开发手册
 
 * [项目构建手册](YourFirstProject.md)
 
-  > 快速构建一个SERVICE、UI的服务框架
-
-* [应用打包部署手册](ProjectBuild.md)-王立松
+* [应用打包部署手册](ProjectBuild.md)-(未开始)
 
 * 编码规约
 
@@ -45,43 +43,35 @@ IPLATFORM-BOOT 是以 SpringCloud Brixton.RELEASE 为核心的微服务开发框
 
 * 开发手册
 
-  * [数据库开发手册](developer/database/README.md)-王立松
-  * [ActiveMQ开发手册](developer/activemq/README.md)-王立松
+  * [数据库开发手册](developer/database/README.md)-(未开始)
+  * [ActiveMQ开发手册](developer/activemq/README.md)-(未开始)
   * [Flume开发手册](developer/flume/README.md)
-  * [Kafka开发手册](developer/kafka/README.md)-王立松
+  * [Kafka开发手册](developer/kafka/README.md)-(未开始)
   * [ElasticSearch开发手册](developer/elasticsearch/README.md)-于胜强
-  * [Redis开发手册](developer/redis/README.md)-王立松
-  * [Tomcat开发手册](developer/tomcat/README.md)-张磊
+  * [Redis开发手册](developer/redis/README.md)-(未开始)
+  * [Tomcat开发手册](developer/tomcat/README.md)-(未开始)
 
 * 分布式相关开发手册
 
-  * [文档服务集成手册](/developer/dfss/README.md)-于胜强
+  * [文档服务集成手册](/developer/dfss/README.md)-(未开始)
   * [集中日志开发手册](/developer/logger/README.md)
   * [分布式锁开发手册](developer/distributedlock/README.md)
-  * [集中式缓存开发手册](developer/distributedcache/README.md)-未开始
+  * [集中式缓存开发手册](developer/distributedcache/README.md)-(未开始)
   * [服务跟踪配置手册](developer/trace/README.md)
   * [负载均衡配置手册](developer/loadbalance/README.md)
   * [消息总线集成手册](developer/messagebus/README.md)
   * [多租户配置手册](developer/multitenant/README.md)
-
-* 微服务管控
-
-  * spring.cloud.config.busisys 
 
 * 其他
 
   * [日志标准化](Logs.md)
   * [安全开发手册](Security.md)
 
-  > 项目安全有关的配置说明，配置文件加密、单点认证、服务鉴权、漏洞应对等
 
-## 4. 产品手册
+## 4. 微服务管控
 
-- [采集产品手册](product/octopus/README.md)-未开始
-- 云管平台手册
-- [CMDB产品手册](product/cmdb/README.md)-未开始
-- [自动化部署手册](product/autodeploy/README.md)-未开始
-- [自动化运维手册](product/automatic/README.md)-未开始
+- [微服务管控平台部署手册](product/triden/README.md)
+- [微服务管控平台集成手册](product/triden/DEV.md)
 
 ## 5. 附件
 
@@ -90,6 +80,6 @@ IPLATFORM-BOOT 是以 SpringCloud Brixton.RELEASE 为核心的微服务开发框
 * [版本跟踪](ChangeLog.md)
 * [Spring Boot 1.3.5 Reference Guid](https://docs.spring.io/spring-boot/docs/1.3.5.RELEASE/reference/html/)
 
-### 6.贡献者
+## 6.贡献者
 
 文档：[王立松](https://github.com/coderwls) [杜臻](https://github.com/duzhen020623)
