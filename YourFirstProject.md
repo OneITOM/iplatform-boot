@@ -13,18 +13,18 @@
 
 ## 2. 代码生成
 
-- 模板信息
+- 项目信息
 
-  ```bash
+  ```properties
   groupId=org.iplatform.myproject
   artifactId=myproject
   package=org.iplatform.myproject
   version=0.0.1-SNAPSHOT
   ```
 
-- 创建脚本
+- 创建项目
 
-  ```bash
+  ```shell
   mvn org.apache.maven.plugins:maven-archetype-plugin:2.4:generate \
   -DgroupId=org.iplatform.myproject \
   -DartifactId=myproject \
@@ -37,14 +37,14 @@
   -DinteractiveMode=false
   ```
 
-- 代码结构说明
+- 目录结构说明
 
-  | 目录结构                      | 说明        |
-  | ----------------------------- | ----------- |
-  | myproject/config/local/run.sh | 启停脚本    |
-  | myproject/service             | SERVICE服务 |
-  | myproject/ui                  | UI服务      |
-  | myproject/util                | 工具包      |
+  | 目录结构                      | 说明                     |
+  | ----------------------------- | ------------------------ |
+  | myproject/config/local/run.sh | 启停脚本                 |
+  | myproject/service             | SERVICE服务              |
+  | myproject/ui                  | UI服务                   |
+  | myproject/util                | UI和SEERVICE公用的工具包 |
 
 ## 3. SERVICE部署
 
@@ -52,9 +52,9 @@
 
 > 修改启停脚本run.sh，配置服务发现地址、服务IP、服务端口等
 
-```bash
+```sh
 nohup java -jar ${PRONAMESERVICE} \
-    --discovery.server.address="https://127.0.0.1:8761/eureka/" \
+	--discovery.server.address="https://127.0.0.1:8761/eureka/" \
     --server.host=127.0.0.1 \
     --server.port=8081 \
     --spring.profiles.active=prod >/dev/null 2>&1 &
@@ -72,9 +72,13 @@ nohup java -jar ${PRONAMESERVICE} \
 
 2. 生成目录
 
-   ```text
+   ```shell
    myproject/service/target/service-0.0.1-SNAPSHOT.jar
    ```
+
+### 部署
+
+
 
 ### 启停
 
@@ -107,9 +111,9 @@ nohup java -jar ${PRONAMESERVICE} \
 
 > 修改启停脚本run.sh，配置服务发现地址、服务IP、服务端口等
 
-```bash
+```shell
 nohup java -jar ${PRONAMEUI} \
-    --discovery.server.address="https://127.0.0.1:8761/eureka/" \
+	--discovery.server.address="https://127.0.0.1:8761/eureka/" \
     --server.host=127.0.0.1 \
     --server.port=8080 \
     --spring.profiles.active=prod >/dev/null 2>&1 &
@@ -127,9 +131,13 @@ nohup java -jar ${PRONAMEUI} \
 
 2. 生成目录
 
-   ```text
+   ```shell
    myproject/ui/target/ui-0.0.1-SNAPSHOT.jar
    ```
+
+### 部署
+
+
 
 ### 启停
 
@@ -147,7 +155,7 @@ nohup java -jar ${PRONAMEUI} \
 
 3. 重启服务
 
-   ```bash
+   ```shell
    sh run.sh restart
    ```
 
@@ -155,3 +163,6 @@ nohup java -jar ${PRONAMEUI} \
 
 1. 验证UI服务注册到注册中心
 2. 验证UI服务到SERVICE服务接口调用
+
+## 5. 骨架代码说明
+
