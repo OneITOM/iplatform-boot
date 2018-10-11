@@ -30,7 +30,7 @@
   -DartifactId=myproject \
   -Dpackage=org.iplatform.myproject \
   -Dversion=0.0.1-SNAPSHOT \
-  -DarchetypeCatalog=http://192.168.100.10/nexus/content/repositories/releases \
+  -DarchetypeCatalog=http://127.0.0.1/nexus/content/repositories/releases \
   -DarchetypeGroupId=org.iplatform.archetypes \
   -DarchetypeArtifactId=iplatform-all-archetype \
   -DarchetypeVersion=0.0.7 \
@@ -51,19 +51,16 @@
 > 修改myproject/util/pom.xml，自定义项目名称myproject-util
 
 ```xml
-<?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-	<modelVersion>4.0.0</modelVersion>
-	<groupId>org.iplatform.myproject</groupId>
-	<artifactId>myproject-util</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
-	<parent>
-		<groupId>org.iplatform.myproject</groupId>
-		<artifactId>myproject</artifactId>
-		<version>0.0.1-SNAPSHOT</version>
-		<relativePath>../</relativePath>
-	</parent>
-</project>
+<modelVersion>4.0.0</modelVersion>
+<groupId>org.iplatform.myproject</groupId>
+<artifactId>myproject-util</artifactId>
+<version>0.0.1-SNAPSHOT</version>
+<parent>
+    <groupId>org.iplatform.myproject</groupId>
+    <artifactId>myproject</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <relativePath>../</relativePath>
+</parent>
 ```
 
 ## 4. SERVICE
@@ -74,7 +71,7 @@
 
    ```properties
    nohup java -jar ${PRONAMESERVICE} \
-   	--discovery.server.address="https://127.0.0.1:8761/eureka/" \
+       --discovery.server.address="https://127.0.0.1:8761/eureka/" \
        --server.host=127.0.0.1 \
        --server.port=8081 \
        --spring.profiles.active=prod >/dev/null 2>&1 &
@@ -158,7 +155,7 @@
 
    > 注册中心地址 http://127.0.0.1:8761
 
-   ![]()
+   ![](images/QuickStart/createpro1.png)
 
 2. 验证SERVICE服务接口
 
@@ -177,7 +174,7 @@
 
    ```properties
    nohup java -jar ${PRONAMEUI} \
-   	--discovery.server.address="https://127.0.0.1:8761/eureka/" \
+       --discovery.server.address="https://127.0.0.1:8761/eureka/" \
        --server.host=127.0.0.1 \
        --server.port=8080 \
        --spring.profiles.active=prod >/dev/null 2>&1 &
@@ -267,7 +264,7 @@
 
    > 注册中心地址 http://127.0.0.1:8761
 
-   ![](D:/Typora/datas/images/QuickStart/createpro2.png)
+   ![](images/QuickStart/createpro2.png)
 
 2. 验证UI服务到SERVICE服务接口调用
 
