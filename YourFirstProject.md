@@ -54,7 +54,7 @@
 
 ```bash
 nohup java -jar ${PRONAMESERVICE} \
-	--discovery.server.address="https://127.0.0.1:8761/eureka/" \
+    --discovery.server.address="https://127.0.0.1:8761/eureka/" \
     --server.host=127.0.0.1 \
     --server.port=8081 \
     --spring.profiles.active=prod >/dev/null 2>&1 &
@@ -109,7 +109,7 @@ nohup java -jar ${PRONAMESERVICE} \
 
 ```bash
 nohup java -jar ${PRONAMEUI} \
-	--discovery.server.address="https://127.0.0.1:8761/eureka/" \
+    --discovery.server.address="https://127.0.0.1:8761/eureka/" \
     --server.host=127.0.0.1 \
     --server.port=8080 \
     --spring.profiles.active=prod >/dev/null 2>&1 &
