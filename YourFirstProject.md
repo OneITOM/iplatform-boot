@@ -24,7 +24,7 @@
 
 - 创建项目
 
-  ```shell
+  ```properties
   mvn org.apache.maven.plugins:maven-archetype-plugin:2.4:generate \
   -DgroupId=org.iplatform.myproject \
   -DartifactId=myproject \
