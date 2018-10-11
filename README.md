@@ -64,9 +64,13 @@ IPLATFORM-BOOT 是以 SpringCloud Brixton.RELEASE 为核心的微服务开发框
   * [消息总线集成手册](developer/messagebus/README.md)
   * [多租户配置手册](developer/multitenant/README.md)
 
+* 微服务管控
+
+  * spring.cloud.config.busisys 
+
 * 其他
 
-  * [日志](Logs.md)
+  * [日志标准化](Logs.md)
   * [安全开发手册](Security.md)
 
   > 项目安全有关的配置说明，配置文件加密、单点认证、服务鉴权、漏洞应对等

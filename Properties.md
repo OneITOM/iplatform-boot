@@ -308,3 +308,10 @@ logger.kafka.zookeeper=localhost:2181
 # 允许远程访问的ip白名单
 endpoints.shutdown.allowip=192.168.1.100,192.168.1.101
 ```
+## 微服务管控
+
+```properties
+# 所属业务系统
+spring.cloud.config.busisys=OneITOM
+```
+
