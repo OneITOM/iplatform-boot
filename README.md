@@ -62,6 +62,8 @@ IPLATFORM-BOOT 是以 SpringCloud Brixton.RELEASE 为核心的微服务开发框
   * [服务跟踪配置手册](developer/trace/README.md)
   * [负载均衡配置手册](developer/loadbalance/README.md)
   * [消息总线集成手册](developer/messagebus/README.md)
+  * [多租户配置手册](developer/multitenant/README.md)
+  * 
 
 * 其他
 
