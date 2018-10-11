@@ -6,8 +6,8 @@
 
 ## 1. 准备
 
-- 已安装发现服务
-- 已安装认证服务
+- [已安装发现服务](iplatform-common/DiscoveryService.md)
+- [已安装认证服务](iplatform-common/AuthService.md)
 - JDK1.8+
 - MAVEN3.5+
 
