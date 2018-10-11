@@ -2,7 +2,7 @@
 
 >  作者 张磊 2018-9-30
 
-IPLATFORM-BOOT 是以 SpringCloud Brixton.RELEASE 为核心的微服务开发框架，简化了微服务开发的复杂度，集成了常用的中间件，修复了SpringCloud的BUG
+IPLATFORM-BOOT 是以 SpringCloud Brixton.RELEASE 为核心的微服务开发框架
 
 ## 1. 公共服务部署手册
 
