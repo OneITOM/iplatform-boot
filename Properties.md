@@ -1,7 +1,9 @@
 # 参数说明
 
 > 作者 张磊
-iplatform-boot 0.0.7+
+> iplatform-boot 0.0.7+
+
+[Spring Boot 1.3.5 common application properties](https://docs.spring.io/spring-boot/docs/1.3.5.RELEASE/reference/html/common-application-properties.html)
 
 ## Java参数
 
