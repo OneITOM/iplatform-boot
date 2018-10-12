@@ -451,5 +451,3 @@
    ```html
    myproject/ui/src/main/resources/templates/index.html
    ```
-
-   
