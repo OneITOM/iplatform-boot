@@ -175,3 +175,15 @@ server.instanceId=xxxxx
 
    https://oneitom-trace:8763/hystrix/monitor?stream=https://oneitom-trace:8763/turbine.stream
 
+## 事件
+
+> Q_MS_EVENT
+
+## 指标
+
+> Q_MS_METRICS
+
+## 调用链
+
+> Q_MS_TRACK
+
