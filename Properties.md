@@ -1,7 +1,9 @@
 # 参数说明
 
 > 作者 张磊
-iplatform-boot 0.0.7+
+> iplatform-boot 0.0.7+
+
+[Spring Boot 1.3.5 common application properties](https://docs.spring.io/spring-boot/docs/1.3.5.RELEASE/reference/html/common-application-properties.html)
 
 ## Java参数
 
@@ -308,3 +310,10 @@ logger.kafka.zookeeper=localhost:2181
 # 允许远程访问的ip白名单
 endpoints.shutdown.allowip=192.168.1.100,192.168.1.101
 ```
+## 微服务管控
+
+```properties
+# 所属业务系统
+spring.cloud.config.busisys=OneITOM
+```
+

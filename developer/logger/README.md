@@ -2,7 +2,7 @@
 
 > 作者 张磊
 
-此框架通过内嵌的KafkaAppender实现日志的集中收集，可以通过启动参数开启kafka记录功能并配置kafka参数
+此框架通过内嵌的KafkaAppender实现日志的集中收集，可以通过启动参数开启kafka记录功能并配置kafka参数，后续可以通过Logstash将Kafka中的数据存储到ES中持久化和查询，具体日志标准化参看[日志标准化](../../Logs.md)
 
 ## 前提
 

@@ -28,7 +28,7 @@ spring.datasource.password=123456
 
 可以使用密码生成工具生成明文对应的密文后配置成密文格式
 
-```bash
+```shell
 java -jar enctool-0.0.1-SNAPSHOT.jar "123456" 
 ======================================================================  
 微服务配置文件密文生成工具  java -jar enctool-0.0.1-SNAPSHOT.jar 要加密的明文 
