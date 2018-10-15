@@ -149,6 +149,8 @@ Spring版本升级到4.2.9
 
 增加框架级消息总线支持MessageBusService，@MessageBusConsumer
 
+增加SQL注入注解@SQLInjection 
+
 ### Bug修复
 
 修复无租户服务可以调用租户服务的BUG
