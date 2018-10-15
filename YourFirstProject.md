@@ -204,16 +204,18 @@
 
 ### SERVICE说明
 
-| org.iplatform.myproject.service.ServiceApplication.java   | 主启动类                             |
+| 文件地址                                                  | 文件说明                             |
 | :-------------------------------------------------------- | ------------------------------------ |
+| org.iplatform.myproject.service.ServiceApplication.java   | 主启动类                             |
 | org.iplatform.myproject.service.service.IndexService.java | 接口类，提供对外接口                 |
 | src/main/resources/bootstrap.yml                          | 应用定义，包括应用名称、描述、版本等 |
 | src/main/resources/application.yml                        | 应用配置，包含IP地址、端口、数据源等 |
 
 ### UI说明
 
-| org.iplatform.myproject.ui.UIApplication.java                | 主启动类                                                     |
+| 文件地址                                                     | 文件说明                                                     |
 | ------------------------------------------------------------ | ------------------------------------------------------------ |
+| org.iplatform.myproject.ui.UIApplication.java                | 主启动类                                                     |
 | org.iplatform.myproject.ui.config.MyprojectUISecurityConfiguration | 拦截器，自定义跳过认证拦截的路径                             |
 | org.iplatform.myproject.ui/feign.IndexClient.java            | Feign客户端，通过Feign实现对SERVICE接口的调用                |
 | org.iplatform.myproject.ui.controller.IndexController        | 控制器                                                       |
