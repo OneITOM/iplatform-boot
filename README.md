@@ -13,18 +13,7 @@ IPLATFORM-BOOT 是以 SpringCloud Brixton.RELEASE 为核心的微服务开发框
 * [监控服务部署手册](iplatform-common/AdminService.md)
 * [通知服务部署手册](iplatform-common/NotifyService.md)-王立松
 
-## 2. 中间件部署手册
-
-* [ActiveMQ](middleware/ActiveMQ.md)-(未开始)
-* [Kafka](middleware/Kafka.md)-(未开始)
-* [ELK](middleware/ELK.md)-(未开始)
-* [Storm](middleware/Storm.md)-(未开始)
-* [MySQL](middleware/MysQL.md)-(未开始)
-* [Redis](middleware/Redis.md)-(未开始)
-* [Nginx](middleware/Nginx.md)-(未开始)
-* [Mongo](middleware/Mongo.md)-(未开始)
-
-## 3. 开发手册
+## 2. 开发手册
 
 * [项目构建手册](YourFirstProject.md)
 
@@ -69,6 +58,16 @@ IPLATFORM-BOOT 是以 SpringCloud Brixton.RELEASE 为核心的微服务开发框
   * [日志标准化](Logs.md)
   * [安全开发手册](Security.md)
 
+## 3. 中间件部署手册
+
+- [ActiveMQ](middleware/ActiveMQ.md)-(未开始)
+- [Kafka](middleware/Kafka.md)-(未开始)
+- [ELK](middleware/ELK.md)-(未开始)
+- [Storm](middleware/Storm.md)-(未开始)
+- [MySQL](middleware/MysQL.md)-(未开始)
+- [Redis](middleware/Redis.md)-(未开始)
+- [Nginx](middleware/Nginx.md)-(未开始)
+- [Mongo](middleware/Mongo.md)-(未开始)
 
 ## 4. 微服务管控
 
