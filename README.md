@@ -16,9 +16,7 @@ IPLATFORM-BOOT 是以 SpringCloud Brixton.RELEASE 为核心的微服务开发框
 ## 2. 开发手册
 
 * [项目构建手册](YourFirstProject.md)
-
 * [应用打包部署手册](ProjectBuild.md)-(未开始)
-
 * 编码规约
 
   * [定时任务规约](developer/coding/Schedule.md)
@@ -30,9 +28,9 @@ IPLATFORM-BOOT 是以 SpringCloud Brixton.RELEASE 为核心的微服务开发框
   * 个性化配置规约
   * 鉴权规约
   * [Shutdown规约](developer/coding/Shutdown.md)
-
 * 开发手册
-
+  * [Service开发手册](developer/service/README.md)
+  * [Controller开发手册](developer/controller/README.md)
   * [数据库开发手册](developer/database/README.md)
   * [ActiveMQ开发手册](developer/activemq/README.md)-(未开始)
   * [Flume开发手册](developer/flume/README.md)
@@ -40,7 +38,6 @@ IPLATFORM-BOOT 是以 SpringCloud Brixton.RELEASE 为核心的微服务开发框
   * [ElasticSearch开发手册](developer/elasticsearch/README.md)-于胜强
   * [Redis开发手册](developer/redis/README.md)-(未开始)
   * [Tomcat开发手册](developer/tomcat/README.md)
-
 * 分布式相关开发手册
 
   * [文档服务集成手册](/developer/dfss/README.md)-(未开始)
@@ -52,7 +49,7 @@ IPLATFORM-BOOT 是以 SpringCloud Brixton.RELEASE 为核心的微服务开发框
   * [负载均衡配置手册](developer/loadbalance/README.md)
   * [消息总线集成手册](developer/messagebus/README.md)
   * [多租户配置手册](developer/multitenant/README.md)
-
+  * [通知服务集成手册](developer/notify/README.md)
 * 其他
 
   * [日志标准化](Logs.md)
