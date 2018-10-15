@@ -9,6 +9,7 @@
   - [获取当前用户](#user-content-2.1)
   - [Token](#user-content-2.2)
   - [角色鉴权](#user-content-2.3)
+  - [忽略鉴权](#user-content-2.4)
 - [安全漏洞](#user-content-2)
   - [SQL注入漏洞](#user-content-2.1)
   - [CSRF跨站请求伪造](#user-content-2.2)
@@ -173,6 +174,33 @@ public String test(ModelMap map) throws Exception {
 ```
 
 **为防止越权访问，要求页面鉴权和方法鉴权结合使用**
+
+### <a id="2.3">2.4</a> 忽略鉴权
+
+> 每个项目可以通过扩展WebSecurityConfigurerAdapter类实现忽略path的定义
+
+**注意忽略的访问路径映射方法以及后续调用的方法中无法获取认证用户**
+
+例如：下边定义了访问/without_ma和/without_mb的时候不需要认证（不需要传递token）也可以调用
+
+```java
+package 项目包xxx.config
+
+import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+
+@Configuration
+public class XXXSecurityConfiguration extends WebSecurityConfigurerAdapter {
+	@Override
+	public void configure(WebSecurity web) throws Exception {
+	    //设置认证不拦截规则，自定义跳过认证拦截的路径
+	    web.ignoring().antMatchers("/without_ma").antMatchers("/without_mb");
+	}
+}
+```
+
+
 
 ## <a id="3">3</a> 安全漏洞
 
