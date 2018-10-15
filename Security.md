@@ -175,7 +175,7 @@ public String test(ModelMap map) throws Exception {
 
 **为防止越权访问，要求页面鉴权和方法鉴权结合使用**
 
-### <a id="2.3">2.4</a> 忽略鉴权
+### <a id="2.4">2.4</a> 忽略鉴权
 
 > 每个项目可以通过扩展WebSecurityConfigurerAdapter类实现忽略path的定义
 
