@@ -40,7 +40,7 @@
 - 目录结构说明
 
   | 目录结构                      | 说明                     |
-  | ----------------------------- | ------------------------ |
+  | :---------------------------- | :----------------------- |
   | myproject/config/local/run.sh | 启停脚本                 |
   | myproject/service             | SERVICE服务              |
   | myproject/ui                  | UI服务                   |
@@ -67,92 +67,85 @@
 
 ### SERVICE
 
-1. 修改启停脚本run.sh，配置服务发现地址、服务IP、服务端口等
+> 修改myproject/service/pom.xml，自定义项目名称myproject-service，调整引用myproject-util
 
-   ```properties
-   nohup java -jar ${PRONAMESERVICE} \
-       --discovery.server.address="https://127.0.0.1:8761/eureka/" \
-       --server.host=127.0.0.1 \
-       --server.port=8081 \
-       --spring.profiles.active=prod >/dev/null 2>&1 &
-   ```
-
-2. 修改myproject/service/pom.xml，自定义项目名称myproject-service，调整引用myproject-util
-
-   ```xml
-   <modelVersion>4.0.0</modelVersion>
-   <groupId>org.iplatform.myproject</groupId>
-   <artifactId>myproject-service</artifactId>
-   <version>0.0.1-SNAPSHOT</version>
-   <name>myproject-service</name>
-   <description>myproject-service</description>
-   <packaging>jar</packaging>
-   <dependencies>
-       <dependency>
-           <groupId>org.iplatform.myproject</groupId>
-           <artifactId>myproject-util</artifactId>
-           <version>0.0.1-SNAPSHOT</version>
-       </dependency>
-   </dependencies>
-   ```
+```xml
+<modelVersion>4.0.0</modelVersion>
+<groupId>org.iplatform.myproject</groupId>
+<artifactId>myproject-service</artifactId>
+<version>0.0.1-SNAPSHOT</version>
+<name>myproject-service</name>
+<description>myproject-service</description>
+<packaging>jar</packaging>
+<dependencies>
+    <dependency>
+        <groupId>org.iplatform.myproject</groupId>
+        <artifactId>myproject-util</artifactId>
+        <version>0.0.1-SNAPSHOT</version>
+    </dependency>
+</dependencies>
+```
 
 ### UI
 
-1. 修改启停脚本run.sh，配置服务发现地址、服务IP、服务端口等
+> 修改myproject/ui/pom.xml，自定义项目名称myproject-ui，调整引用myproject-util
 
-   ```properties
-   nohup java -jar ${PRONAMEUI} \
-       --discovery.server.address="https://127.0.0.1:8761/eureka/" \
-       --server.host=127.0.0.1 \
-       --server.port=8080 \
-       --spring.profiles.active=prod >/dev/null 2>&1 &
-   ```
+```xml
+<modelVersion>4.0.0</modelVersion>
+<groupId>org.iplatform.myproject</groupId>
+<artifactId>myproject-ui</artifactId>
+<version>0.0.1-SNAPSHOT</version>
+<name>myproject-ui</name>
+<description>myproject-ui</description>
+<packaging>jar</packaging>
+<parent>
+    <groupId>org.iplatform.myproject</groupId>
+    <artifactId>myproject</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <relativePath>../</relativePath>
+</parent>
+<dependencies>
+    <dependency>
+        <groupId>org.iplatform.myproject</groupId>
+        <artifactId>myproject-util</artifactId>
+        <version>0.0.1-SNAPSHOT</version>
+    </dependency>
+</dependencies>
+```
 
-2. 修改myproject/ui/pom.xml，自定义项目名称myproject-ui，调整引用myproject-util
+### RUN.SH
 
-   ```xml
-   <modelVersion>4.0.0</modelVersion>
-   <groupId>org.iplatform.myproject</groupId>
-   <artifactId>myproject-ui</artifactId>
-   <version>0.0.1-SNAPSHOT</version>
-   <name>myproject-ui</name>
-   <description>myproject-ui</description>
-   <packaging>jar</packaging>
-   <parent>
-       <groupId>org.iplatform.myproject</groupId>
-       <artifactId>myproject</artifactId>
-       <version>0.0.1-SNAPSHOT</version>
-       <relativePath>../</relativePath>
-   </parent>
-   <dependencies>
-       <dependency>
-           <groupId>org.iplatform.myproject</groupId>
-           <artifactId>myproject-util</artifactId>
-           <version>0.0.1-SNAPSHOT</version>
-       </dependency>
-   </dependencies>
-   ```
+> 修改项目名称、服务发现地址、服务IP、服务端口等
+
+```properties
+PRONAMEUI=myproject-ui-0.0.1-SNAPSHOT.jar
+PRONAMESERVICE=myproject-service-0.0.1-SNAPSHOT.jar
+
+nohup java -Xmx1g -Xms1g -Xss256k -XX:OnOutOfMemoryError="kill -9 %p" -jar ${PRONAMESERVICE} \
+    --discovery.server.address="https://127.0.0.1:8761/eureka/" \
+    --server.host=127.0.0.1 \
+    --spring.profiles.active=prod >/dev/null 2>&1 &
+
+    nohup java -Xmx1g -Xms1g -Xss256k -XX:OnOutOfMemoryError="kill -9 %p" -jar ${PRONAMEUI} \
+    --discovery.server.address="https://127.0.0.1:8761/eureka/" \
+    --server.host=127.0.0.1 \
+    --spring.profiles.active=prod >/dev/null 2>&1 &
+```
 
 ## 4. 打包
 
-> myproject目录下打包
+> myproject目录下执行打包命令
 
-1. 打包命令
-
-   ```shell
-   mvn clean package
-   ```
-
-2. 生成目录
-
-   ```text
-   myproject/service/target/myproject-service-0.0.1-SNAPSHOT.jar
-   myproject/ui/target/myproject-ui-0.0.1-SNAPSHOT.jar
-   ```
+```shell
+mvn clean package
+```
 
 ## 5. 部署
 
-> 复制myproject-service-0.0.1-SNAPSHOT.jar、myproject-ui-0.0.1-SNAPSHOT.jar和run.sh到指定部署目录
+1. 指定部署目录
+2. 复制myproject/service/target/myproject-service-0.0.1-SNAPSHOT.jar到部署目录下
+3. 复制myproject/ui/target/myproject-ui-0.0.1-SNAPSHOT.jar到部署目录下
+4. 复制run.sh到部署目录下
 
 ## 6. 启停
 
@@ -160,6 +153,10 @@
 
    ```shell
    sh run.sh start
+   
+   出现如下日志，代表启动成功
+   eureka.instance.metadataMap.instanceId=Document::myproject-service:8081
+   o.i.m.core.IPlatformApplication.run : 服务启动完毕
    ```
 
 2. 停止服务
@@ -176,13 +173,21 @@
 
 ## 2. 验证
 
-1. 验证SERVICE和UI服务注册到注册中心
+1. 验证服务注册
 
-   > 注册中心地址 http://127.0.0.1:8761
+   > 访问注册中心 http://127.0.0.1:8761，查看已注册的服务列表
 
    ![](images/QuickStart/createpro1.png)
 
-2. 验证SERVICE服务接口
+2. 验证服务认证
+
+   > 访问认证系统 https://127.0.0.1:9999/auth，通过默认用户名密码登录，认证列表查找UI服务并进入
+
+   ![](images/QuickStart/createpro2.png)
+
+   ![](images/QuickStart/createpro3.png)
+
+3. 验证SERVICE服务接口
 
    > curl请求返回json串
 
@@ -191,7 +196,7 @@
    {"success":true,"message":null,"data":"Hi"}[root@localhost opt]# 
    ```
 
-3. 验证UI服务到SERVICE服务接口调用
+4. 验证UI到SERVICE服务调用
 
    > curl请求返回字符串 Hi
 
@@ -205,7 +210,7 @@
 ### SERVICE说明
 
 | 文件地址                                                  | 文件说明                             |
-| :-------------------------------------------------------- | :------------------------------------ |
+| :-------------------------------------------------------- | :----------------------------------- |
 | org.iplatform.myproject.service.ServiceApplication.java   | 主启动类                             |
 | org.iplatform.myproject.service.service.IndexService.java | 接口类，提供对外接口                 |
 | src/main/resources/bootstrap.yml                          | 应用定义，包括应用名称、描述、版本等 |
@@ -213,12 +218,12 @@
 
 ### UI说明
 
-| 文件地址                                                     | 文件说明                                                     |
-| :------------------------------------------------------------ | :------------------------------------------------------------ |
-| org.iplatform.myproject.ui.UIApplication.java                | 主启动类                                                     |
-| org.iplatform.myproject.ui.config.MyprojectUISecurityConfiguration | 拦截器，自定义跳过认证拦截的路径                             |
-| org.iplatform.myproject.ui/feign.IndexClient.java            | Feign客户端，通过Feign实现对SERVICE接口的调用                |
-| org.iplatform.myproject.ui.controller.IndexController        | 控制器                                                       |
-| src/main/resources/bootstrap.yml                             | 应用定义，包括应用名称、描述、版本等                         |
-| src/main/resources/application.yml                           | 应用配置，包含IP地址、端口、数据源等                         |
-| src/main/resources/templates/index.html                      | 通过认证登录成功以后跳转至该页面，认证地址：https://127.0.0.1:9999/auth |
+| 文件地址                                                     | 文件说明                                      |
+| :----------------------------------------------------------- | :-------------------------------------------- |
+| org.iplatform.myproject.ui.UIApplication.java                | 主启动类                                      |
+| org.iplatform.myproject.ui.config.MyprojectUISecurityConfiguration | 拦截器，自定义跳过认证拦截的路径              |
+| org.iplatform.myproject.ui/feign.IndexClient.java            | Feign客户端，通过Feign实现对SERVICE接口的调用 |
+| org.iplatform.myproject.ui.controller.IndexController        | 控制器                                        |
+| src/main/resources/bootstrap.yml                             | 应用定义，包括应用名称、描述、版本等          |
+| src/main/resources/application.yml                           | 应用配置，包含IP地址、端口、数据源等          |
+| src/main/resources/templates/index.html                      | 主页面，登录成功后跳转至主页面                |
