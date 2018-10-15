@@ -143,7 +143,11 @@ bind注释掉，代表绑定主机上所有的IP
 
 /etc/hosts设置IPV6地址、主机名映射
 
-![1539154515209](C:\Users\duzhen\AppData\Roaming\Typora\typora-user-images\1539154515209.png)
+127.0.0.1   localhost localhost.localdomain localhost4 localhost4.localdomain4
+::1         localhost localhost.localdomain localhost6 localhost6.localdomain6
+fe80::5429:9e58:a3bd:dbd2       bomcipv61
+fe80::19b6:180f:1f00:f666       bomcipv62
+fe80::dfea:5b6:22a5:7505        bomcipv63
 
 设置IPv6地址，其他安装方式一样
 
