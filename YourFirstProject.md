@@ -205,7 +205,7 @@
 ### SERVICE说明
 
 | 文件地址                                                  | 文件说明                             |
-| :-------------------------------------------------------- | ------------------------------------ |
+| -------------------------------------------------------- | ------------------------------------ |
 | org.iplatform.myproject.service.ServiceApplication.java   | 主启动类                             |
 | org.iplatform.myproject.service.service.IndexService.java | 接口类，提供对外接口                 |
 | src/main/resources/bootstrap.yml                          | 应用定义，包括应用名称、描述、版本等 |
