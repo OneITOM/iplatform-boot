@@ -175,13 +175,13 @@ mvn clean package
 
 1. 验证服务注册
 
-   > 访问注册中心 http://127.0.0.1:8761，查看已注册的服务列表
+   > 访问注册中心 http://127.0.0.1:8761 ，查看已注册的服务列表
 
    ![](images/QuickStart/createpro1.png)
 
 2. 验证服务认证
 
-   > 访问认证系统 https://127.0.0.1:9999/auth，通过默认用户名密码登录，认证列表查找UI服务并进入
+   > 访问认证系统 https://127.0.0.1:9999/auth ，通过默认用户名密码登录，认证列表查找UI服务并进入
 
    ![](images/QuickStart/createpro2.png)
 
