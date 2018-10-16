@@ -233,14 +233,6 @@ Successfully added user: {
 mongodb://cmdb-user:cmdb-password@10.22.1.237/cmdb
 ```
 
-
-
-```shell
-mongodb://cmdb-user:cmdb-password@10.22.1.237/cmdb
-```
-
-
-
 ## 2. Docker
 
 > 基于Docker的单节点配置
