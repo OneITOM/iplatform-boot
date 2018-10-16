@@ -4,7 +4,7 @@
 
 通过本文档可以快速开发一个属于你的SERVICE、UI服务，你可以看到服务是如何注册到注册中心，并通过认证服务登录后完成一个UI到SERVICE调用的样例
 
-## 1. 准备
+## 1. 前提
 
 - [已安装发现服务](iplatform-common/DiscoveryService.md)
 - [已安装认证服务](iplatform-common/AuthService.md)
