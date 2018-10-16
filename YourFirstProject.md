@@ -142,7 +142,7 @@ mvn clean package
 
 ## 5. 部署
 
-1. 指定部署目录
+1. 创建部署目录
 2. 复制myproject/service/target/myproject-service-0.0.1-SNAPSHOT.jar到部署目录下
 3. 复制myproject/ui/target/myproject-ui-0.0.1-SNAPSHOT.jar到部署目录下
 4. 复制run.sh到部署目录下
