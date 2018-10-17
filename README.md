@@ -16,7 +16,7 @@ IPLATFORM-BOOT 是以 SpringCloud Brixton.RELEASE 为核心的微服务开发框
 ## 2. 开发手册
 
 * [项目构建手册](YourFirstProject.md)
-* [应用打包部署手册](ProjectBuild.md)-(未开始)
+* [应用打包部署手册](ProjectBuild.md)
 * 编码规约
 
   * [定时任务规约](developer/coding/Schedule.md)
@@ -29,7 +29,6 @@ IPLATFORM-BOOT 是以 SpringCloud Brixton.RELEASE 为核心的微服务开发框
   * 鉴权规约
   * [Shutdown规约](developer/coding/Shutdown.md)
   * [获取配置参数](developer/coding/Environment.md)
-  * 
 * 开发手册
   * [Service开发手册](developer/service/README.md)
   * [Controller开发手册](developer/controller/README.md)
@@ -57,6 +56,7 @@ IPLATFORM-BOOT 是以 SpringCloud Brixton.RELEASE 为核心的微服务开发框
 
   * [日志标准化](Logs.md)
   * [安全开发手册](Security.md)
+  * 自动化测试
 
 ## 3. 中间件部署手册
 
