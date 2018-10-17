@@ -13,7 +13,7 @@
 - operation: `add`, `update`, `delete`
 - configName：应用微服务ID 如：`dfss-service`
 - configProfile：应用环境标签 如：`development`
-- jsonParams：配置项json数组 如`[{"key":"testkey1","value":"testStr"},{"key":"testkey2","value":123456}]`
+- jsonParams：配置项json数组 如：`[{"key":"testkey1","value":"testStr"},{"key":"testkey2","value":123456}]`
 
 > 接口返回
 
