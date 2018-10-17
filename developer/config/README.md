@@ -28,12 +28,12 @@
 @Service
 @ConditionalOnExpression("${spring.cloud.config.enabled:false}")
 public class ChangeMsgEventListener {
-	private static final Logger LOG = LoggerFactory.getLogger(ChangeMsgEventListener.class);
-	/** 装配变更通知消息总线 */
-	@Autowired
-	private AsyncEventBus asyncEventBus;
+  private static final Logger LOG = LoggerFactory.getLogger(ChangeMsgEventListener.class);
+  /** 装配变更通知消息总线 */
+  @Autowired
+  private AsyncEventBus asyncEventBus;
 	
-	@Value("${spring.application.name:}")
+  @Value("${spring.application.name:}")
   private String application;
   @Value("${spring.cloud.config.profile:}")
   private String profile;    
@@ -43,12 +43,12 @@ public class ChangeMsgEventListener {
   private String busiSys;
     
   /** 注册订阅方法至消息总线 */
-	@PostConstruct
-	public void register() {
-		asyncEventBus.register(this);
-	}
+  @PostConstruct
+  public void register() {
+    asyncEventBus.register(this);
+  }
 	
-	/** 注册订阅变更通知事件 */
+  /** 注册订阅变更通知事件 */
   @Subscribe
   public void listener(ChangeMsgEvent event) {
     //接收到的消息event
@@ -56,7 +56,7 @@ public class ChangeMsgEventListener {
     //判断是否为自己的应用
     LOG.info(String.format("应用信息：busiSys:%s, application:%s, profile:%s, label:%s", busiSys, application, profile, label));
     if(busiSys.equals(event.getBusisys()) && application.equals(event.getApplication()) && 
-        profile.equals(event.getProfile()) && label.equals(event.getLabel())) {
+      profile.equals(event.getProfile()) && label.equals(event.getLabel())) {
 
       //获取变更的配置
       List<PropItem> propList = event.getProps();
