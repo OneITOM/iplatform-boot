@@ -12,7 +12,7 @@
    curl https://{ip}:{port}/{contextpath}/health
    ```
 
-   看到如下信息表示断路器已经开始
+   看到如下信息表示断路器已经开启
 
    ```json
    "hystrix": {
