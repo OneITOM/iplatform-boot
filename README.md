@@ -44,7 +44,7 @@ IPLATFORM-BOOT 是以 SpringCloud Brixton.RELEASE 为核心的微服务开发框
 
   * [文档服务集成手册](/developer/dfss/README.md)-(未开始)
   * [集中日志开发手册](/developer/logger/README.md)
-  *  [集中配置开发手册](/developer/config/README.md)
+  * [集中配置开发手册](/developer/config/README.md)
   * [分布式锁开发手册](developer/distributedlock/README.md)
   * [集中式缓存开发手册](developer/distributedcache/README.md)-(未开始)
   * [服务跟踪配置手册](developer/trace/README.md)
@@ -52,6 +52,7 @@ IPLATFORM-BOOT 是以 SpringCloud Brixton.RELEASE 为核心的微服务开发框
   * [消息总线集成手册](developer/messagebus/README.md)
   * [多租户配置手册](developer/multitenant/README.md)
   * [通知服务集成手册](developer/notify/README.md)
+  * [断路器集成手册](developer/hystrix/README.md)
 * 其他
 
   * [日志标准化](Logs.md)
@@ -82,4 +83,4 @@ IPLATFORM-BOOT 是以 SpringCloud Brixton.RELEASE 为核心的微服务开发框
 
 ## 6.贡献者
 
-文档：[王立松](https://github.com/coderwls) [杜臻](https://github.com/duzhen020623)
+文档：[coderwls](https://github.com/coderwls) [duzhen](https://github.com/duzhen020623) [Yu Shengqiang](https://github.com/ShefronYudy)
