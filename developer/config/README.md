@@ -6,7 +6,9 @@
 
 > 通过RESTful API提供配置的新增、修改、删除
 
-`POST` `https://localhost:8761/api/v1/configparams/{operation}?configName=XXX&configProfile=XXX&jsonParams=XXX`
+```shell
+POST https://localhost:8761/api/v1/configparams/{operation}?configName={XXX}&configProfile={XXX}&jsonParams={XXX}
+```
 
 > 参数说明：
 
