@@ -12,8 +12,12 @@
 ## 服务参数配置
 
 ```properties
-# 跟踪服务开关（默认开启）
+# 跟踪服务开关（默认true）
 spring.sleuth.enabled=true
+# JDBC跟踪服务开关（默认true）
+spring.sleuth.mybatis.enabled=true
+# 数据上报方式（可选项是 activemq、http），默认activemq
+spring.zipkin.type=activemq
 # 集中配置开关
 spring.cloud.config.enabled=true
 # 集中配置环境
@@ -599,7 +603,7 @@ eureka.instance.metadataMap.trackSampling=1
 
 | ID | 组件类型 | 名称 | 说明 |
 | ---| ----- | ----- | -----|
-| b1ce90a546e67ba5 | httpservice     | http:/api/v1/test/testmethodwithdb | 服务端受到请求 |
+| b1ce90a546e67ba5 | httpservice     | http:/api/v1/test/testmethodwithdb | 服务端收到请求 |
 | c0e7a6f66745b037 | httpclient      | https:/auth/user                   | 服务端向认证服务鉴权 |
 | d3b277175669b1f6 | jdbc            | o.i.m.e.s.d.testmapper.create      | 服务端调用SQL |
 

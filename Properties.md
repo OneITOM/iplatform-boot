@@ -1,7 +1,9 @@
 # 参数说明
 
 > 作者 张磊
-iplatform-boot 0.0.7+
+> iplatform-boot 0.0.7+
+
+[Spring Boot 1.3.5 common application properties](https://docs.spring.io/spring-boot/docs/1.3.5.RELEASE/reference/html/common-application-properties.html)
 
 ## Java参数
 
@@ -260,14 +262,18 @@ eureka.server.response-cache-update-interval-ms=5000
 ```sh
 # 服务跟踪总开关，默认关闭
 spring.sleuth.enabled=false
-
 # jdbc服务跟踪开关，默认开启
 spring.sleuth.mybatis.enabled=true
-
+# 慢HTTP基线百分比阀值，默认超过平均基线3倍
+spring.sleuth.event.http.time.overpct=3
+# 慢SQL基线百分比阀值，默认超过平均基线3倍
+spring.sleuth.event.sql.time.overpct=3
 # 跟踪服务采样率
 eureka.instance.metadataMap.trackSampling=0.1
 # 跟踪消息发送方式，messagebus：消息总线，http：跟踪服务restfulapi（默认）
 spring.zipkin.type=messagebus 
+# 跟踪忽略web路径
+spring.sleuth.web.skipPattern="/api-docs.*|/autoconfig|/configprops|/dump|/health|/refresh|/info|/metrics.*|/mappings|/trace|/swagger.*|.*\\.png|.*\\.css|.*\\.js|.*\\.html|/favicon.ico|/hystrix.stream"
 ```
 
 ## 流控
@@ -308,3 +314,10 @@ logger.kafka.zookeeper=localhost:2181
 # 允许远程访问的ip白名单
 endpoints.shutdown.allowip=192.168.1.100,192.168.1.101
 ```
+## 微服务管控
+
+```properties
+# 所属业务系统
+spring.cloud.config.busisys=OneITOM
+```
+

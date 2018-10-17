@@ -197,6 +197,10 @@ Fegin异步调用支持
 
 支持HTTP2.0
 
+Remote Shell
+
+Spring Batch
+
 
 
 
