@@ -268,6 +268,8 @@ spring.sleuth.mybatis.enabled=true
 spring.sleuth.event.http.time.overpct=3
 # 慢SQL基线百分比阀值，默认超过平均基线3倍
 spring.sleuth.event.sql.time.overpct=3
+# 慢调度基线百分比阀值，默认超过平均基线3倍
+spring.sleuth.event.scheduling.time.overpct=3
 # 跟踪服务采样率
 eureka.instance.metadataMap.trackSampling=0.1
 # 跟踪消息发送方式，messagebus：消息总线，http：跟踪服务restfulapi（默认）

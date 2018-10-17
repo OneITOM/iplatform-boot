@@ -99,7 +99,13 @@ eureka.instance.metadataMap.trackSampling=1
 * 服务实例ID
   * serviceInstId
 * 移动平均耗时
-  * duration_move_avg
+  * durationMoveAvg
+* 性能警告百分比阀值
+  * optimize_warn_pct
+* 性能警告类型
+  - optimize_warn_type
+* 异常类型
+  * exception_class
 
 #### SPAN头格式
 > 扩展key
@@ -108,7 +114,10 @@ eureka.instance.metadataMap.trackSampling=1
 > * succeed 是否成功
 > * busisys 所属业务系统
 > * serviceInstId 服务实例ID
-> * duration_move_avg 移动平均耗时
+> * durationMoveAvg 移动平均耗时
+> * optimize_warn_pct 性能警告百分比阀值
+> * optimize_warn_type 性能告警类型
+> * exception_class 异常类型，Exception的类名或者Http Status Code
 ```json
 {
 	"traceId": "b22d96fb827f754f",
@@ -117,6 +126,11 @@ eureka.instance.metadataMap.trackSampling=1
 	"parentId": "b22d96fb827f754f",
 	"timestamp": 1537967701308000,
 	"duration": 53000,
+	"lc": "scheduled",
+	"optimize_warn_type": "none",
+    "exception_class": "none",
+	"serviceInstId": "10.50.7.14::empty-service:58080",
+	"succeed": "true",    
 	"binaryAnnotations": [{
 		"key": "lc",
 		"value": "组件类型",
@@ -128,20 +142,33 @@ eureka.instance.metadataMap.trackSampling=1
 	},{
 	  "key": "succeed",
 	  "value": "true",
-	  "endpoint": {...}
+	  "endpoint": {}
 	},{
 	  "key": "busisys",
 	  "value": "OneITOM",
-	  "endpoint": {...}
+	  "endpoint": {}
 	},{
-	  "key": "duration_move_avg",
+	  "key": "durationMoveAvg",
 	  "value": 60000,
-	  "endpoint": {...}
+	  "endpoint": {}
 	},{
 		"key": "serviceInstId",
 		"value": "10.50.7.14::empty-service:58080",
-		"endpoint": {...}
-	}]
+		"endpoint": {}
+	},{
+		"key": "optimize_warn_pct",
+		"value": "200.0%",
+		"endpoint": {}
+	},{
+		"key": "optimize_warn_type",
+		"value": "warn_http_optimize_time",
+		"endpoint": {}
+	},{
+		"key": "exception_class",
+		"value": "java.net.SocketTimeoutException",
+		"endpoint": {}
+	}
+]
 ```
 
 #### SPAN HttpClient
