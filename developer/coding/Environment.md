@@ -52,6 +52,14 @@ public class MyServiceApplication extends IPlatformServiceApplication {
     }
 }
 
+
+public class MyClass {
+
+    public void testMethod(Environment environment) {
+        Environment environment = MyServiceApplication.context.getEnvironment();
+        String serverHost = environment.getProperty("server.host");
+    }    
+}
 ```
 
 
