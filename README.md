@@ -28,6 +28,8 @@ IPLATFORM-BOOT 是以 SpringCloud Brixton.RELEASE 为核心的微服务开发框
   * 个性化配置规约
   * 鉴权规约
   * [Shutdown规约](developer/coding/Shutdown.md)
+  * [获取配置参数](developer/coding/Environment.md)
+  * 
 * 开发手册
   * [Service开发手册](developer/service/README.md)
   * [Controller开发手册](developer/controller/README.md)
@@ -42,7 +44,7 @@ IPLATFORM-BOOT 是以 SpringCloud Brixton.RELEASE 为核心的微服务开发框
 
   * [文档服务集成手册](/developer/dfss/README.md)-(未开始)
   * [集中日志开发手册](/developer/logger/README.md)
-  *  集中配置开发手册
+  *  [集中配置开发手册](/developer/config/README.md)
   * [分布式锁开发手册](developer/distributedlock/README.md)
   * [集中式缓存开发手册](developer/distributedcache/README.md)-(未开始)
   * [服务跟踪配置手册](developer/trace/README.md)
