@@ -27,47 +27,26 @@ POST https://localhost:8761/api/v1/configparams/{operation}?configName={XXX}&con
 > 订阅消息总线,实现配置变更后的逻辑
 
 ```java
-@Service
-@ConditionalOnExpression("${spring.cloud.config.enabled:false}")
-public class ChangeMsgEventListener {
-  private static final Logger LOG = LoggerFactory.getLogger(ChangeMsgEventListener.class);
   /** 装配变更通知消息总线 */
   @Autowired
   private AsyncEventBus asyncEventBus;
-	
-  @Value("${spring.application.name:}")
-  private String application;
-  @Value("${spring.cloud.config.profile:}")
-  private String profile;    
-  @Value("${spring.cloud.config.label:main}")
-  private String label;
-  @Value("${spring.cloud.config.busisys:OneITOM}")
-  private String busiSys;
-    
+```
+
+```java
   /** 注册订阅方法至消息总线 */
   @PostConstruct
   public void register() {
     asyncEventBus.register(this);
   }
-	
+```
+
+```java
   /** 注册订阅变更通知事件 */
   @Subscribe
   public void listener(ChangeMsgEvent event) {
-    //接收到的消息event
-    LOG.info("###receive msg:"+event);
-    //判断是否为自己的应用
-    LOG.info(String.format("应用信息：busiSys:%s, application:%s, profile:%s, label:%s", busiSys, application, profile, label));
-    if(busiSys.equals(event.getBusisys()) && application.equals(event.getApplication()) && 
-      profile.equals(event.getProfile()) && label.equals(event.getLabel())) {
-
-      //获取变更的配置
-      List<PropItem> propList = event.getProps();
-
-      //TODO:根据获取的变更配置逻辑处理
-
-    } else {
-      LOG.info("非自身应用变更通知消息，忽略.");
-    }
+    //获取变更的配置列表PropItem->{type, key, value}
+    List<PropItem> propList = event.getPropItems();
+    //TODO: 实现变更配置的业务逻辑处理
   }
 }
 ```
