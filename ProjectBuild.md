@@ -22,7 +22,10 @@ mvn clean package
 > 压缩启动脚本run.sh以及ui和service对应的jar包
 
 ```shell
-tar -zcvf iplatform-myproject-0.0.1.tar.gz
+cp run.sh ${tempdir}
+cp ui-0.0.1.jar ${tempdir}
+cp service-0.0.1.jar ${tempdir}
+tar -zcvf iplatform-myproject-0.0.1.tar.gz ${tempdir}
 ```
 
 ## 4. 部署
