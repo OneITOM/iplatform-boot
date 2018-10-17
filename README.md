@@ -60,13 +60,13 @@ IPLATFORM-BOOT 是以 SpringCloud Brixton.RELEASE 为核心的微服务开发框
 
 ## 3. 中间件部署手册
 
-- [ActiveMQ](middleware/ActiveMQ.md)-(未开始)
-- [Kafka](middleware/Kafka.md)-(未开始)
-- [ELK](middleware/ELK.md)-(未开始)
-- [Storm](middleware/Storm.md)-(未开始)
-- [MySQL](middleware/MysQL.md)-(未开始)
-- [Redis](middleware/Redis.md)-(未开始)
-- [Nginx](middleware/Nginx.md)-(未开始)
+- [ActiveMQ](middleware/ActiveMQ.md)
+- [Kafka](middleware/Kafka.md)
+- [ELK](middleware/ELK.md)
+- [Storm](middleware/Storm.md)
+- [MySQL](middleware/MysQL.md)
+- [Redis](middleware/Redis.md)
+- [Nginx](middleware/Nginx.md)
 - [Mongo](middleware/Mongo.md)
 
 ## 4. 微服务管控
