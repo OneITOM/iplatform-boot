@@ -2,7 +2,7 @@
 
 > 作者 张磊
 
-框架中所有配置参数都可以通过 Environment 获取，配置参数包含启动参数，System.env等参数
+本文介绍了在框架中如何获取配置参数值
 
 ## @Value
 
@@ -90,5 +90,9 @@ public class MyClass {
 ```
 
 
+
+## 配置中心动态参数
+
+参考[集中配置开发手册](../developer/config/README.md)
 
  
