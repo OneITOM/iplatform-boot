@@ -1,4 +1,4 @@
-# Dockerfile
+# Docker
 
 > 作者 张磊
 
@@ -205,3 +205,6 @@ docker-compose -f docker-compose-myproject.yml stop
 ```
 docker-compose -f docker-compose-myproject.yml rm
 ```
+
+## 5. K8S & Mesos Support
+

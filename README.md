@@ -57,7 +57,7 @@ IPLATFORM-BOOT 是以 SpringCloud Brixton.RELEASE 为核心的微服务开发框
 
   * [日志标准化](Logs.md)
   * [安全开发手册](Security.md)
-  * [Dockerfile](Dockerfile.md)
+  * [Docker](Dockerfile.md)
   * 自动化测试
 
 ## 3. 中间件部署手册
