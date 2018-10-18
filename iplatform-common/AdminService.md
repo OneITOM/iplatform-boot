@@ -51,7 +51,21 @@ sh run.sh restart
 https://127.0.0.1:8762/admin
 ```
 
+应用列表
+
 ![admin.png](images/AdminService/admin.png)
+
+详细信息
+
+![admin-detail.png](images/AdminService/admin-detail.png)
+
+配置参数
+
+![image-20181018151616803](images/AdminService/admin-env.png)
+
+日志级别
+
+![image-20181018151818740](images/AdminService/admin-log.png)
 
 ## 6. Docker
 
