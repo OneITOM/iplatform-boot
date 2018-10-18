@@ -16,7 +16,7 @@ IPLATFORM-BOOT 是以 SpringCloud Brixton.RELEASE 为核心的微服务开发框
 ## 2. 开发手册
 
 * [项目构建手册](YourFirstProject.md)
-* [应用打包部署手册](ProjectBuild.md)-(未开始)
+* [应用打包部署手册](ProjectBuild.md)
 * 编码规约
 
   * [定时任务规约](developer/coding/Schedule.md)
@@ -28,6 +28,7 @@ IPLATFORM-BOOT 是以 SpringCloud Brixton.RELEASE 为核心的微服务开发框
   * 个性化配置规约
   * 鉴权规约
   * [Shutdown规约](developer/coding/Shutdown.md)
+  * [获取配置参数](developer/coding/Environment.md)
 * 开发手册
   * [Service开发手册](developer/service/README.md)
   * [Controller开发手册](developer/controller/README.md)
@@ -37,12 +38,13 @@ IPLATFORM-BOOT 是以 SpringCloud Brixton.RELEASE 为核心的微服务开发框
   * [Kafka开发手册](developer/kafka/README.md)-(未开始)
   * [ElasticSearch开发手册](developer/elasticsearch/README.md)-于胜强
   * [Redis开发手册](developer/redis/README.md)-(未开始)
+  * [Mongo开发手册](developer/mongo/README.md)
   * [Tomcat开发手册](developer/tomcat/README.md)
 * 分布式相关开发手册
 
   * [文档服务集成手册](/developer/dfss/README.md)-(未开始)
   * [集中日志开发手册](/developer/logger/README.md)
-  *  集中配置开发手册
+  * [集中配置开发手册](/developer/config/README.md)
   * [分布式锁开发手册](developer/distributedlock/README.md)
   * [集中式缓存开发手册](developer/distributedcache/README.md)-(未开始)
   * [服务跟踪配置手册](developer/trace/README.md)
@@ -50,20 +52,22 @@ IPLATFORM-BOOT 是以 SpringCloud Brixton.RELEASE 为核心的微服务开发框
   * [消息总线集成手册](developer/messagebus/README.md)
   * [多租户配置手册](developer/multitenant/README.md)
   * [通知服务集成手册](developer/notify/README.md)
+  * [断路器集成手册](developer/hystrix/README.md)
 * 其他
 
   * [日志标准化](Logs.md)
   * [安全开发手册](Security.md)
+  * 自动化测试
 
 ## 3. 中间件部署手册
 
-- [ActiveMQ](middleware/ActiveMQ.md)-(未开始)
-- [Kafka](middleware/Kafka.md)-(未开始)
-- [ELK](middleware/ELK.md)-(未开始)
-- [Storm](middleware/Storm.md)-(未开始)
-- [MySQL](middleware/MysQL.md)-(未开始)
-- [Redis](middleware/Redis.md)-(未开始)
-- [Nginx](middleware/Nginx.md)-(未开始)
+- [ActiveMQ](middleware/ActiveMQ.md)
+- [Kafka](middleware/Kafka.md)
+- [ELK](middleware/ELK.md)
+- [Storm](middleware/Storm.md)
+- [MySQL](middleware/MysQL.md)
+- [Redis](middleware/Redis.md)
+- [Nginx](middleware/Nginx.md)
 - [Mongo](middleware/Mongo.md)
 
 ## 4. 微服务管控
@@ -80,4 +84,4 @@ IPLATFORM-BOOT 是以 SpringCloud Brixton.RELEASE 为核心的微服务开发框
 
 ## 6.贡献者
 
-文档：[王立松](https://github.com/coderwls) [杜臻](https://github.com/duzhen020623)
+文档：[coderwls](https://github.com/coderwls) [duzhen](https://github.com/duzhen020623) [Yu Shengqiang](https://github.com/ShefronYudy)
