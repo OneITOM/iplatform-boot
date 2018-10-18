@@ -47,7 +47,15 @@ sh run.sh restart
 | spring.data.mongodb.uri     | 是   |        | 集中配置存储mongodb地址，mongodb://localhost/config-db，spring.cloud.config.enable=true是必须配置 |
 | spring.activemq.broker-url  | 是   |        | 集中配置推送ActiveMQ地址，tcp://localhost:61616              |
 
-## 5. Docker
+## 5. 界面
+
+```
+https://127.0.0.1:8761/
+```
+
+![discovery.png](images/DiscoveryService/discovery.png)
+
+## 6. Docker
 
 ```yaml
 version: '3.2'

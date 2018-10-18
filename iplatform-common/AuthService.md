@@ -108,7 +108,15 @@ sh run.sh restart
 | custom.datasource.bomcbp.password            | 是   |        | 定义数据源bomcbp的密码                                       |
 | spring.profiles.active                       | 是   | bomc   | 增加bomc到这个参数中，如果已经有其他参数，则逗号分隔，例如：spring.profiles.active=bomc,syncmongodb |
 
-## 5. Docker
+## 5. 界面
+
+```
+https://127.0.0.1:9999/auth
+```
+
+![auth.png](images/AuthService/auth.png)
+
+## 6. Docker
 
 ```yaml
 version: '3.2'
