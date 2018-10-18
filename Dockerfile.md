@@ -118,9 +118,9 @@ sh build.sh
 * 发布demo/myproject:0.0.1镜像到私服127.0.0.1:8089上
 * 在docker目录下生成了离线镜像文件docker_demo_myproject_0.0.1.tar.gz
 
-## 3. 启动
+## 4. 启动
 
-### 3.1 导入离线镜像文件到运行服务器
+### 4.1 导入离线镜像文件到运行服务器
 
 > 如果启动环境可以连接Docker私服请跳过此步骤，并自行配置docker仓库地址
 
@@ -128,7 +128,7 @@ sh build.sh
 docker load -i docker_demo_myproject_0.0.1.tar.gz 
 ```
 
-### 3.2 创建网络
+### 4.2 创建网络
 
 > 此步骤不是必须，建议创建
 
@@ -139,7 +139,7 @@ docker load -i docker_demo_myproject_0.0.1.tar.gz
     oneitom-network
 ```
 
-### 3.3 启动容器
+### 4.3 启动容器
 
 在目标服务器上创建docker-compos文件
 
