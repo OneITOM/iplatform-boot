@@ -33,7 +33,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/v1/test")
 public class TestService {
 	
-	@RequestMapping(value = "/testservice", method = RequestMethod.GET)
+    @RequestMapping(value = "/testservice", method = RequestMethod.GET)
     public ResponseEntity<RestResponse<String>> testService() {
         RestResponse<String> response = new RestResponse<String>();
         String returnStr = "I am testService";
