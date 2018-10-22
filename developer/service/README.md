@@ -2,7 +2,7 @@
 
 > 作者 王立松
 
-通过本文档你可以了解如何开发和调用Service
+通过本文档你可以了解如何开发一个Service以及如何调用Service
 
 ## 包命名
 
@@ -70,7 +70,9 @@ public interface TestClient {
 
 ```
 
-### 2. 实现Service调用
+### 2. 完成Service调用
+
+> 以下示例通过Controller完成对Service的调用
 
 ```java
 package [你的ui项目包路径].controller;
