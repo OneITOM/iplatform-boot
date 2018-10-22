@@ -101,20 +101,20 @@ pages/test/test.html
 		<script th:src="@{/js/plugins/jquery/jquery.min.js}"></script>
 		<script type="text/javascript" th:inline="javascript">/*<![CDATA[*/	
 			
-			var CONTEXT_PATH = /*[[@{/}]]*/;
+		var CONTEXT_PATH = /*[[@{/}]]*/;
 	    	var ACCESS_TOKEN = /*[[${access_token}]]*/;
 	    	
 	    	$(function() {
 	    		$.ajax({
-					 type:'GET',
-			         headers: {'Authorization': 'Bearer ' + ACCESS_TOKEN},
-			         url: CONTEXT_PATH + 'test/getTestData',
-			         data:{},
-			         success: function(result){
-			        	console.log(result);
-			         }
-				});
+			     type:'GET',
+			     headers: {'Authorization': 'Bearer ' + ACCESS_TOKEN},
+			     url: CONTEXT_PATH + 'test/getTestData',
+			     data:{},
+			     success: function(result){
+				console.log(result);
+			     }
 			});
+		});
 
 		/*]]>*/
 		</script>		
