@@ -43,20 +43,21 @@ public class TestController {
 
 	@Autowired
 	private TestClient testClient;
-	
+
 	@RequestMapping("/showtest")
-	public String showtest(ModelMap map, HttpServletRequest request, HttpServletResponse response, Principal principal) throws Exception{
+	public String showtest(ModelMap map, HttpServletRequest request, HttpServletResponse response, Principal principal)
+			throws Exception {
 		String data = testClient.testService().getBody().getData();
 		map.put("testData", data);
 		return "pages/test/test";
 	}
-	
+
 	@RequestMapping("/getTestData")
 	@ResponseBody
-	public String getTestData() throws Exception{
+	public String getTestData() throws Exception {
 		return testClient.testService().getBody().getData();
 	}
-	
+
 }
 
 ```
