@@ -6,11 +6,15 @@
 
 ## 包命名
 
+包以controller命名
+
 ```java
 package [你的ui项目包路径].controller
 ```
 
 ## 类命名
+
+类以Controller结尾
 
 ```java
 [你的ui项目包路径].controller.XxxController.java
@@ -18,9 +22,9 @@ package [你的ui项目包路径].controller
 
 ## 定义Controller
 
-> showtest 完成页面跳转，同时将测试数据返回到前端
+> 增加注解@Controller和@RequestMapping
 >
-> getTestData 供ajax调用，返回测试数据
+> showtest方法完成页面跳转，getTestData方法返回测试数据
 
 ```java
 package [你的ui项目包路径].controller;
@@ -41,22 +45,22 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @RequestMapping("/test")
 public class TestController {
 
-	@Autowired
-	private TestClient testClient;
+    @Autowired
+    private TestClient testClient;
 
-	@RequestMapping("/showtest")
-	public String showtest(ModelMap map, HttpServletRequest request, HttpServletResponse response, Principal principal)
-			throws Exception {
-		String data = testClient.testService().getBody().getData();
-		map.put("testData", data);
-		return "pages/test/test";
-	}
+    @RequestMapping("/showtest")
+    public String showtest(ModelMap map, HttpServletRequest request, HttpServletResponse response, Principal principal)
+		throws Exception {
+	String data = testClient.testService().getBody().getData();
+	map.put("testData", data);
+	return "pages/test/test";
+     }
 
-	@RequestMapping("/getTestData")
-	@ResponseBody
-	public String getTestData() throws Exception {
-		return testClient.testService().getBody().getData();
-	}
+     @RequestMapping("/getTestData")
+     @ResponseBody
+     public String getTestData() throws Exception {
+	 return testClient.testService().getBody().getData();
+     }
 
 }
 
@@ -64,7 +68,7 @@ public class TestController {
 
 ## 访问Controller
 
-### 1. 页面跳转
+### 1. FORM表单请求
 
 ```html
 index.html
@@ -77,7 +81,7 @@ index.html
 	<div layout:fragment="content"
 		class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">	
 		<form name="testform" th:action="@{/test/showtest}" method="GET">
-			<input type="hidden" name="access_token" th:value="${access_token}"></input>
+		    <input type="hidden" name="access_token" th:value="${access_token}"></input>
 		</form>
 		<a href="javascript:document.testform.submit();">testJump</a>
 	</div>
@@ -85,7 +89,7 @@ index.html
 </html>
 ```
 
-### 2. ajax调用
+### 2. ajax请求
 
 ```html
 pages/test/test.html
@@ -106,13 +110,13 @@ pages/test/test.html
 	    	
 	    	$(function() {
 	    		$.ajax({
-			     type:'GET',
-			     headers: {'Authorization': 'Bearer ' + ACCESS_TOKEN},
-			     url: CONTEXT_PATH + 'test/getTestData',
-			     data:{},
-			     success: function(result){
-				console.log(result);
-			     }
+			    type:'GET',
+			    headers: {'Authorization': 'Bearer ' + ACCESS_TOKEN},
+			    url: CONTEXT_PATH + 'test/getTestData',
+			    data:{},
+			    success: function(result){
+			      	console.log(result);
+			    }
 			});
 		});
 
