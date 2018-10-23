@@ -6,17 +6,23 @@
 
 ## 包命名
 
+> 包以service命名
+
 ```java
 package [你的service项目包路径].service
 ```
 
 ## 类命名
 
+> 类以Service结尾
+
 ```java
 [你的service项目包路径].service.XxxService.java
 ```
 
 ## 定义Service
+
+> 增加注解@Service、@RestController和@RequestMapping
 
 ```java
 package [你的service项目包路径].service;
@@ -72,7 +78,7 @@ public interface TestClient {
 
 ### 2. 完成Service调用
 
-> 以下示例通过Controller完成对Service的调用
+> 以下示例为Controller对Service的调用
 
 ```java
 package [你的ui项目包路径].controller;
@@ -86,14 +92,14 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Controller
 public class TestController {
 
-	@Autowired
-	private TestClient testClient;
-	
-	@RequestMapping("/testservice")
-	@ResponseBody
-	public String testService() throws Exception{
-		return testClient.testService().getBody().getData();
-	}
+    @Autowired
+    private TestClient testClient;
+
+    @RequestMapping("/testservice")
+    @ResponseBody
+    public String testService() throws Exception{
+	return testClient.testService().getBody().getData();
+    }
 	
 }
 ```
