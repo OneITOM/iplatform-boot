@@ -2,7 +2,7 @@
 
 > 作者 王立松
 
-通过本文档你可以了解如何开发一个Service以及如何调用Service
+本文档演示如何给[myproject](YourFirstProject.md)项目增加一个Service
 
 ## 包命名
 
@@ -14,10 +14,10 @@ package [你的service项目包路径].service
 
 ## 类命名
 
-> 类以Service结尾
+> 类以Service结尾，例如MyService
 
 ```java
-[你的service项目包路径].service.XxxService.java
+[你的service项目包路径].service.MyService.java
 ```
 
 ## 定义Service
@@ -36,13 +36,13 @@ import org.springframework.web.bind.annotation.RestController;
 
 @Service
 @RestController
-@RequestMapping("/api/v1/test")
-public class TestService {
+@RequestMapping("/api/v1/myservice")
+public class MyService {
 	
-    @RequestMapping(value = "/testservice", method = RequestMethod.GET)
-    public ResponseEntity<RestResponse<String>> testService() {
+    @RequestMapping(value = "/getData", method = RequestMethod.GET)
+    public ResponseEntity<RestResponse<String>> getData() {
         RestResponse<String> response = new RestResponse<String>();
-        String returnStr = "I am testService";
+        String returnStr = "I am service";
         response.setData(returnStr);
         response.setSuccess(Boolean.TRUE);
         return new ResponseEntity<>(response, HttpStatus.OK);
@@ -67,10 +67,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 @FeignClient("[service项目名称]")
-public interface TestClient {
+public interface MyClient {
 	
-    @RequestMapping(value = "[service项目contextPath]/api/v1/test/testservice", method = RequestMethod.GET)
-    public ResponseEntity<RestResponse<String>> testService();
+    @RequestMapping(value = "[service项目contextPath]/api/v1/myservice/getData", method = RequestMethod.GET)
+    public ResponseEntity<RestResponse<String>> getData();
 	
 }
 
@@ -83,22 +83,23 @@ public interface TestClient {
 ```java
 package [你的ui项目包路径].controller;
 
-import [你的ui项目包路径].feign.TestClient;
+import [你的ui项目包路径].feign.MyClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
-public class TestController {
+@RequestMapping("/mycontroller")
+public class MyController {
 
     @Autowired
-    private TestClient testClient;
-
-    @RequestMapping("/testservice")
+    private MyClient myClient;
+	
+    @RequestMapping("/getData")
     @ResponseBody
-    public String testService() throws Exception{
-	return testClient.testService().getBody().getData();
+    public String getData() throws Exception{
+	return myClient.getData().getBody().getData();
     }
 	
 }
