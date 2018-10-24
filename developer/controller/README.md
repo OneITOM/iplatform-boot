@@ -2,7 +2,7 @@
 
 > 作者 王立松
 
-通过本文档你可以了解如何开发一个Controller以及如何访问Controller
+本文档演示如何给[myproject](YourFirstProject.md)项目增加一个Controller
 
 ## 包命名
 
@@ -14,17 +14,17 @@ package [你的ui项目包路径].controller
 
 ## 类命名
 
-类以Controller结尾
+类以Controller结尾，例如MyController
 
 ```java
-[你的ui项目包路径].controller.XxxController.java
+[你的ui项目包路径].controller.MyController.java
 ```
 
 ## 定义Controller
 
 > 增加注解@Controller和@RequestMapping
 >
-> showtest方法完成页面跳转，getTestData方法返回测试数据
+> toMypage方法完成页面跳转，getData方法返回测试数据
 
 ```java
 package [你的ui项目包路径].controller;
@@ -34,7 +34,7 @@ import java.security.Principal;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import [你的ui项目包路径].feign.TestClient;
+import [你的ui项目包路径].feign.MyClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -42,25 +42,25 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
-@RequestMapping("/test")
-public class TestController {
+@RequestMapping("/mycontroller")
+public class MyController {
 
     @Autowired
-    private TestClient testClient;
+    private MyClient myClient;
 
-    @RequestMapping("/showtest")
-    public String showtest(ModelMap map, HttpServletRequest request, HttpServletResponse response, Principal principal)
+    @RequestMapping("/toMypage")
+    public String toMypage(ModelMap map, HttpServletRequest request, HttpServletResponse response, Principal principal)
 		throws Exception {
-	String data = testClient.testService().getBody().getData();
-	map.put("testData", data);
-	return "pages/test/test";
-     }
+	String data = myClient.getData().getBody().getData();
+	map.put("data", data);
+	return "pages/mypage";
+    }
 
-     @RequestMapping("/getTestData")
-     @ResponseBody
-     public String getTestData() throws Exception {
-	 return testClient.testService().getBody().getData();
-     }
+    @RequestMapping("/getData")
+    @ResponseBody
+    public String getData() throws Exception {
+	return myClient.getData().getBody().getData();
+    }
 
 }
 
@@ -80,8 +80,8 @@ index.html
 <body>
 	<div layout:fragment="content"
 		class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">	
-		<form name="testform" th:action="@{/test/showtest}" method="GET">
-		    <input type="hidden" name="access_token" th:value="${access_token}"></input>
+		<form name="testform" th:action="@{/mycontroller/toMypage}" method="GET">
+			<input type="hidden" name="access_token" th:value="${access_token}"></input>
 		</form>
 		<a href="javascript:document.testform.submit();">testJump</a>
 	</div>
@@ -105,17 +105,17 @@ pages/test/test.html
 		<script th:src="@{/js/plugins/jquery/jquery.min.js}"></script>
 		<script type="text/javascript" th:inline="javascript">/*<![CDATA[*/	
 			
-		var CONTEXT_PATH = /*[[@{/}]]*/;
+		    var CONTEXT_PATH = /*[[@{/}]]*/;
 	    	var ACCESS_TOKEN = /*[[${access_token}]]*/;
 	    	
 	    	$(function() {
 	    		$.ajax({
 			    type:'GET',
 			    headers: {'Authorization': 'Bearer ' + ACCESS_TOKEN},
-			    url: CONTEXT_PATH + 'test/getTestData',
+			    url: CONTEXT_PATH + 'mycontroller/getData',
 			    data:{},
 			    success: function(result){
-			      	console.log(result);
+			     	console.log(result);
 			    }
 			});
 		});
