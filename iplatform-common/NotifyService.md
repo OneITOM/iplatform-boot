@@ -2,7 +2,7 @@
 
 > 作者 王立松
 
-通知服务负责短信和邮件的发送，其底层基于flume，短信和邮件的发送均由相应的sink组件实现
+通知服务负责接收ActiveMQ消息发送到短信网关和邮件服务器
 
 ## 1. 准备
 
@@ -65,7 +65,7 @@ sh run.sh restart
 | discovery.server.address                                 | 是   | 注册服务的地址，当集群模式时配置多个地址逗号分隔     |
 | server.host                                              | 是   | 服务绑定IP                                           |
 | server.port                                              | 是   | 服务绑定端口                                         |
-| spring.activemq.broker-url                               | 是   | 短信邮件推送ActiveMQ地址                             |
+| spring.activemq.broker-url                               | 是   | 短信邮件消息的ActiveMQ地址                           |
 | spring.datasource.platform                               | 是   | 数据库平台类型，例如oracle                           |
 | spring.datasource.dataSourceClassName                    | 是   | 数据库JDBC驱动，例如 oracle.jdbc.driver.OracleDriver |
 | spring.datasource.url                                    | 是   | 数据库url，例如jdbc:oracle:thin:@127.0.0.1:1521:orcl |
@@ -83,3 +83,4 @@ sh run.sh restart
 | flume.agent.sinks.smsk.CMPPConnect.shared-secret         | 是   | 短信网关登录密码                                     |
 | flume.agent.sinks.smsk.CMPPSubmitMessage.msg_Src         | 是   | 短信网关登录ID                                       |
 | flume.agent.sinks.smsk.CMPPSubmitMessage.src_Terminal_Id | 是   | 短信网关服务代码或前缀                               |
+
