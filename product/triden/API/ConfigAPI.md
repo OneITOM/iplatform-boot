@@ -35,18 +35,6 @@
 
 `curl -X GET -H 'X-CONFIG-BUSISYS: {busisys}' -H 'Content-Type: application/x-www-form-urlencoded' -i 'http://localhost:8761/config/{label}/{name}-{profile}.properties'`
 
-参数说明：
-
-`{busisys}`: 指定业务系统ID
-
-`{operation}`: 操作类型：add, update, delete
-
-`{name}`: 应用ID
-
-`{profile}`: 应用环境
-
-`{label}`: 应用版本
-
 > 返回yml文件格式 restful api：
 
 `curl -X GET -H 'X-CONFIG-BUSISYS: {busisys}' -H 'Content-Type: application/x-www-form-urlencoded' -i 'http://localhost:8761/config/{label}/{name}-{profile}.yml'`
