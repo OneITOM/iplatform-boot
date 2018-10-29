@@ -2,7 +2,7 @@
 
 > 作者 张磊
 
-本手册指导第三方系统如何通过API集成微服务管控平台，API接口全部采用RESTful API方式。
+本手册指导基于原生SpringCloud开发的微服务如何集成到微服务管控平台。
 
 [注册中心集成](API/DiscoveryAPI.md)
 
