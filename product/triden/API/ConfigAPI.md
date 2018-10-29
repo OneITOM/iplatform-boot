@@ -4,7 +4,10 @@
 
 ### 配置参数同步集中配置
 
-`curl -X POST -H 'X-CONFIG-BUSISYS: OneITOM' -i http://localhost:8761/api/v1/syncparams/{operation} --data 'configName={}&configProfile={}&configLabel={main}&jsonParams={}'`
+`curl -X POST -H 'X-CONFIG-BUSISYS: {busisys}' -i http://localhost:8761/api/v1/syncparams/{operation} --data 'configName={name}&configProfile={profile}&configLabel={label}&jsonParams={jsonStr}'`
+
+说明：{xxxx}为具体的业务值,参数解释具体如下：
+{busisys}: 指定业务系统ID
 
 
 ### 集中配置配置项参数变更
