@@ -11,8 +11,6 @@
 
 `payload`: JSON
 
-`instanceId`: 应用实例ID
-
 ```json
 
 {
@@ -65,4 +63,4 @@
 }
 
 ```
-
+`instanceId`: 应用实例ID
