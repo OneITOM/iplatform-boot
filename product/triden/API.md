@@ -16,3 +16,5 @@
 
 [服务跟踪集成](API/TracesAPI.md)
 
+[服务控制集成](API/ControlAPI.md)
+
