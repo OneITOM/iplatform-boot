@@ -25,8 +25,11 @@ discovery.server.address=https://127.0.0.1:8761/eureka/
 # 实例ID（非必填）,默认生成一个唯一ID，格式为ip:服务名:port
 server.instanceId='xxx'
 
-# 服务IP（必填）
-server.host=127.0.0.1
+# 服务IP（当没有配置server.host.prefix的时候必填）
+server.host=192.168.1.1
+
+# 服务器IP前缀（当使用这个配置的时候server.host可以不填，会根据前缀自动匹配IP）
+server.host.prefix=192.168.
 ```
 
 ## 第二端口(非SSL)
