@@ -51,6 +51,16 @@
 
 ### 配置变更通知
 
+> 采用ActiveMQ进行通知
+
+发布TOPIC: T_CCMP_CONFIG
+
+订阅消息：json字符串
+
+```
+
+```
+
 
 
 
