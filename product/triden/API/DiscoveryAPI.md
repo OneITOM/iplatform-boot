@@ -19,7 +19,7 @@
 	"instance": {
 		"instanceId": "{instanceId}",
 		"hostName": "instance0.application0.com",
-		"app": "app-1",
+		"app": "{appID}",
 		"ipAddr": "20.0.0.0",
 		"status": "UP",
 		"overriddenstatus": "UNKNOWN",
