@@ -6,6 +6,8 @@
 
 `curl -H "Content-Type:application/json" -X POST --data '{payload}'  http://localhost/eureka/apps/{appID}`
 
+状态码：
+成功 -> 204
 
 `appID` : 应用ID
 
@@ -64,3 +66,12 @@
 
 ```
 `instanceId`: 应用实例ID
+
+## 撤销应用实例注册
+
+`curl -X DELETE http://localhost:8761/eureka/apps/{appID}/{instanceID}`
+
+`appId`：应用ID
+`instanceId`：应用实例ID
+
+## 
