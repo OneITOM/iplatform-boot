@@ -11,11 +11,13 @@
 
 `payload`: JSON
 
+`instanceId`: 应用实例ID
+
 ```json
 
 {
 	"instance": {
-		"instanceId": "app-inst-id-1",
+		"instanceId": "{instanceId}",
 		"hostName": "instance0.application0.com",
 		"app": "app-1",
 		"ipAddr": "20.0.0.0",
