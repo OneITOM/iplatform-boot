@@ -43,8 +43,6 @@
 
 `{busisys}`: 指定业务系统ID
 
-`{operation}`: 操作类型：add, update, delete
-
 `{name}`: 应用ID
 
 `{profile}`: 应用环境
