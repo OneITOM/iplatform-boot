@@ -58,7 +58,30 @@
 订阅消息：json字符串
 
 ```
-
+{
+	"uuid": "23e9b957c4e245c7a0c6f7a93b031b5e",
+	"timestamp": "1540823027123",
+	"busisys": "OneITOM",
+	"application": "dfss-service",
+	"profile": "prod",
+	"label": "0.0.2",
+	"propItems": [
+    {
+		"key": "spring.test.key1",
+		"value": "123",
+		"type": "add"
+	},
+	{
+		"key": "spring.test.key2",
+		"value": "123",
+		"type": "update"
+	},
+	{
+		"key": "spring.test.key3",
+		"value": "123",
+		"type": "delete"
+	}]
+}
 ```
 
 
