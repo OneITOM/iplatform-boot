@@ -20,6 +20,12 @@
 
 `{jsonStr}`: 配置项数组json格式如：`[{"key":"spring.key","value":"123","remark":"备注"},{"key":"spring.test.key","value":"123","remark":"备注"}]`
 
+返回结果：
+
+成功 -> {"success":true, "message": null, "data": null}
+
+失败 -> {"success":false, "message", "XXX错误信息", "data": null}
+
 ### 集中配置配置项参数变更
 
 
