@@ -6,7 +6,7 @@
 
 `curl -X POST -H 'X-CONFIG-BUSISYS: {busisys}' -i http://localhost:8761/api/v1/syncparams/{operation} --data 'configName={name}&configProfile={profile}&configLabel={label}&jsonParams={jsonStr}'`
 
-说明：`{xxxx}`为具体的业务值,参数解释具体如下：
+> 说明：`{xxxx}`为具体的业务值,参数解释具体如下：
 
 `{busisys}`: 指定业务系统ID
 
@@ -20,7 +20,7 @@
 
 `{jsonStr}`: 配置项数组json格式如：`[{"key":"spring.key","value":"123","remark":"备注"},{"key":"spring.test.key","value":"123","remark":"备注"}]`
 
-返回结果：
+> 返回结果：
 
 成功 -> {"success":true, "message": null, "data": null}
 
