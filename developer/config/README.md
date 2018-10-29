@@ -46,7 +46,143 @@ POST https://localhost:8761/api/v1/configparams/{operation}?configName={XXX}&con
   public void listener(ChangeMsgEvent event) {
     //获取变更的配置列表PropItem->{type, key, value}
     List<PropItem> propList = event.getPropItems();
-    //TODO: 实现变更配置的业务逻辑处理
+		for(PropItem item : propList) {
+			type = item.getType();
+			if(PropItemTypeEnum.add == type) {
+				//TODO: 新增
+			} else if(PropItemTypeEnum.update == type) {
+				//TODO: 修改
+			} else if(PropItemTypeEnum.delete == type) {
+				//TODO: 删除
+			}
+		}
   }
 }
 ```
+
+## logstash采集kafka应用日志消息
+
+```jruby
+
+input {
+  
+  kafka {
+    zk_connect => "172.18.254.105:2181,172.18.254.106:2181,172.18.254.107:2181/mykafka"
+    group_id => "logstash-trident-group"
+    topic_id => "trident-service-log"
+    reset_beginning => false
+    consumer_threads => 1
+    codec => "json"
+    #smallest or largest
+    auto_offset_reset => "smallest"
+  }
+
+}
+
+```
+
+## kafka应用日志消息入elasticsearch
+
+json格式kafka日志消息key重命名及指定字段值小写
+```jruby
+
+filter {
+
+  mutate {
+    rename => {
+        "traceid" => "traceId"
+    }
+    lowercase => [ "busisys", "serviceId" ]
+  }
+
+}
+
+```
+
+kafka日志消息入elasticsearch
+```jruby
+
+output {
+
+	elasticsearch {
+	  hosts => ["172.18.254.105:9200","172.18.254.106:9200","172.18.254.107:9200"]
+	  index => "%{busisys}-%{serviceId}-%{+YYYY.MM.dd}"
+	  template_name => "oneitom-template"
+	  template => "/usr/local/logstash-2.4.1/templates/oneitom-template.json"
+	  template_overwrite => true
+	  document_type => "logs"
+	}
+
+}
+
+```
+
+附：elasticsearch索引模板oneitem-template.json
+```json
+
+{
+	"template": "oneitom*",
+	"settings": {
+		"index.refresh_interval": "5s",
+		"index.number_of_shards": "5",
+		"index.number_of_replicas": "1"
+	},
+	"mappings": {
+		"_default_": {
+			"dynamic_templates": [{
+				"message_field": {
+					"mapping": {
+						"fielddata": {
+							"format": "disabled"
+						},
+						"index": "analyzed",
+						"type": "string"
+					},
+					"match_mapping_type": "string",
+					"match": "message"
+				}
+			}],
+			"_all": {
+				"enabled": true
+			},
+			"properties": {
+				"@timestamp": {
+					"type": "date"
+				},
+				"serviceId": {
+					"index": "not_analyzed",
+					"type": "string"
+				},
+				"serviceInstId": {
+					"index": "not_analyzed",
+					"type": "string"
+				},
+				"traceId": {
+					"index": "not_analyzed",
+					"type": "string"
+				},
+				"tracespanid": {
+					"index": "not_analyzed",
+					"type": "string"
+				},
+				"busisys": {
+					"index": "not_analyzed",
+					"type": "string"
+				},
+				"level": {
+					"index": "not_analyzed",
+					"type": "string"
+				},
+				"@version": {
+					"index": "not_analyzed",
+					"type": "string"
+				}
+			}
+		}
+	}
+}
+
+```
+
+
+
