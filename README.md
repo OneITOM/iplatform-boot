@@ -74,7 +74,7 @@ IPLATFORM-BOOT 是以 SpringCloud Brixton.RELEASE 为核心的微服务开发框
 ## 4. 微服务管控
 
 - [微服务管控平台部署手册](product/triden/README.md)
-- [微服务管控平台集成手册](product/triden/Dev.md)
+- [微服务管控平台API](product/triden/API.md)
 
 ## 5. 附件
 
