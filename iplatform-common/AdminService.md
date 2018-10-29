@@ -45,7 +45,29 @@ sh run.sh restart
 | spring.cloud.config.enable  | 是   | true   | 开启集中配置功能                                             |
 | spring.cloud.config.profile | 是   |        | 集中配置环境名，例如：生产环境                               |
 
-## 5. Docker
+## 5.界面
+
+```
+https://127.0.0.1:8762/admin
+```
+
+应用列表
+
+![admin.png](images/AdminService/admin.png)
+
+详细信息
+
+![admin-detail.png](images/AdminService/admin-detail.png)
+
+配置参数
+
+![image-20181018151616803](images/AdminService/admin-env.png)
+
+日志级别
+
+![image-20181018151818740](images/AdminService/admin-log.png)
+
+## 6. Docker
 
 ```yaml
 version: '3.2'
