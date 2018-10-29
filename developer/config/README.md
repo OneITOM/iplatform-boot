@@ -67,7 +67,7 @@ POST https://localhost:8761/api/v1/configparams/{operation}?configName={XXX}&con
 input {
   
   kafka {
-    zk_connect => "172.18.254.105:2181,172.18.254.106:2181,172.18.254.107:2181/mykafka"
+    zk_connect => "172.18.254.105:2181,172.18.254.106:2181,172.18.254.107:2181"
     group_id => "logstash-trident-group"
     topic_id => "trident-service-log"
     reset_beginning => false
