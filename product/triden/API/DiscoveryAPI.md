@@ -11,8 +11,6 @@
 
 `payload`: JSON
 
-eg:
-
 ```json
 
 {
