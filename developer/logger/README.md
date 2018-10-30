@@ -51,7 +51,7 @@ logger.kafka.replication=1
 
 ### Topic
 
-服务发送的topic自动创建，默认名称是服务名${spring.application.name}-log
+服务发送的topic自动创建，iplatform-{spring.application.name}-log
 
 ### Key
 
