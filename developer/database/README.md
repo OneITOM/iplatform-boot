@@ -175,7 +175,7 @@ public class TestService {
 
 ## 6. 翻页查询
 
-> 框架内部集成了[PageHelper 4.1.6]("https://pagehelper.github.io/")，研发人员可通过该插件实现分页，样例如下
+> 框架内部集成了[PageHelper 4.1.6](https://pagehelper.github.io/)，研发人员可通过该插件实现分页，样例如下
 
 ```java
 int pageNum = 1;//页数
