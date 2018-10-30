@@ -175,7 +175,15 @@ public class TestService {
 
 ## 6. 翻页查询
 
-> 待补充
+> 框架内部集成了[PageHelper 4.1.6]("https://pagehelper.github.io/")，研发人员可通过该插件实现分页，样例如下
+
+```java
+int pageNum = 1;//页数
+int pageSize = 10;//每页显示的条数
+PageHelper.startPage(pageNum,pageSize);//启用分页
+List<TestDO> dbos = testMapper.getAll();//紧跟startPage方法后面的第一个Mybatis查询会被分页
+PageInfo<TestDO> pageInfo = new PageInfo<TestDO>(dbos);//查询结果强转为包含完整分页信息的PageInfo
+```
 
 ## 7. 多数据源
 
@@ -251,4 +259,41 @@ public class TestService {
     "</script>" })
 List<Map> getTest();
 ```
+## 9. 事务管理
 
+### 9.1 事务支持
+
+> 主启动类增加@EnableTransactionManagement开启注解式事务的支持 
+
+```java
+@SpringBootApplication
+@EnableOAuth2Client
+@EnableDiscoveryClient
+@EnableEurekaClient
+@Configuration
+@EnableTransactionManagement
+@ComponentScan({"org.iplatform.microservices", "org.iplatform.myproject.service"})
+public class MyprojectServiceApplication extends IPlatformServiceApplication {
+
+    private static final Logger LOG = LoggerFactory.getLogger(ServiceApplication.class);
+
+    public static void main(String[] args) {
+        try {
+            run(MyprojectServiceApplication.class, args);
+        } catch (Exception e) {
+            LOG.error("", e);
+        }
+    }
+}
+```
+
+### 9.2 开启事务
+
+> 类或者方法上增加注解@Transactional开启事务，在类上增加意味着此类的所有public方法都进行事务管理
+
+```java
+@Transactional(rollbackFor = Exception.class)
+public void save(TestDO testDO){
+    testMapper.insert(testDO);
+}
+```
