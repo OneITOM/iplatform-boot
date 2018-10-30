@@ -60,7 +60,7 @@ QUEUE：Q_MS_EVENT
    	"version": "0.1",
    	"time": "2018-09-13 09:15:20",
    	"type": "event",
-   	"ms_id": "example-server",
+	"ms_id": "example-server",
    	"ms_ins_id": "[10.50.7.10]:example-server:8761",
    	"ms_from": "example-server",
        "host": "192.168.0.1",
@@ -84,7 +84,7 @@ QUEUE：Q_MS_EVENT
    	"ms_id": "discovery-server",
    	"ms_ins_id": "[10.50.7.10]:discovery-server:8761",
    	"ms_from": "discovery-server",
-       "host": "192.168.0.1",    
+	"host": "192.168.0.1",    
    	"data": {
    		"event_code": "service_down",
    		"event_title": "服务下线"
@@ -105,7 +105,7 @@ QUEUE：Q_MS_EVENT
    	"ms_id": "discovery-server",
    	"ms_ins_id": "[10.50.7.10]:discovery-server:8761",
    	"ms_from": "discovery-server",
-       "host": "192.168.0.1",    
+	"host": "192.168.0.1",    
    	"data": {
    		"event_code": "service_heart",
    		"event_title": "服务心跳"
@@ -126,7 +126,7 @@ QUEUE：Q_MS_EVENT
    	"ms_id": null,
    	"ms_ins_id": null,
    	"ms_from": null,
-       "host": "192.168.0.1",    
+	"host": "192.168.0.1",    
    	"data": {
    		"sqlid": "org.iplatform.microservices.emptyservice.service.dao.TestMapper.create",
    		"event_code": "sql_error",
@@ -151,7 +151,7 @@ QUEUE：Q_MS_EVENT
    	"ms_id": null,
    	"ms_ins_id": null,
    	"ms_from": null,
-       "host": "192.168.0.1",    
+	"host": "192.168.0.1",    
    	"data": {
    		"sqlid": "org.iplatform.microservices.emptyservice.service.dao.TestMapper.getAll",
    		"cost": "1",
@@ -176,7 +176,7 @@ QUEUE：Q_MS_EVENT
    	"ms_id": null,
        "ms_ins_id": null,
    	"ms_from": null,
-       "host": "192.168.0.1",    
+	"host": "192.168.0.1",    
    	"data": {
    		"http_method": "GET",
    		"event_code": "http_error",
@@ -205,7 +205,7 @@ QUEUE：Q_MS_EVENT
    	"ms_id": "empty-service",
    	"ms_ins_id": "10.50.7.13::empty-service:58080",
    	"ms_from": "empty-service",
-       "host": "192.168.0.1",    
+	"host": "192.168.0.1",    
    	"data": {
    		"event_code": "track_sampling_change",
    		"old_sampling": "0.5",
@@ -229,7 +229,7 @@ QUEUE：Q_MS_EVENT
    	"ms_id": "empty-service",
    	"ms_ins_id": "10.50.7.13::empty-service:58080",
    	"ms_from": "empty-service",
-       "host": "192.168.0.1",    
+	"host": "192.168.0.1",    
    	"data": {
    		"event_code": "traffic_weight_change",
    		"event_title": "流控权重变更",
@@ -253,7 +253,7 @@ QUEUE：Q_MS_EVENT
    	"ms_id": "empty-service",
    	"ms_ins_id": "10.50.7.13::empty-service:58080",
    	"ms_from": "empty-service",
-       "host": "192.168.0.1",    
+	"host": "192.168.0.1",    
    	"data": {
    		"event_code": "route_label_change",
    		"event_title": "路由标签变更",
@@ -278,7 +278,7 @@ QUEUE：Q_MS_EVENT
     	"ms_id": "empty-service",
     	"ms_ins_id": "10.50.7.13::empty-service:58080",
     	"ms_from": "empty-service",
-        "host": "192.168.0.1",    
+    	"host": "192.168.0.1",    
     	"data": {
     		"old_tenant": "",
     		"event_code": "teant_change",
@@ -302,7 +302,7 @@ QUEUE：Q_MS_EVENT
     	"ms_id": "empty-service",
     	"ms_ins_id": "10.50.7.9::empty-service:58080",
     	"ms_from": "empty-service",
-        "host": "192.168.0.1",    
+    	"host": "192.168.0.1",    
     	"data": {
     		"event_code": "circuit_breaker",
     		"circuit_type": "SHORT_CIRCUITED",
