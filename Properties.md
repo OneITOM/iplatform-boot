@@ -268,8 +268,8 @@ eureka.server.response-cache-update-interval-ms=5000
 ## 跟踪服务
 
 ```sh
-# 服务跟踪总开关，默认关闭
-spring.sleuth.enabled=false
+# 服务跟踪总开关，默认(true)
+spring.sleuth.enabled=true
 # jdbc服务跟踪开关，默认开启
 spring.sleuth.mybatis.enabled=true
 # 慢HTTP基线百分比阀值，默认超过平均基线3倍
