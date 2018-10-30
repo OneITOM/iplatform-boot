@@ -25,6 +25,7 @@ QUEUE：Q_MS_METRICS
 	"ms_id": "example-server",
 	"ms_ins_id": "[10.50.7.10]:example-server:8761",
 	"ms_from": "example-server",
+	"host": "192.168.0.1",
 	"data": {
 		"mem": 887538,
 		"mem.free": 287955,
@@ -64,6 +65,7 @@ QUEUE：Q_MS_METRICS
 | ms_id      | example-server                       | 是 | 服务ID                                                       |
 | ms_ins_id  | [10.50.7.10]:discovery-server:8761]  | 是 | 服务实例ID,格式不固定，要能全网表示一个唯一服务，建议格式[IP]:ms_id:port |
 | ms_form    | example-server                       | 是 | 事件发送者服务ID，如果事件发送者就是服务本身，那么与ms_id相同 |
+| host | 192.168.0.1 | 是 | 事件发送服务器IP |
 
 ### 指标数据data
 

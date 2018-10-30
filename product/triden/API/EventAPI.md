@@ -48,6 +48,7 @@ QUEUE：Q_MS_EVENT
 | ms_id      | example-server                       | 是   | 服务ID                                                       |
 | ms_ins_id  | [10.50.7.10]:discovery-server:8761]  | 是   | 服务实例ID,格式不固定，要能全网表示一个唯一服务，建议格式[IP]:ms_id:port |
 | ms_form    | example-server                       | 是   | 事件发送者服务ID，如果事件发送者就是服务本身，那么与ms_id相同 |
+| host       | 192.168.0.1                          | 是   | 发送服务器IP                                                 |
 
 ## 事件数据示例
 
@@ -62,6 +63,7 @@ QUEUE：Q_MS_EVENT
    	"ms_id": "example-server",
    	"ms_ins_id": "[10.50.7.10]:example-server:8761",
    	"ms_from": "example-server",
+       "host": "192.168.0.1",
    	"data": {
    		"event_code": "service_up",
    		"event_title": "服务启动"
@@ -82,6 +84,7 @@ QUEUE：Q_MS_EVENT
    	"ms_id": "discovery-server",
    	"ms_ins_id": "[10.50.7.10]:discovery-server:8761",
    	"ms_from": "discovery-server",
+       "host": "192.168.0.1",    
    	"data": {
    		"event_code": "service_down",
    		"event_title": "服务下线"
@@ -102,6 +105,7 @@ QUEUE：Q_MS_EVENT
    	"ms_id": "discovery-server",
    	"ms_ins_id": "[10.50.7.10]:discovery-server:8761",
    	"ms_from": "discovery-server",
+       "host": "192.168.0.1",    
    	"data": {
    		"event_code": "service_heart",
    		"event_title": "服务心跳"
@@ -122,6 +126,7 @@ QUEUE：Q_MS_EVENT
    	"ms_id": null,
    	"ms_ins_id": null,
    	"ms_from": null,
+       "host": "192.168.0.1",    
    	"data": {
    		"sqlid": "org.iplatform.microservices.emptyservice.service.dao.TestMapper.create",
    		"event_code": "sql_error",
@@ -146,6 +151,7 @@ QUEUE：Q_MS_EVENT
    	"ms_id": null,
    	"ms_ins_id": null,
    	"ms_from": null,
+       "host": "192.168.0.1",    
    	"data": {
    		"sqlid": "org.iplatform.microservices.emptyservice.service.dao.TestMapper.getAll",
    		"cost": "1",
@@ -170,6 +176,7 @@ QUEUE：Q_MS_EVENT
    	"ms_id": null,
        "ms_ins_id": null,
    	"ms_from": null,
+       "host": "192.168.0.1",    
    	"data": {
    		"http_method": "GET",
    		"event_code": "http_error",
@@ -198,6 +205,7 @@ QUEUE：Q_MS_EVENT
    	"ms_id": "empty-service",
    	"ms_ins_id": "10.50.7.13::empty-service:58080",
    	"ms_from": "empty-service",
+       "host": "192.168.0.1",    
    	"data": {
    		"event_code": "track_sampling_change",
    		"old_sampling": "0.5",
@@ -221,6 +229,7 @@ QUEUE：Q_MS_EVENT
    	"ms_id": "empty-service",
    	"ms_ins_id": "10.50.7.13::empty-service:58080",
    	"ms_from": "empty-service",
+       "host": "192.168.0.1",    
    	"data": {
    		"event_code": "traffic_weight_change",
    		"event_title": "流控权重变更",
@@ -244,6 +253,7 @@ QUEUE：Q_MS_EVENT
    	"ms_id": "empty-service",
    	"ms_ins_id": "10.50.7.13::empty-service:58080",
    	"ms_from": "empty-service",
+       "host": "192.168.0.1",    
    	"data": {
    		"event_code": "route_label_change",
    		"event_title": "路由标签变更",
@@ -268,6 +278,7 @@ QUEUE：Q_MS_EVENT
     	"ms_id": "empty-service",
     	"ms_ins_id": "10.50.7.13::empty-service:58080",
     	"ms_from": "empty-service",
+        "host": "192.168.0.1",    
     	"data": {
     		"old_tenant": "",
     		"event_code": "teant_change",
@@ -291,6 +302,7 @@ QUEUE：Q_MS_EVENT
     	"ms_id": "empty-service",
     	"ms_ins_id": "10.50.7.9::empty-service:58080",
     	"ms_from": "empty-service",
+        "host": "192.168.0.1",    
     	"data": {
     		"event_code": "circuit_breaker",
     		"circuit_type": "SHORT_CIRCUITED",
