@@ -84,3 +84,8 @@ sh run.sh restart
 | flume.agent.sinks.smsk.CMPPSubmitMessage.msg_Src         | 是   | 短信网关登录ID                                       |
 | flume.agent.sinks.smsk.CMPPSubmitMessage.src_Terminal_Id | 是   | 短信网关服务代码或前缀                               |
 
+## 6. 界面
+
+```
+
+```
