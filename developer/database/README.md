@@ -175,15 +175,107 @@ public class TestService {
 
 ## 6. 翻页查询
 
-> 框架内部集成了[PageHelper 4.1.6](https://pagehelper.github.io/)，研发人员可通过该插件实现分页，样例如下
+> 框架内部集成了分页插件[PageHelper 4.1.6]("https://pagehelper.github.io/")，示例如下，前端表格基于Bootstrap Table
 
-```java
-int pageNum = 1;//页数
-int pageSize = 10;//每页显示的条数
-PageHelper.startPage(pageNum,pageSize);//启用分页
-List<TestDO> dbos = testMapper.getAll();//紧跟startPage方法后面的第一个Mybatis查询会被分页
-PageInfo<TestDO> pageInfo = new PageInfo<TestDO>(dbos);//查询结果强转为包含完整分页信息的PageInfo
-```
+1. 创建QueryContext，定义Bootstrap Table分页信息
+
+   ```java
+   package [你的项目包路径].domain;
+   
+   public class QueryContext {
+   	private int start;
+   	private int limit;
+   
+   	public int getStart() {
+   		return start;
+   	}
+   
+   	public void setStart(int start) {
+   		this.start = start;
+   	}
+   
+   	public int getLimit() {
+   		return limit;
+   	}
+   
+   	public void setLimit(int limit) {
+   		this.limit = limit;
+   	}
+   
+   }
+   ```
+
+2. 创建PageInfoTable，定义Bootstrap Table接收数据类型
+
+   ```java
+   package [你的项目名称].domain;
+   
+   import java.util.List;
+   
+   public class PageInfoTable {
+   
+   	private long total;
+   
+   	private List rows;
+   
+   	public long getTotal() {
+   		return total;
+   	}
+   
+   	public void setTotal(long total) {
+   		this.total = total;
+   	}
+   
+   	public List getRows() {
+   		return rows;
+   	}
+   
+   	public void setRows(List rows) {
+   		this.rows = rows;
+   	}
+   }
+   ```
+
+   
+
+3. 创建controller，接收Bootstrap Table的请求
+
+   ```java
+   @RequestMapping(value = "/allTableData", method = RequestMethod.POST)
+   public ResponseEntity<PageInfoTable> getAllTableData(@RequestBody QueryContext queryContext) {
+   	PageInfoTable pageInfoTable = null;
+   	try {
+   		pageInfoTable = testService.getAllTableData(queryContext);
+   		return new ResponseEntity<>(pageInfoTable, HttpStatus.OK);
+   	} catch (Exception e) {
+   		LOG.error("", e);
+   		return new ResponseEntity<>(pageInfoTable, HttpStatus.OK);
+   	}	
+   }
+   ```
+
+4. 创建service，实现分页查询
+
+   ```java
+   public PageInfoTable getAllTableData(QueryContext queryContext) {
+   	PageInfoTable pageInfoTable = new PageInfoTable();
+   	try{
+            //启用分页
+   		PageHelper.startPage(queryContext.getStart(), queryContext.getLimit());
+            //紧跟startPage方法后面的第一个Mybatis查询会被分页
+   		List<Map<String,Object>> dataList = testMapper.getAllTableData();
+            //查询结果强转为包含完整分页信息的PageInfo
+   		PageInfo<Map<String,Object>> pageInfo = new PageInfo<Map<String,Object>>(dataList);
+   		long total = pageInfo.getTotal();
+            //装载pageInfoTable返回前端
+   		pageInfoTable.setTotal(total);
+   		pageInfoTable.setRows(dataList);
+   	}catch(Exception e){
+   		LOG.error("", e);
+   	}
+   	return pageInfoTable;
+   }
+   ```
 
 ## 7. 多数据源
 
