@@ -98,8 +98,6 @@ eureka.instance.metadataMap.trackSampling=1
   * busisys
 * 服务实例ID
   * serviceInstId
-* 移动平均耗时
-  * durationMoveAvg
 * 性能警告百分比阀值
   * optimize_warn_pct
 * 性能警告类型
