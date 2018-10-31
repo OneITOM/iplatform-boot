@@ -180,60 +180,63 @@ public class TestService {
 1. 创建QueryContext，定义Bootstrap Table分页信息
 
    ```java
-   package [你的项目包路径].domain;
    
-   public class QueryContext {
-     private int start;
-     private int limit;
-   
-   	 public int getStart() {
-   	   return start;
-   	 }
-   
-   	 public void setStart(int start) {
-   	   this.start = start;
-   	 }
-   
-   	 public int getLimit() {
-   	   return limit;
-   	 }
-   
-   	 public void setLimit(int limit) {
-   	   this.limit = limit;
-   	 }
-   
-   }
+    package [你的项目包路径].domain;
+
+    public class QueryContext {
+        private int start;
+        private int limit;
+
+        public int getStart() {
+            return start;
+        }
+
+        public void setStart(int start) {
+            this.start = start;
+        }
+
+        public int getLimit() {
+            return limit;
+        }
+
+        public void setLimit(int limit) {
+            this.limit = limit;
+        }
+    }
+    
    ```
 
 2. 创建PageInfoTable，定义Bootstrap Table接收数据类型
 
    ```java
-   package [你的项目名称].domain;
    
-   import java.util.List;
+    package [你的项目名称].domain;
+
+    import java.util.List;
+
+    public class PageInfoTable {
+
+        private long total;
+
+        private List rows;
+
+        public long getTotal() {
+            return total;
+        }
+
+        public void setTotal(long total) {
+            this.total = total;
+        }
+
+        public List getRows() {
+            return rows;
+        }
+
+        public void setRows(List rows) {
+            this.rows = rows;
+        }
+    }
    
-   public class PageInfoTable {
-   
-     private long total;
-   
-     private List rows;
-   
-     public long getTotal() {
-       return total;
-     }
-   
-     public void setTotal(long total) {
-       this.total = total;
-     }
-   
-     public List getRows() {
-       return rows;
-     }
-   
-     public void setRows(List rows) {
-       this.rows = rows;
-     }
-   }
    ```
 
    
@@ -257,24 +260,26 @@ public class TestService {
 4. 创建service，实现分页查询
 
    ```java
-   public PageInfoTable getAllTableData(QueryContext queryContext) {
-   	PageInfoTable pageInfoTable = new PageInfoTable();
-   	try{
+
+    public PageInfoTable getAllTableData(QueryContext queryContext) {
+        PageInfoTable pageInfoTable = new PageInfoTable();
+        try{
             //启用分页
-   	PageHelper.startPage(queryContext.getStart(), queryContext.getLimit());
+            PageHelper.startPage(queryContext.getStart(), queryContext.getLimit());
             //紧跟startPage方法后面的第一个Mybatis查询会被分页
-   	List<Map<String,Object>> dataList = testMapper.getAllTableData();
+            List<Map<String,Object>> dataList = testMapper.getAllTableData();
             //查询结果强转为包含完整分页信息的PageInfo
-   	PageInfo<Map<String,Object>> pageInfo = new PageInfo<Map<String,Object>>(dataList);
-   	long total = pageInfo.getTotal();
+            PageInfo<Map<String,Object>> pageInfo = new PageInfo<Map<String,Object>>(dataList);
+            long total = pageInfo.getTotal();
             //装载pageInfoTable返回前端
-   	pageInfoTable.setTotal(total);
-   	pageInfoTable.setRows(dataList);
-   	}catch(Exception e){
-   		LOG.error("", e);
-   	}
-   	return pageInfoTable;
-   }
+            pageInfoTable.setTotal(total);
+            pageInfoTable.setRows(dataList);
+        }catch(Exception e){
+            LOG.error("", e);
+        }
+        return pageInfoTable;
+    }
+   
    ```
 
 ## 7. 多数据源
