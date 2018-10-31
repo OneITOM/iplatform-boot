@@ -2,7 +2,7 @@
 
 > 作者 王立松
 
-通知服务负责接收ActiveMQ消息发送到短信网关和邮件服务器
+通知服务负责接收ActiveMQ消息发送短信和邮件
 
 ## 1. 准备
 
@@ -83,4 +83,3 @@ sh run.sh restart
 | flume.agent.sinks.smsk.CMPPConnect.shared-secret         | 是   | 短信网关登录密码                                     |
 | flume.agent.sinks.smsk.CMPPSubmitMessage.msg_Src         | 是   | 短信网关登录ID                                       |
 | flume.agent.sinks.smsk.CMPPSubmitMessage.src_Terminal_Id | 是   | 短信网关服务代码或前缀                               |
-
