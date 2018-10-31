@@ -8,7 +8,7 @@
 
 ### 1. 前提
 
-- 已启动ActiveMQ
+- [已启动ActiveMQ](../../middleware/ActiveMQ.md)
 - [已启动通知服务](../../iplatform-common/NotifyService.md)
 - [已启动文档服务](../../iplatform-common/DfssService.md)
 
