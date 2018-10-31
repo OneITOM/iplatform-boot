@@ -183,24 +183,24 @@ public class TestService {
    package [你的项目包路径].domain;
    
    public class QueryContext {
-        private int start;
-   	    private int limit;
+     private int start;
+     private int limit;
    
-   	    public int getStart() {
-   	        return start;
-   	    }
+   	 public int getStart() {
+   	   return start;
+   	 }
    
-   	    public void setStart(int start) {
-   		    this.start = start;
-   	    }
+   	 public void setStart(int start) {
+   	   this.start = start;
+   	 }
    
-   	    public int getLimit() {
-   		    return limit;
-   	    }
+   	 public int getLimit() {
+   	   return limit;
+   	 }
    
-   	    public void setLimit(int limit) {
-   		    this.limit = limit;
-   	    }
+   	 public void setLimit(int limit) {
+   	   this.limit = limit;
+   	 }
    
    }
    ```
@@ -214,25 +214,25 @@ public class TestService {
    
    public class PageInfoTable {
    
-       private long total;
+     private long total;
    
-       private List rows;
+     private List rows;
    
-   	   public long getTotal() {
-   	       return total;
-   	   }
+     public long getTotal() {
+       return total;
+     }
    
-   	   public void setTotal(long total) {
-   	       this.total = total;
-   	   }
+     public void setTotal(long total) {
+       this.total = total;
+     }
    
-       public List getRows() {
-   		    return rows;
-   	   }
+     public List getRows() {
+       return rows;
+     }
    
-   	   public void setRows(List rows) {
-   	       this.rows = rows;
-   	   }
+     public void setRows(List rows) {
+       this.rows = rows;
+     }
    }
    ```
 
@@ -260,12 +260,16 @@ public class TestService {
    public PageInfoTable getAllTableData(QueryContext queryContext) {
    	PageInfoTable pageInfoTable = new PageInfoTable();
    	try{
-   		PageHelper.startPage(queryContext.getStart(), queryContext.getLimit());//启用分页
-   		List<Map<String,Object>> dataList = testMapper.getAllTableData();//紧跟startPage方法后面的第一个Mybatis查询会被分页
-   		PageInfo<Map<String,Object>> pageInfo = new PageInfo<Map<String,Object>>(dataList);//查询结果强转为包含完整分页信息的PageInfo
-   		long total = pageInfo.getTotal();
-   		pageInfoTable.setTotal(total);//装载pageInfoTable返回前端
-   		pageInfoTable.setRows(dataList);
+            //启用分页
+   	PageHelper.startPage(queryContext.getStart(), queryContext.getLimit());
+            //紧跟startPage方法后面的第一个Mybatis查询会被分页
+   	List<Map<String,Object>> dataList = testMapper.getAllTableData();
+            //查询结果强转为包含完整分页信息的PageInfo
+   	PageInfo<Map<String,Object>> pageInfo = new PageInfo<Map<String,Object>>(dataList);
+   	long total = pageInfo.getTotal();
+            //装载pageInfoTable返回前端
+   	pageInfoTable.setTotal(total);
+   	pageInfoTable.setRows(dataList);
    	}catch(Exception e){
    		LOG.error("", e);
    	}
