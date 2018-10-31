@@ -27,7 +27,7 @@
 | ID                 | 名称             | 必填 | 描述                                     |
 | :----------------- | :--------------- | :--- | :--------------------------------------- |
 | uuid               | 消息唯一ID       | 是   |                                          |
-| req_platform_type  | 平台类型         | 是   | 定义消息来源                             |
+| req_platform_type  | 平台类型         | 是   | 标识消息来源                             |
 | message_type       | 消息类型         | 是   | sms 短信、vioce 语音、email 邮件         |
 | message_title      | 消息标题         | 是   |                                          |
 | message_content    | 消息正文         | 是   |                                          |
