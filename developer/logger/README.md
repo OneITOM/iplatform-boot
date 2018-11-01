@@ -156,6 +156,8 @@ ProducerConfig values:
 
 - jdk1.8
 - logstash-5.6.12.tar.gz
+- kafka-0.9.*及以上
+- elasticsearch-2.4.*及以上
 
 ```
 tar -zxvf logtash-5.6.12.tar.gz
@@ -163,8 +165,134 @@ tar -zxvf logtash-5.6.12.tar.gz
 
 ### logstash配置
 
+> logstash配置文件trident-logstash.conf
+
+```
+input {
+  
+  kafka {
+    bootstrap_servers => "127.0.0.1:9092"
+    group_id => "logstash-trident-newgroup"
+    topics_pattern => "iplatform.*"
+    consumer_threads => 20
+    codec => "json"
+    auto_offset_reset => "earliest"
+    auto_commit_interval_ms => "5000"
+    enable_auto_commit => "true"
+  }
+
+}
+
+filter {
+
+  mutate {
+    rename => {
+        "traceid" => "traceId"
+    }
+    lowercase => [ "busisys", "serviceId" ]
+  }
+
+}
+
+output {
+
+ # stdout {
+ #     codec => rubydebug
+ # }
+
+  elasticsearch {
+    hosts => ["10.22.1.236:9200"]
+    index => "%{busisys}-%{serviceId}-%{+YYYY.MM.dd}"
+    template_name => "trident-template"
+    template => "/opt/logstash-5.6.12/conf/trident-template.json"
+    template_overwrite => true
+    document_type => "logs"
+  }
+
+}
+ 
+```
+
+> logstash使用elasticsearch模板trident-template.json
+
+```
+{
+	"template": "*",
+	"settings": {
+		"index.refresh_interval": "5s",
+		"index.number_of_shards": "5",
+		"index.number_of_replicas": "1"
+	},
+	"mappings": {
+		"_default_": {
+			"dynamic_templates": [{
+				"message_field": {
+					"mapping": {
+						"fielddata": {
+							"format": "disabled"
+						},
+						"index": "analyzed",
+						"type": "string"
+					},
+					"match_mapping_type": "string",
+					"match": "message"
+				}
+			}],
+			"_all": {
+				"enabled": true
+			},
+			"properties": {
+				"@timestamp": {
+					"type": "date"
+				},
+				"serviceId": {
+					"index": "not_analyzed",
+					"type": "string"
+				},
+				"serviceInstId": {
+					"index": "not_analyzed",
+					"type": "string"
+				},
+				"traceId": {
+					"index": "not_analyzed",
+					"type": "string"
+				},
+				"tracespanid": {
+					"index": "not_analyzed",
+					"type": "string"
+				},
+				"busisys": {
+					"index": "not_analyzed",
+					"type": "string"
+				},
+				"level": {
+					"index": "not_analyzed",
+					"type": "string"
+				},
+				"@version": {
+					"index": "not_analyzed",
+					"type": "string"
+				}
+			}
+		}
+	}
+}
+
+```
+
 ### logstash启动停止
 
+> 启动
 
+```
+bin/logstash -f conf/trident-logstash.conf -r --verbose > console.log 2>&1 &
+```
+
+> 停止
+
+```
+ps -ef | grep logstash
+kill -9 pid
+```
 
 
