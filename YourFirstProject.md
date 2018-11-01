@@ -115,7 +115,7 @@
 
 ### RUN.SH
 
-> 修改项目名称、服务发现地址、服务IP、服务端口等
+> 修改项目名称、服务发现地址、服务IP、服务端口、contextPath等，其中contextPath必须配置，不可省略，7层负载均衡的实现依赖此参数
 
 ```properties
 PRONAMEUI=myproject-ui-0.0.1-SNAPSHOT.jar
@@ -124,11 +124,13 @@ PRONAMESERVICE=myproject-service-0.0.1-SNAPSHOT.jar
 nohup java -Xmx1g -Xms1g -Xss256k -XX:OnOutOfMemoryError="kill -9 %p" -jar ${PRONAMESERVICE} \
     --discovery.server.address="https://127.0.0.1:8761/eureka/" \
     --server.host=127.0.0.1 \
+    --contextPath=myprojectservice \
     --spring.profiles.active=prod >/dev/null 2>&1 &
 
     nohup java -Xmx1g -Xms1g -Xss256k -XX:OnOutOfMemoryError="kill -9 %p" -jar ${PRONAMEUI} \
     --discovery.server.address="https://127.0.0.1:8761/eureka/" \
     --server.host=127.0.0.1 \
+    --contextPath=myprojectui \
     --spring.profiles.active=prod >/dev/null 2>&1 &
 ```
 

@@ -175,6 +175,21 @@ public String test(ModelMap map) throws Exception {
 
 **为防止越权访问，要求页面鉴权和方法鉴权结合使用**
 
+#### <a id="2.3.3">2.3.3</a> 页面获取认证信息
+
+> 在页面上可以获取认证通过的用户信息
+
+```html
+<div th:text="${user.username}">用户登录名</div>  
+<div th:text="${user.truename}">用户中文名</div>
+<div th:text="${user.email}">邮箱</div>
+<div th:text="${user.mobile}">手机号</div>
+<div th:text="${user.authorities}">具有的角色列表</div>   
+<div th:text="${user.departments}">所属部门</div>
+```
+
+
+
 ### <a id="2.4">2.4</a> 忽略鉴权
 
 > 每个项目可以通过扩展WebSecurityConfigurerAdapter类实现忽略path的定义

@@ -25,8 +25,14 @@ discovery.server.address=https://127.0.0.1:8761/eureka/
 # 实例ID（非必填）,默认生成一个唯一ID，格式为ip:服务名:port
 server.instanceId='xxx'
 
-# 服务IP（必填）
-server.host=127.0.0.1
+# 服务IP（此参数和server.host.prefix不可以同时使用）
+server.host=192.168.1.1
+
+# 服务器IP前缀（此参数和server.host不可以同时使用，会根据前缀自动匹配IP）
+server.host.prefix=192.168.
+
+# 服务绑定端口（端口设置为0的时候会使用随机端口）
+server.port=8080
 ```
 
 ## 第二端口(非SSL)
@@ -242,6 +248,8 @@ hystrix.command.default.fallback.isolation.semaphore.maxConcurrentRequests=5000
 ## 注册中心
 
 ```sh
+# 连接到注册中心开关（默认true）
+eureka.client.enabled=true
 eureka.client.register-with-eureka=false
 eureka.client.fetch-registry=false
 eureka.client.serviceUrl.defaultZone
@@ -260,8 +268,8 @@ eureka.server.response-cache-update-interval-ms=5000
 ## 跟踪服务
 
 ```sh
-# 服务跟踪总开关，默认关闭
-spring.sleuth.enabled=false
+# 服务跟踪总开关，默认(true)
+spring.sleuth.enabled=true
 # jdbc服务跟踪开关，默认开启
 spring.sleuth.mybatis.enabled=true
 # 慢HTTP基线百分比阀值，默认超过平均基线3倍

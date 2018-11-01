@@ -175,7 +175,112 @@ public class TestService {
 
 ## 6. 翻页查询
 
-> 待补充
+> 框架内部集成了分页插件[PageHelper 4.1.6]("https://pagehelper.github.io/")，示例如下，前端表格基于Bootstrap Table
+
+1. 创建QueryContext，定义Bootstrap Table分页信息
+
+   ```java
+   
+    package [你的项目包路径].domain;
+
+    public class QueryContext {
+        private int start;
+        private int limit;
+
+        public int getStart() {
+            return start;
+        }
+
+        public void setStart(int start) {
+            this.start = start;
+        }
+
+        public int getLimit() {
+            return limit;
+        }
+
+        public void setLimit(int limit) {
+            this.limit = limit;
+        }
+    }
+    
+   ```
+
+2. 创建PageInfoTable，定义Bootstrap Table接收数据类型
+
+   ```java
+   
+    package [你的项目名称].domain;
+
+    import java.util.List;
+
+    public class PageInfoTable {
+
+        private long total;
+
+        private List rows;
+
+        public long getTotal() {
+            return total;
+        }
+
+        public void setTotal(long total) {
+            this.total = total;
+        }
+
+        public List getRows() {
+            return rows;
+        }
+
+        public void setRows(List rows) {
+            this.rows = rows;
+        }
+    }
+   
+   ```
+
+   
+
+3. 创建controller，接收Bootstrap Table的请求
+
+   ```java
+   @RequestMapping(value = "/allTableData", method = RequestMethod.POST)
+   public ResponseEntity<PageInfoTable> getAllTableData(@RequestBody QueryContext queryContext) {
+   	PageInfoTable pageInfoTable = null;
+   	try {
+   		pageInfoTable = testService.getAllTableData(queryContext);
+   		return new ResponseEntity<>(pageInfoTable, HttpStatus.OK);
+   	} catch (Exception e) {
+   		LOG.error("", e);
+   		return new ResponseEntity<>(pageInfoTable, HttpStatus.OK);
+   	}	
+   }
+   ```
+
+4. 创建service，实现分页查询
+
+   ```java
+
+    public PageInfoTable getAllTableData(QueryContext queryContext) {
+        PageInfoTable pageInfoTable = new PageInfoTable();
+        try{
+            //启用分页
+            PageHelper.startPage(queryContext.getStart(), queryContext.getLimit());
+            //紧跟startPage方法后面的第一个Mybatis查询会被分页
+            List<Map<String,Object>> dataList = testMapper.getAllTableData();
+            //查询结果强转为包含完整分页信息的PageInfo
+            PageInfo<Map<String,Object>> pageInfo = new PageInfo<Map<String,Object>>(dataList);
+            long total = pageInfo.getTotal();
+            //装载pageInfoTable返回前端
+            pageInfoTable.setTotal(total);
+            pageInfoTable.setRows(dataList);
+        }catch(Exception e){
+            LOG.error("", e);
+        }
+        return pageInfoTable;
+    }
+   
+   ```
 
 ## 7. 多数据源
 
@@ -251,4 +356,41 @@ public class TestService {
     "</script>" })
 List<Map> getTest();
 ```
+## 9. 事务管理
 
+### 9.1 事务支持
+
+> 主启动类增加@EnableTransactionManagement开启注解式事务的支持 
+
+```java
+@SpringBootApplication
+@EnableOAuth2Client
+@EnableDiscoveryClient
+@EnableEurekaClient
+@Configuration
+@EnableTransactionManagement
+@ComponentScan({"org.iplatform.microservices", "org.iplatform.myproject.service"})
+public class MyprojectServiceApplication extends IPlatformServiceApplication {
+
+    private static final Logger LOG = LoggerFactory.getLogger(ServiceApplication.class);
+
+    public static void main(String[] args) {
+        try {
+            run(MyprojectServiceApplication.class, args);
+        } catch (Exception e) {
+            LOG.error("", e);
+        }
+    }
+}
+```
+
+### 9.2 开启事务
+
+> 类或者方法上增加注解@Transactional开启事务，在类上增加意味着此类的所有public方法都进行事务管理
+
+```java
+@Transactional(rollbackFor = Exception.class)
+public void save(TestDO testDO){
+    testMapper.insert(testDO);
+}
+```

@@ -62,8 +62,15 @@ EXPOSE 50010 50011
 VERSION=0.0.1
 UI_JAR=cmdb-ui-${VERSION}.jar
 
+trap "shut_down" SIGKILL SIGTERM SIGINT
+function shut_down() {
+    kill $PID
+}
+
 java $JAVA_OPTIONS -XX:OnOutOfMemoryError="kill -9 %p" -jar ${UI_JAR} \
-    --spring.profiles.active=prod
+    --spring.profiles.active=prod & PID=$!
+    
+wait $PID
 ```
 
 - VERSION  定义的是版本号
@@ -79,8 +86,15 @@ java $JAVA_OPTIONS -XX:OnOutOfMemoryError="kill -9 %p" -jar ${UI_JAR} \
 VERSION=0.0.1
 SERVICE_JAR=cmdb-service-${VERSION}.jar
 
+trap "shut_down" SIGKILL SIGTERM SIGINT
+function shut_down() {
+    kill $PID
+}
+
 java $JAVA_OPTIONS -XX:OnOutOfMemoryError="kill -9 %p" -jar ${SERVICE_JAR} \
-    --spring.profiles.active=prod
+    --spring.profiles.active=prod & PID=$!
+    
+wait $PID
 ```
 
 * VERSION  定义的是版本号
