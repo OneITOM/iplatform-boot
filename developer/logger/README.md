@@ -151,5 +151,20 @@ ProducerConfig values:
 
 > 使用Logstash实现Kafka中日志数据集中存储在Elasticsearch
 
-此处描述logstash的部署，配置，启动停止脚本
+### logstash部署
+> 依赖
+
+- jdk1.8
+- logstash-5.6.12.tar.gz
+
+```
+tar -zxvf logtash-5.6.12.tar.gz
+```
+
+### logstash配置
+
+### logstash启动停止
+
+
+
 
