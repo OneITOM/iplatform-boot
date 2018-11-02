@@ -177,6 +177,10 @@ eureka.instance.metadataMap.trackSampling=1
 > * httpclient.path HTTP客户端调用路径
 > * httpclient.status_code HTTP客户端调用返回码
 > * httpclient.url HTTP客户端调用全路径
+> * httpclient.request.headers.xx 请求消息头
+> * httpclient.request.body 请求参数
+> * httpclient.response.headers.xx 相应消息头
+> * httpclient.response.body 响应参数
 > * sa HTTP客户端调用服务端地址
 
 ```json
@@ -251,6 +255,118 @@ eureka.instance.metadataMap.trackSampling=1
 			"serviceName": "empty-service",
 			"ipv4": "10.50.7.13",
 			"port": 58080
+		}
+	},  {
+		"key": "httpclient.request.headers.accept",
+		"value": "application/json",
+		"endpoint": {
+			"serviceName": "empty-ui",
+			"ipv4": "10.50.7.28",
+			"port": 49890
+		}
+	}, {
+		"key": "httpclient.request.headers.content-length",
+		"value": "0",
+		"endpoint": {
+			"serviceName": "empty-ui",
+			"ipv4": "10.50.7.28",
+			"port": 49890
+		}
+	}, {
+		"key": "httpclient.request.headers.x-b3-parentspanid",
+		"value": "641a5fc4d184a0e5",
+		"endpoint": {
+			"serviceName": "empty-ui",
+			"ipv4": "10.50.7.28",
+			"port": 49890
+		}
+	}, {
+		"key": "httpclient.request.headers.x-b3-sampled",
+		"value": "1",
+		"endpoint": {
+			"serviceName": "empty-ui",
+			"ipv4": "10.50.7.28",
+			"port": 49890
+		}
+	}, {
+		"key": "httpclient.request.headers.x-b3-spanid",
+		"value": "3254ba97dc3c7b87",
+		"endpoint": {
+			"serviceName": "empty-ui",
+			"ipv4": "10.50.7.28",
+			"port": 49890
+		}
+	}, {
+		"key": "httpclient.request.headers.x-b3-traceid",
+		"value": "641a5fc4d184a0e5",
+		"endpoint": {
+			"serviceName": "empty-ui",
+			"ipv4": "10.50.7.28",
+			"port": 49890
+		}
+	},  {
+		"key": "httpclient.response.headers.content-length",
+		"value": "0",
+		"endpoint": {
+			"serviceName": "empty-ui",
+			"ipv4": "10.50.7.28",
+			"port": 49890
+		}
+	}, {
+		"key": "httpclient.response.headers.trace_service_address",
+		"value": "10.22.1.236",
+		"endpoint": {
+			"serviceName": "empty-ui",
+			"ipv4": "10.50.7.28",
+			"port": 49890
+		}
+	}, {
+		"key": "httpclient.response.headers.trace_service_id",
+		"value": "AUTH-SERVICE",
+		"endpoint": {
+			"serviceName": "empty-ui",
+			"ipv4": "10.50.7.28",
+			"port": 49890
+		}
+	}, {
+		"key": "httpclient.response.headers.trace_service_port",
+		"value": "9998",
+		"endpoint": {
+			"serviceName": "empty-ui",
+			"ipv4": "10.50.7.28",
+			"port": 49890
+		}
+	}, {
+		"key": "httpclient.response.headers.x-b3-parentspanid",
+		"value": "641a5fc4d184a0e5",
+		"endpoint": {
+			"serviceName": "empty-ui",
+			"ipv4": "10.50.7.28",
+			"port": 49890
+		}
+	}, {
+		"key": "httpclient.response.headers.x-b3-sampled",
+		"value": "1",
+		"endpoint": {
+			"serviceName": "empty-ui",
+			"ipv4": "10.50.7.28",
+			"port": 49890
+		}
+	}, {
+		"key": "httpclient.response.headers.x-b3-spanid",
+		"value": "3254ba97dc3c7b87",
+		"endpoint": {
+			"serviceName": "empty-ui",
+			"ipv4": "10.50.7.28",
+			"port": 49890
+		}
+	}, {
+		"key": "httpclient.response.headers.x-b3-traceid",
+		"value": "641a5fc4d184a0e5",
+		"endpoint": {
+			"serviceName": "empty-ui",
+			"ipv4": "10.50.7.28",
+			"port": 49890
 		}
 	}, {
 		"key": "lc",
@@ -426,6 +542,13 @@ eureka.instance.metadataMap.trackSampling=1
 > * httpservice.path 服务路径
 > * httpservice.remoteaddr 远程请求地址
 > * httpservice.url 服务全路径
+> * httpservice.request.headers.xx 请求消息头
+> * httpservice.request.paramters 请求参数
+> * httpservice.request.attribute 请求参数
+> * httpservice.request.body 请求参数
+> * httpservice.response.headers.xx 响应消息头
+> * httpservice.response.body 响应参数
+> * httpservice.cookies.xxx Cookie
 
 ```json
 {
@@ -506,6 +629,46 @@ eureka.instance.metadataMap.trackSampling=1
 			"serviceName": "empty-service",
 			"ipv4": "10.50.7.13",
 			"port": 58080
+		}
+	}, {
+		"key": "httpservice.request.headers.accept",
+		"value": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+		"endpoint": {
+			"serviceName": "empty-ui",
+			"ipv4": "10.50.7.28",
+			"port": 49434
+		}
+	}, {
+		"key": "httpservice.request.headers.accept-encoding",
+		"value": "gzip, deflate",
+		"endpoint": {
+			"serviceName": "empty-ui",
+			"ipv4": "10.50.7.28",
+			"port": 49434
+		}
+	}, {
+		"key": "httpservice.response.headers.cache-control",
+		"value": "no-cache, no-store, max-age=0, must-revalidate",
+		"endpoint": {
+			"serviceName": "empty-ui",
+			"ipv4": "10.50.7.28",
+			"port": 49434
+		}
+	}, {
+		"key": "httpservice.response.headers.content-language",
+		"value": "zh-CN",
+		"endpoint": {
+			"serviceName": "empty-ui",
+			"ipv4": "10.50.7.28",
+			"port": 49434
+		}
+	}, {
+		"key": "httpservice.cookies.JSESSIONID",
+		"value": "[{\"name\":\"JSESSIONID\",\"value\":\"2B0495D3083676D0033ED0463E66BD64\",\"version\":0,\"comment\":null,\"domain\":null,\"maxAge\":-1,\"path\":null,\"secure\":false,\"httpOnly\":false}]",
+		"endpoint": {
+			"serviceName": "empty-ui",
+			"ipv4": "10.50.7.28",
+			"port": 50761
 		}
 	}, {
 		"key": "lc",
