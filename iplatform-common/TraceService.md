@@ -55,11 +55,47 @@ sh run.sh restart
 | zipkin.storage.elasticsearch.index-shards   |      | 1             | 设置默认索引分片个数，默认为1片                              |
 | zipkin.storage.elasticsearch.index-replicas |      | 1             | 设置默认索引副本个数，默认为1个副本                          |
 
-## 5. 跟踪服务集成
+## 5. 界面
+
+```
+https://127.0.0.1:8763
+```
+
+跟踪服务列表
+
+![image-20181018160821063](images/TraceService/trace.png)
+
+调用链详细信息
+
+![image-20181018160944059](images/TraceService/trace-detail.png)
+
+熔断器监控
+
+![image-20181018160944059](images/TraceService/hystrix-one.png)
+
+## 6. Kibana
+
+> 可以通过Kibana查看ES中存储的调用链
+
+```http
+http://127.0.0.1:5601
+```
+
+> 在Settings中增加ES索引 zipkin-*
+
+![image-20181008122509586](images/TraceService/kibana-settings.png)
+
+
+
+> 在Discover中可以查询到ES中的调用链
+
+![image-20181008122831685](images/TraceService/kibana-discover.png)
+
+## 7. 跟踪服务集成
 
 > 其他微服务产品如果要集成跟踪服务请参考[服务跟踪配置手册](../developer/trace/README.md)
 
-## 6. Docker
+## 8. Docker
 
 ```yaml
 version: '3.2'
@@ -98,22 +134,3 @@ networks:
     external: true
 ```
 
-
-
-## 7. Kibana
-
-> 可以通过Kibana查看ES中存储的调用链
-
-```http
-http://127.0.0.1:5601
-```
-
-> 在Settings中增加ES索引 zipkin-*
-
-![image-20181008122509586](images/TraceService/kibana-settings.png)
-
-
-
-> 在Discover中可以查询到ES中的调用链
-
-![image-20181008122831685](images/TraceService/kibana-discover.png)

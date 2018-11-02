@@ -12,8 +12,12 @@
 ## 服务参数配置
 
 ```properties
-# 跟踪服务开关（默认开启）
+# 跟踪服务开关（默认true）
 spring.sleuth.enabled=true
+# JDBC跟踪服务开关（默认true）
+spring.sleuth.mybatis.enabled=true
+# 数据上报方式（可选项是 activemq、http），默认activemq
+spring.zipkin.type=activemq
 # 集中配置开关
 spring.cloud.config.enabled=true
 # 集中配置环境
@@ -94,8 +98,12 @@ eureka.instance.metadataMap.trackSampling=1
   * busisys
 * 服务实例ID
   * serviceInstId
-* 移动平均耗时
-  * duration_move_avg
+* 性能警告百分比阀值
+  * optimize_warn_pct
+* 性能警告类型
+  - optimize_warn_type
+* 异常类型
+  * exception_class
 
 #### SPAN头格式
 > 扩展key
@@ -104,7 +112,10 @@ eureka.instance.metadataMap.trackSampling=1
 > * succeed 是否成功
 > * busisys 所属业务系统
 > * serviceInstId 服务实例ID
-> * duration_move_avg 移动平均耗时
+> * durationMoveAvg 移动平均耗时
+> * optimize_warn_pct 性能警告百分比阀值
+> * optimize_warn_type 性能告警类型
+> * exception_class 异常类型，Exception的类名或者Http Status Code
 ```json
 {
 	"traceId": "b22d96fb827f754f",
@@ -113,6 +124,11 @@ eureka.instance.metadataMap.trackSampling=1
 	"parentId": "b22d96fb827f754f",
 	"timestamp": 1537967701308000,
 	"duration": 53000,
+	"lc": "scheduled",
+	"optimize_warn_type": "none",
+    "exception_class": "none",
+	"serviceInstId": "10.50.7.14::empty-service:58080",
+	"succeed": "true",    
 	"binaryAnnotations": [{
 		"key": "lc",
 		"value": "组件类型",
@@ -124,20 +140,33 @@ eureka.instance.metadataMap.trackSampling=1
 	},{
 	  "key": "succeed",
 	  "value": "true",
-	  "endpoint": {...}
+	  "endpoint": {}
 	},{
 	  "key": "busisys",
 	  "value": "OneITOM",
-	  "endpoint": {...}
+	  "endpoint": {}
 	},{
-	  "key": "duration_move_avg",
+	  "key": "durationMoveAvg",
 	  "value": 60000,
-	  "endpoint": {...}
+	  "endpoint": {}
 	},{
 		"key": "serviceInstId",
 		"value": "10.50.7.14::empty-service:58080",
-		"endpoint": {...}
-	}]
+		"endpoint": {}
+	},{
+		"key": "optimize_warn_pct",
+		"value": "200.0%",
+		"endpoint": {}
+	},{
+		"key": "optimize_warn_type",
+		"value": "warn_http_optimize_time",
+		"endpoint": {}
+	},{
+		"key": "exception_class",
+		"value": "java.net.SocketTimeoutException",
+		"endpoint": {}
+	}
+]
 ```
 
 #### SPAN HttpClient
@@ -599,7 +628,7 @@ eureka.instance.metadataMap.trackSampling=1
 
 | ID | 组件类型 | 名称 | 说明 |
 | ---| ----- | ----- | -----|
-| b1ce90a546e67ba5 | httpservice     | http:/api/v1/test/testmethodwithdb | 服务端受到请求 |
+| b1ce90a546e67ba5 | httpservice     | http:/api/v1/test/testmethodwithdb | 服务端收到请求 |
 | c0e7a6f66745b037 | httpclient      | https:/auth/user                   | 服务端向认证服务鉴权 |
 | d3b277175669b1f6 | jdbc            | o.i.m.e.s.d.testmapper.create      | 服务端调用SQL |
 

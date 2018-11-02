@@ -2,7 +2,7 @@
 
 > 作者 张磊
 
-此框架通过内嵌的KafkaAppender实现日志的集中收集，可以通过启动参数开启kafka记录功能并配置kafka参数
+此框架通过内嵌的KafkaAppender实现日志的集中收集，可以通过启动参数开启kafka记录功能并配置kafka参数，后续可以通过Logstash将Kafka中的数据存储到ES中持久化和查询，具体日志标准化参看[日志标准化](../../Logs.md)
 
 ## 前提
 
@@ -51,7 +51,7 @@ logger.kafka.replication=1
 
 ### Topic
 
-服务发送的topic自动创建，默认名称是服务名${spring.application.name}-log
+服务发送的topic自动创建，iplatform-{spring.application.name}-log
 
 ### Key
 
@@ -119,18 +119,37 @@ ProducerConfig values:
 
 ```json
 {
-	"ip": "10.50.7.9",
+	"ip": "192.168.0.1",
+    "busisys": "OneITOM",
 	"timestamp": 1538965917237,
-	"serviceId": "empty-service",
-	"serviceInstId": "10.50.7.38::empty-service:58080",
+	"serviceId": "example-service",
+	"serviceInstId": "192.168.0.1::example-service:58080",
 	"traceid": "6959dcf98356c725",
 	"tracespanid": "9ef659e1deb2126c",
 	"level": "INFO",
 	"thread": "http-nio-58080-exec-4",
-	"logger": "org.iplatform.microservices.core.sleuth.instrument.mybatis.SQLInterceptor",
+	"logger": " o.i.m.c.s.i.m.SQLInterceptor",
 	"message": "sqltrace [insert into empty_test (is_enable,create_time) values (true,'2018-10-8 10:31:49')] cost [49ms]"
 }
 ```
 
+| key           | value                              | 说明                 |
+| ------------- | ---------------------------------- | -------------------- |
+| ip            | 192.168.0.1                        | 应用所在服务器IP地址 |
+| busisys       | OneITOM                            | 应用所属业务系统名称 |
+| timestamp     | 1538965917237                      | 日志产生时间         |
+| serviceId     | example-service                    | 服务ID               |
+| serviceInstId | 192.168.0.1::example-service:58080 | 服务实例ID           |
+| traceid       | 6959dcf98356c725                   | 跟踪ID               |
+| tracespanid   | 9ef659e1deb2126c                   | 当前环节SPANID       |
+| level         | INFO                               | 日志级别             |
+| thread        | http-nio-58080-exec-4              | 线程ID               |
+| logger        | o.i.m.c.s.i.m.SQLInterceptor       | 日志产生类名         |
+| message       |                                    | 日志正文             |
 
+## 日志存储到ES
+
+> 使用Logstash实现Kafka中日志数据集中存储在Elasticsearch
+
+此处描述logstash的部署，配置，启动停止脚本
 

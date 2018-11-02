@@ -175,6 +175,8 @@ Spring版本升级到4.2.9
 
 默认不开启服务跟踪功能spring.sleuth.enabled=false
 
+跟踪服务Span存储到ES的时候在JSON根节点增加succeed，exception_class，optimize_warn_type，lc，serviceInstId属性
+
 
 
 # Roadmap
@@ -196,6 +198,10 @@ Fegin异步调用支持
 页面提交增加csrf防御
 
 支持HTTP2.0
+
+Remote Shell
+
+Spring Batch
 
 
 
