@@ -23,9 +23,9 @@ IPLATFORM-BOOT 是以 SpringCloud Brixton.RELEASE 为核心的微服务开发框
   * 文件上传规约
   * 并发处理规约
   * [异步处理规约](developer/coding/Async.md)
-  * [RESTful API规约](developer/coding/RESTfulAPI.md)
+  * [RESTfulAPI规约](developer/coding/RESTfulAPI.md)
   * [缓存使用规约](developer/coding/Cache.md)
-  * 个性化配置规约
+  * 自定义配置参数规约
   * 鉴权规约
   * [Shutdown规约](developer/coding/Shutdown.md)
   * [获取配置参数](developer/coding/Environment.md)
