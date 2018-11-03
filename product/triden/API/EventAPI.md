@@ -12,19 +12,19 @@ QUEUE：Q_MS_EVENT
 
 ## 事件类型
 
-| 类型                  | 说明         | 描述                   |
-| --------------------- | ------------ | ---------------------- |
-| service_up            | 服务启动     | 服务启动完成后发送     |
-| service_down          | 服务停止     | 服务正常停止后发送     |
-| service_heart         | 服务心跳     | 每分钟发送心跳事件     |
-| sql_error             | SQL错误      | SQL错误事件            |
-| sql_cost              | SQL耗时      | SQL执行耗时            |
-| http_error            | HTTP错误     | HTTP调用错误           |
-| track_sampling_change | 采样率变更   | 采样率发生变更时发送   |
-| traffic_weight_change | 流控权重变更 | 流控权重发生变更时发送 |
-| route_label_change    | 路由标签变更 | 路由标签变更时发送     |
-| teant_change          | 租户变更     | 租户标签变更时发送     |
-| circuit_breaker       | 服务熔断     | 发生服务熔断后发送     |
+| 类型                        | 说明         | 描述                              |
+| --------------------------- | ------------ | --------------------------------- |
+| service_up                  | 服务启动     | 服务启动完成后发送                |
+| service_down                | 服务停止     | 服务正常停止后发送                |
+| service_heart（默认不开启） | 服务心跳     | 定时发送心跳事件                  |
+| sql_error                   | SQL错误      | SQL错误事件                       |
+| sql_cost                    | SQL耗时      | SQL执行耗时（超过动态基线时发送） |
+| http_error                  | HTTP错误     | HTTP调用错误                      |
+| track_sampling_change       | 采样率变更   | 采样率发生变更时发送              |
+| traffic_weight_change       | 流控权重变更 | 流控权重发生变更时发送            |
+| route_label_change          | 路由标签变更 | 路由标签变更时发送                |
+| teant_change                | 租户变更     | 租户标签变更时发送                |
+| circuit_breaker             | 服务熔断     | 发生服务熔断后发送                |
 
 ## 事件数据格式
 
