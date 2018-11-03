@@ -38,7 +38,7 @@ HTTP -H "Content-Type:application/json" -X PUT --data '{"alarminfo":"xxx","alarm
 HTTP -H "Content-Type:application/json" -X PUT --data '{"alarmlevel:2}' http://127.0.0.1/alarm/{alarmid}
 ```
 
-幂等性返例，将告警表中最老的100调记录移动到历史表中
+幂等性返例，将告警表中最老的100调记录移动到历史表中，并且参数跟在了URL后边
 
 ```shell
 HTTP PUT http://127.0.0.1/alarm/movehistory?oldrecords=100
@@ -55,7 +55,7 @@ HTTP PUT http://127.0.0.1/alarm/movehistory?oldrecords=100
 HTTP DELETE http://127.0.0.1/alarm/{alarmid}
 ```
 
-幂等性返例，删除告警表中最老的5条记录
+幂等性返例，删除告警表中最老的5条记录，并且参数跟在了URL后边
 
 ```shell
 HTTP DELETE http://127.0.0.1/alarm?oldrecords=5
