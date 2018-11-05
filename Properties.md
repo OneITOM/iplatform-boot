@@ -55,6 +55,8 @@ server.second.port=xxx
 spring.cloud.config.enabled=false
 # 服务环境（开启集中配置后必填）
 spring.cloud.config.profile='XX业务系统'
+# 自动上传本地配置到集中配置(默认false)
+spring.cloud.config.initialize=false
 ```
 
 ## 服务隔离
