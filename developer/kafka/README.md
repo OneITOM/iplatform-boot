@@ -8,7 +8,7 @@
 
 > 通过配置参数激活Kafka
 
-```properties
+```yml
 # kafka开关，必填
 spring.kafka.enabled: true
 
