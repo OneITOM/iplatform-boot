@@ -2,7 +2,7 @@
 
 > 作者 于胜强
 
-## 引入依赖（elasticsearch-2.4.*）
+## 引入依赖
 
 ```xml
 <dependency>
