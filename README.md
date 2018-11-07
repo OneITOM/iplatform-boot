@@ -23,9 +23,9 @@ IPLATFORM-BOOT 是以 SpringCloud Brixton.RELEASE 为核心的微服务开发框
   * 文件上传规约
   * 并发处理规约
   * [异步处理规约](developer/coding/Async.md)
-  * RESTful API规约
+  * [RESTfulAPI规约](developer/coding/RESTfulAPI.md)
   * [缓存使用规约](developer/coding/Cache.md)
-  * 个性化配置规约
+  * 自定义配置参数规约
   * 鉴权规约
   * [Shutdown规约](developer/coding/Shutdown.md)
   * [获取配置参数](developer/coding/Environment.md)
@@ -35,8 +35,8 @@ IPLATFORM-BOOT 是以 SpringCloud Brixton.RELEASE 为核心的微服务开发框
   * [数据库开发手册](developer/database/README.md)
   * [ActiveMQ开发手册](developer/activemq/README.md)-(未开始)
   * [Flume开发手册](developer/flume/README.md)
-  * [Kafka开发手册](developer/kafka/README.md)-(未开始)
-  * [ElasticSearch开发手册](developer/elasticsearch/README.md)-于胜强
+  * [Kafka开发手册](developer/kafka/README.md)
+  * [ElasticSearch开发手册](developer/elasticsearch/README.md)-(未开始)
   * [Redis开发手册](developer/redis/README.md)
   * [Mongo开发手册](developer/mongo/README.md)
   * [Tomcat开发手册](developer/tomcat/README.md)
