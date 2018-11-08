@@ -32,7 +32,7 @@ o.i.m.core.messagebus.MessageBusService.initActiveQM : 框架消息总线初始�
 2. 使用消息总线服务发送消息
 
     ```java
-    if(messageBusService!=null && messageBusService.isConnected){
+    if(messageBusService!=null && messageBusService.isConnected()){
       messageBusService.getQueueJmsTemplate().send("topic或者queue名称", new MessageCreator() {
           @Override
           public Message createMessage(Session session) throws JMSException {
