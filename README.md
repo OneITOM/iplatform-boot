@@ -29,6 +29,7 @@ IPLATFORM-BOOT 是以 SpringCloud Brixton.RELEASE 为核心的微服务开发框
   * 鉴权规约
   * [Shutdown规约](developer/coding/Shutdown.md)
   * [获取配置参数](developer/coding/Environment.md)
+  * [发号器规约](developer/coding/UUID.md)
 * 开发手册
   * [Service开发手册](developer/service/README.md)
   * [Controller开发手册](developer/controller/README.md)
