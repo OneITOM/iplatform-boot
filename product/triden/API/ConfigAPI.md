@@ -2,7 +2,16 @@
 
 > 作者 于胜强
 
-### 配置参数同步集中配置
+## 集中配置参数
+
+| key | value | 备注
+|:-----:|:------:|:-----:|
+|spring.cloud.config.busisys|OneITOM|业务系统,默认为OneITOM
+|spring.cloud.config.enabled|false|是否启用集中配置,默认为false
+|spring.cloud.config.profile||应用环境，启用集中配置时必填
+
+
+## 配置参数同步集中配置
 
 `curl -X POST -H 'X-CONFIG-BUSISYS: {busisys}' -i http://localhost:8761/api/v1/syncparams/{operation} --data 'configName={name}&configProfile={profile}&configLabel={label}&jsonParams={jsonStr}'`
 
@@ -26,10 +35,7 @@
 
 失败 -> {"success":false, "message", "XXX错误信息", "data": null}
 
-### 集中配置配置项参数变更
-
-
-### 集中配置查询获取
+## 集中配置查询获取配置参数
 
 > 返回properties文件格式 restful api：
 
@@ -49,7 +55,7 @@
 
 `{label}`: 应用版本
 
-### 配置变更通知
+## 配置变更通知
 
 > 采用ActiveMQ进行通知
 
