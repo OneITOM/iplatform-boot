@@ -20,7 +20,7 @@ IPLATFORM-BOOT 是以 SpringCloud Brixton.RELEASE 为核心的微服务开发框
 * 编码规约
 
   * [定时任务规约](developer/coding/Schedule.md)
-  * 文件上传规约
+  * [文件上传规约](developer/coding/FileUpload.md)
   * 并发处理规约
   * [异步处理规约](developer/coding/Async.md)
   * [RESTfulAPI规约](developer/coding/RESTfulAPI.md)
@@ -43,7 +43,7 @@ IPLATFORM-BOOT 是以 SpringCloud Brixton.RELEASE 为核心的微服务开发框
   * [Tomcat开发手册](developer/tomcat/README.md)
 * 分布式相关开发手册
 
-  * [文档服务集成手册](/developer/dfss/README.md)-(未开始)
+  * [文档服务集成手册](/developer/dfss/README.md)
   * [集中日志开发手册](/developer/logger/README.md)
   * [集中配置开发手册](/developer/config/README.md)
   * [分布式锁开发手册](developer/distributedlock/README.md)
