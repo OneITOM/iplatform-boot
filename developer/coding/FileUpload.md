@@ -31,16 +31,16 @@ multipart.maxRequestSize: 100Mb
 			$("#file").fileupload({
 			    url: /*[[@{/testUpload}]]*/,
 			    formData: {"access_token" : [[${access_token}]]},
-	    	    maxFileSize : 50000000, // 50 MB
-	    	    autoUpload: true,
-	    	    done: function(e,_result){
-	    	    	result = _result.result;
-	    	    	if(result && result.success){
-	    	    		alert("文件上传成功,文件Id:"+result.fileId);
-	    	    	}else{
-	    	    		alert("上传文件失败");
-	    	    	}
-	    	    }
+			    maxFileSize : 50000000, // 50 MB
+			    autoUpload: true,
+			    done: function(e,_result){
+				result = _result.result;
+				if(result && result.success){
+					alert("文件上传成功,文件Id:"+result.fileId);
+				}else{
+					alert("上传文件失败");
+				}
+			    }
 			});
 		});
 
