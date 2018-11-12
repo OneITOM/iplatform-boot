@@ -16,7 +16,7 @@ multipart.enabled: true
 multipart.file-size-threshold: 0
 
 # 上传文件的临时目录
-#spring.http.multipart.location: 
+#multipart.location: 
 
 # 单个文件的大小，默认100Mb
 multipart.maxFileSize: 100Mb
