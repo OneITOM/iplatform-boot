@@ -10,10 +10,10 @@
 
 ```yml
 # 单个文件的大小，默认1Mb
-multipart.maxFileSize: 50Mb
+multipart.maxFileSize: 100Mb
 
 # 单次请求的文件的总大小，默认10Mb
-multipart.maxRequestSize: 100Mb
+multipart.maxRequestSize: 1000Mb
 ```
 
 ## 前端
