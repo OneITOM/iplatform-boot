@@ -9,10 +9,16 @@
 > 通过配置参数实现对上传文件的限制
 
 ```yml
-# 单个文件的大小，默认1Mb
+# 支持文件上传，默认true
+multipart.enabled: true
+
+# 支持文件写入磁盘的阈值，默认0
+multipart.file-size-threshold: 0
+
+# 单个文件的大小，默认100Mb
 multipart.maxFileSize: 100Mb
 
-# 单次请求的文件的总大小，默认10Mb
+# 单次请求的文件的总大小，默认1000Mb
 multipart.maxRequestSize: 1000Mb
 ```
 
