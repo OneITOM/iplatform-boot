@@ -2,7 +2,7 @@
 
 > 作者 张磊
 >
-> 访问代理服务主要用于通过统一的IP地址进行访问，同时提供页面URL地址重写功能
+> 访问代理服务自动代理所有已注册服务的访问，同时提供页面URL地址重写功能，支持通过部署多个代理服务实现不同网络域的用户通过代理进行服务访问
 
 ![image-20181112203825659](images/DiscoveryHAProxy/discoveryhaproxy.png)
 
@@ -96,10 +96,11 @@ URL地址重写
 
 效果说明：
 
-* serviceInfo.homePageUrl 在后台配置的地址是 http://10.22.1.111:9999/auth
-* haproxy的代理访问地址为 http://111.204.35.100/auth，并且服务器端获取的客户端IP段为10.127.x.x
-* 如果通过10.22.1.111地址访问页面，那么页面中serviceInfo.homePageUrl地址依然为http://10.22.1.111:9999/auth
-* 如果通过111.204.35.100地址访问页面，那么页面中serviceInfo.homePageUrl地址变为为http://10.22.1.100/auth
+* 通过外网地址登录认证服务，然后看到认证服务内有一个admin服务的URL地址serviceInfo.homePageUrl 
+* serviceInfo.homePageUrl 在后台配置的地址是 http://172.16.0.101:8764/admin
+* 通过111.204.25.100地址打开auth页面中admin的地址变为 http://111.204.25.100/admin
+* 通过192.168.1.100地址打开auth页面中admin的地址变为 http://192.168.1.100/admin
+* 通过172.16.0.1地址打开auth页面中admin的地址变为 http://172.16.0.2:8763/admin
 
 ## 7.Docker
 
@@ -113,14 +114,14 @@ services:
     network_mode: host
     environment:
       - 'JAVA_OPTIONS=-Xmx512m -Xms512m'
-      - 'discovery.server.address=http://10.22.1.236:8761/eureka/'
+      - 'discovery.server.address=http://172.16.0.99:8761/eureka/'
       - 'eureka.instance.metadataMap.tenant=trident'
       - 'spring.cloud.config.busisys=trident'
       - 'spring.cloud.config.enabled=true'
       - 'spring.cloud.config.profile=生产'
       - 'server.host.prefix=10.22.'
-      - 'haproxy.urlrewrite.destIp=111.204.35.100'
-      - 'haproxy.urlrewrite.clientIpMatch=10.127,10.50'
+      - 'haproxy.urlrewrite.destIp=111.204.25.100'
+      - 'haproxy.urlrewrite.clientIpMatch=111.204.'
       - 'haproxy.binds.frontend_http.port=80'
       - 'haproxy.binds.stats_http.port=8080'
     volumes:
