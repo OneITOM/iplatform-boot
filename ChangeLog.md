@@ -149,6 +149,8 @@ Spring版本升级到4.2.9
 
 增加框架级消息总线支持MessageBusService，@MessageBusConsumer
 
+页面支持URL地址重写标签#ProxyURL.resolverURL（需要启动[访问代理服务](iplatform-common/DiscoveryHAProxy.md)）
+
 ### Bug修复
 
 修复无租户服务可以调用租户服务的BUG
@@ -173,7 +175,9 @@ Spring版本升级到4.2.9
 
 跟踪服务增加lc类型httpclient，httpservice，jdbc
 
-默认不开启服务跟踪功能spring.sleuth.enabled=false
+默认启服务跟踪功能spring.sleuth.enabled=true
+
+默认不开启HTTPS -Dssl=false
 
 跟踪服务Span存储到ES的时候在JSON根节点增加succeed，exception_class，optimize_warn_type，lc，serviceInstId属性
 
@@ -205,7 +209,7 @@ Fegin异步调用支持
 
 Remote Shell
 
-Spring Batch
+接口访问限速
 
 
 

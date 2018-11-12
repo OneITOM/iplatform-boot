@@ -12,6 +12,7 @@ IPLATFORM-BOOT 是以 SpringCloud Brixton.RELEASE 为核心的微服务开发框
 * [跟踪服务部署手册](iplatform-common/TraceService.md)
 * [监控服务部署手册](iplatform-common/AdminService.md)
 * [通知服务部署手册](iplatform-common/NotifyService.md)
+* [访问代理服务部署手册](iplatform-common/DiscoveryHAProxy.md)
 
 ## 2. 开发手册
 
