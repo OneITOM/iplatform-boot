@@ -15,6 +15,9 @@ multipart.enabled: true
 # 支持文件写入磁盘的阈值，默认0
 multipart.file-size-threshold: 0
 
+# 上传文件的临时目录
+#spring.http.multipart.location: 
+
 # 单个文件的大小，默认100Mb
 multipart.maxFileSize: 100Mb
 
