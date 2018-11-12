@@ -4,6 +4,8 @@
 >
 > 访问代理服务主要用于通过统一的IP地址进行访问，同时提供页面URL地址重写功能
 
+![image-20181112203825659](images/DiscoveryHAProxy/discoveryhaproxy.png)
+
 ## 1. 准备
 
 * JDK1.8+
