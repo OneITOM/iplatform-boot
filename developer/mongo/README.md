@@ -94,13 +94,6 @@ MongoDB是一种NoSql非关系型数据库，以键值对(key-value)存储，它
 
 具体API可参见  [MongoTemplate API](https://docs.spring.io/spring-data/mongodb/docs/current/api/org/springframework/data/mongodb/core/MongoTemplate.html)
 
-### MongoDB的查询
-Mongodb提供了Criteria对象，帮助我们实现数据的查询功能，何为Criteria对象：
-
-	+ Criteria查询采用面向对象方式进程条件查询
-	+ 对查询语句进行了封装
-	+ 采用对象的方式来组合各种查询条件
-
 ### Query的翻页和排序
 		Query query = new Query(criteria);
 		// 翻页
@@ -108,6 +101,15 @@ Mongodb提供了Criteria对象，帮助我们实现数据的查询功能，何�
 		query.limit(pageSize);
 		// 排序(DESC：降序, ASC：升序)
 		query.with(new Sort(Direction.DESC, key));	
+		
+### MongoDB的查询
+Mongodb提供了Criteria对象，帮助我们实现数据的查询功能，何为Criteria对象：
+
+	+ Criteria查询采用面向对象方式进程条件查询
+	+ 对查询语句进行了封装
+	+ 采用对象的方式来组合各种查询条件
+
+
 更多的Query查询对象的用法及API可参见 [Query API](https://docs.spring.io/spring-data/mongodb/docs/current/api/org/springframework/data/mongodb/core/query/Query.html)
 
 ### Criteria常用查询
