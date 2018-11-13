@@ -121,7 +121,7 @@ Mongodb提供了Criteria对象，帮助我们实现数据的查询功能，何�
 
 	语法：Criteria criteria = new Criteria();
 	     criteria = criteria.and(key).is(value);
-         criteria = criteria.and(key).ne(value); 
+             criteria = criteria.and(key).ne(value); 
 
 	Sql：where key = value, where key <> value
 
@@ -129,9 +129,9 @@ Mongodb提供了Criteria对象，帮助我们实现数据的查询功能，何�
 
 	语法：Criteria criteria = new Criteria();
 	     criteria = criteria.and(key).gt(value);
-		 criteria = criteria.and(key).gte(value);
-		 criteria = criteria.and(key).lt(value);
-		 criteria = criteria.and(key).lte(value); 
+             criteria = criteria.and(key).gte(value);
+	     criteria = criteria.and(key).lt(value);
+	     criteria = criteria.and(key).lte(value); 
 
 	Sql：where key > value, where key >= value, where key < value, where key <= value
 
@@ -139,7 +139,7 @@ Mongodb提供了Criteria对象，帮助我们实现数据的查询功能，何�
 
 	语法：Criteria criteria = new Criteria();
 	     criteria = criteria.and(key).in(values);
-		 criteria = criteria.and(key).nin(values); 
+	     criteria = criteria.and(key).nin(values); 
 
 	Sql：where key in (values), where key not in (values)
 
