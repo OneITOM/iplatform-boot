@@ -34,6 +34,7 @@ IPLATFORM-BOOT 是以 SpringCloud Brixton.RELEASE 为核心的微服务开发框
 * 开发手册
   * [Service开发手册](developer/service/README.md)
   * [Controller开发手册](developer/controller/README.md)
+  * [服务调用开发手册](developer/fegin/README.md)
   * [数据库开发手册](developer/database/README.md)
   * [ActiveMQ开发手册](developer/activemq/README.md)-(未开始)
   * [Flume开发手册](developer/flume/README.md)
