@@ -12,8 +12,8 @@
 ## 服务参数配置
 
 ```properties
-# 跟踪服务开关（默认true）
-spring.sleuth.enabled=true
+# 跟踪服务开关（默认false）
+spring.sleuth.enabled=false
 # JDBC跟踪服务开关（默认true）
 spring.sleuth.mybatis.enabled=true
 # 数据上报方式（可选项是 activemq、http），默认activemq

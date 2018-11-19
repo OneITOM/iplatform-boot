@@ -24,7 +24,15 @@ POST https://localhost:8761/api/v1/configparams/{operation}?configName={XXX}&con
 
 ## 监听接口
 
-> 订阅消息总线,实现配置变更后的逻辑
+> 订阅消息总线,实现配置变更后的逻辑，每个微服务可以通过开启集中配置参数，实现配置参数的集中管理，和配置变更监听
+
+开启集中配置开关
+
+```properties
+spring.cloud.config.enabled=true
+```
+
+
 
 ```java
   /** 装配变更通知消息总线 */

@@ -175,9 +175,11 @@ Spring版本升级到4.2.9
 
 跟踪服务增加lc类型httpclient，httpservice，jdbc
 
-默认启服务跟踪功能spring.sleuth.enabled=true
+默认关闭服务跟踪功能，可通过spring.sleuth.enabled=true开启
 
-默认不开启HTTPS -Dssl=false
+默认不开启集中配置功能，可通过spring.cloud.config.enabled=true开启
+
+默认不开启HTTPS，可通过 -Dssl=true开启
 
 跟踪服务Span存储到ES的时候在JSON根节点增加succeed，exception_class，optimize_warn_type，lc，serviceInstId属性
 
