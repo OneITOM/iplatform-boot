@@ -70,7 +70,7 @@ oracle文件位置
 
 src/main/resources/db/oracle/V1__初始化.sql
 
-## 4. 举例
+## 4. 举个栗子
 
 > 以下步骤的前提是项目初期就采用Flyway进行数据库版本管理，如果是已有项目纳入数据库版本管理，请参考[已有项目迁移到版本管理](#user-content-5)
 
