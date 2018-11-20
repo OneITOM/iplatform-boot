@@ -151,6 +151,8 @@ Spring版本升级到4.2.9
 
 页面支持URL地址重写标签#ProxyURL.resolverURL（需要启动[访问代理服务](iplatform-common/DiscoveryHAProxy.md)）
 
+集成数据库版本管理Flyway
+
 ### Bug修复
 
 修复无租户服务可以调用租户服务的BUG
@@ -186,8 +188,6 @@ Spring版本升级到4.2.9
 
 
 # Roadmap
-
-数据库版本管理Flyway
 
 JDBC客户端分片
 
