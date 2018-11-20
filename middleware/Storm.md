@@ -7,36 +7,87 @@
 ### 1.1 前提
 
 * JDK1.8+
-* 磁盘剩余空间大于xxxMB
-* 空闲内存大于xxxGB
+
+* 磁盘剩余空间大于10G
+
+* 空闲内存大于4GB
+
+* 添加主机名、IP对应关系
+
+  修改/etc/hosts，在最后添加
+
+  ```
+  192.22.1.180 aaa-NLKF-04
+  192.22.1.182 aaa-NLKF-02
+  192.22.1.181 aaa-NLKF-03
+  ```
+
+- 设置环境变量
+
+```
+
+STORM_HOME=/opt/BOCO/apache-storm-1.1.0
+export STORM_HOME
+PATH=$STORM_HOME/bin:$PATH
+export PATH
+```
+
+
 
 ### 2.2 安装
 
 1. 下载安装包
 
 ```bash
-
+wget http://storm.apache.org/downloads.html/apache-storm-1.1.0.tar.gz
 ```
 
 2. 解压缩
 
 ```bash
-
+cd /opt/BOCO
+tar -xzvf apache-storm-1.1.0.tar.gz
 ```
 3. 参数配置
 
-```xml
+   修改conf/storm.yaml,在最后追加
 
+```xml
+#zookeeper地址
+storm.zookeeper.servers: [ "10.22.1.146","10.22.1.147","10.22.1.148" ]
+#集群的主机名（必须是主机名）
+nimbus.seeds:  [ "bomc147","guansu-busi","shanxi-oracle" ]
+supervisor.slots.ports:
+ - 6700
+ - 6701
+ - 6702
+ - 6703
+storm.local.dir: "/apache-storm-1.1.0/workdir" 
+ui.port: 8765
 ```
 
 4. 启动
 
-```bash
+   主机：ui只在一台机器启动即可
 
+```bash
+cd /opt/BOCO/
+nohup ./storm logviewer & 
+nohup ./storm ui &
+nohup ./storm supervisor &
+nohup ./storm nimbus &
 ```
 
-5. 验证安装
-6. 停止
+5. 停止
+
+   ```
+   ps -ef | grep org.apache.storm.daemon.logviewer
+   ps -ef | grep org.apache.storm.ui.core
+   ps -ef | grep org.apache.storm.daemon.supervisor.Supervisor
+   ps -ef | grep org.apache.storm.daemon.nimbus
+   kill -9
+   ```
+
 
 ## 2. Docker
 
