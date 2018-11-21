@@ -7,8 +7,8 @@
 
 ## Java参数
 
-```sh
-# 启动HTTPS（默认是true）
+```properties
+# 启动HTTPS（默认是false）
 -Dssl=false
 # JVM 内存参数
 JAVA_OPTIONS=-Xmx1g -Xms1g -XX:OnOutOfMemoryError="kill -9 %p"
@@ -18,19 +18,15 @@ JAVA_OPTIONS=-Xmx1g -Xms1g -XX:OnOutOfMemoryError="kill -9 %p"
 
 ### 最小启动参数
 
-```sh
+```properties
 # 注册服务地址（必填）
-discovery.server.address=https://127.0.0.1:8761/eureka/
-
-# 实例ID（非必填）,默认生成一个唯一ID，格式为ip:服务名:port
+discovery.server.address=http://127.0.0.1:8761/eureka/
+# 实例ID（非必填）,默认生成一个唯一ID，格式为ip::服务名:port
 server.instanceId='xxx'
-
 # 服务IP（此参数和server.host.prefix不可以同时使用）
 server.host=192.168.1.1
-
 # 服务器IP前缀（此参数和server.host不可以同时使用，会根据前缀自动匹配IP）
 server.host.prefix=192.168.
-
 # 服务绑定端口（端口设置为0的时候会使用随机端口）
 server.port=8080
 ```
@@ -39,7 +35,7 @@ server.port=8080
 
 当想保留原有https的端口，又想对外提供一个非ssl端口访问时配置
 
-```sh
+```properties
 # 第二端口开关,默认false
 server.second.enabled=false
 # 第二端口号
@@ -50,7 +46,7 @@ server.second.port=xxx
 
 当使用集中配置时的参数
 
-```sh
+```properties
 # 集中配置开关,默认flase
 spring.cloud.config.enabled=false
 # 服务环境（开启集中配置后必填）
@@ -63,7 +59,7 @@ spring.cloud.config.initialize=false
 
 当希望在一个注册中心的服务需要进行分组隔离时使用
 
-```sh
+```properties
 # 服务所属租户，当需要做到服务隔离的时候使用（非必填）
 eureka.instance.metadataMap.tenant=beijing
 ```
@@ -72,14 +68,14 @@ eureka.instance.metadataMap.tenant=beijing
 
 如果要使用框架内置的flume时使用
 
-```sh
+```properties
 # flume框架开关,默认false
 flume.enabled=false
 ```
 
 ## JDBC数据源
 
-```sh
+```properties
 # 数据源类型
 spring.datasource.platform=mysql
 # 数据源驱动
@@ -111,9 +107,24 @@ spring.datasource.max-wait=30000
 
 ## Redis
 
+### Redis公共参数
+
+```properties
+# 连接池最大连接数
+spring.redis.pool.max-active=5
+# 连接池最大阻塞等待时间
+spring.redis.pool.max-wait=-1
+# 连接池中的最小空闲连接
+spring.redis.pool.min-idle=1
+# 连接池中的最大空闲连接
+spring.redis.pool.max-idle=5
+# 连接超时时间（毫秒）
+spring.redis.timeout=1000
+```
+
 ### Redis哨兵模式
 
-```sh
+```properties
 spring.redis.database=0
 spring.redis.port=6379
 spring.redis.password=xxx
@@ -123,7 +134,7 @@ spring.redis.sentinel.nodes=10.22.1.205:26379,10.22.1.204:26379
 
 ### Redis单例模式
 
-```sh
+```properties
 spring.redis.database=0
 spring.redis.password=xxx
 spring.redis.host=127.0.0.1
@@ -132,7 +143,7 @@ spring.redis.port=6379
 
 ### Redis集群模式
 
-```sh
+```properties
 spring.redis.password=xxx
 spring.redis.cluster.enabled=true
 spring.redis.cluster.nodes=172.18.254.109:8000,172.18.254.109:8001,172.18.254.109:8002
@@ -142,26 +153,49 @@ spring.redis.cluster.max-redirects=12
 
 ## MongoDB
 
-```sh
+```properties
 spring.data.mongodb2.uri=mongodb://{username}:{password}@127.0.0.1/datashare
 ```
 
 ## Tomcat
 
-```sh
-server.tomcat.max-threads=2000
+```properties
+# tomcat 最大并发线程
+server.tomcat.max-threads=1000
+# 消息头最大值
 server.tomcat.max-http-header-size=65536
+# 禁用http方法
+server.tomcat.disabled.methods=OPTIONS,TRACE,HEAD
 ```
+
+### Multipart
+
+```properties
+# 支持文件上传
+multipart.enabled=true
+# 支持文件写入磁盘
+multipart.file-size-threshold=0
+# 最大支持文件大小
+multipart.max-file-size=100Mb
+# 最大支持请求大小
+multipart.max-request-size=1000Mb
+```
+
+
 
 ## Cache
 
-```sh
+```properties
+# 使用Guava实现缓存
 spring.cache.type=guava
+
+# 使用Redis实现缓存
+spring.cache.type=redis
 ```
 
 ## 分布式锁
 
-```sh
+```properties
 # 是否开启分布式锁，默认不开启
 iplatform.scheduled.lock.enabled=false
 # 分布式锁实现类型 jdbc,redis,mongo,zookeeper
@@ -172,7 +206,7 @@ iplatform.scheduled.lock.type=jdbc
 
 ### XSS
 
-```sh
+```properties
 iplatform.xss.enabled=true
 iplatform.xss.words[0]="alert\\s*\\("
 iplatform.xss.words[1]="eval\\s*\\("
@@ -184,23 +218,16 @@ iplatform.xss.policy=break
 
 ### CSRF
 
-```sh
+```properties
 # header attack 防篡改开关,默认false
 iplatform.tamperproofing.headerhost.enabled=false
 # header host 白名单
 iplatform.tamperproofing.headerhost.whitelist=www.bomc.com:8761,www.bomc.org:8761
 ```
 
-### HTTP方法
-
-```sh
-# 设置tomcat允许的方法列表
-server.tomcat.port-header=HEAD,PUT,DELETE,OPTIONS,TRACE,COPY,SEARCH,PROPFIND  
-```
-
 ### SSL
 
-```sh
+```properties
 server.ssl.ciphers=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256,TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256,TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384,TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384,TLS_ECDHE_RSA_WITH_AES_128_SHA256,TLS_ECDHE_ECDSA_WITH_AES_128_SHA256,TLS_ECDHE_RSA_WITH_AES_128_SHA,TLS_ECDHE_ECDSA_WITH_AES_128_SHA,TLS_ECDHE_RSA_WITH_AES_256_SHA384,TLS_ECDHE_ECDSA_WITH_AES_256_SHA384,TLS_ECDHE_RSA_WITH_AES_256_SHA,TLS_ECDHE_ECDSA_WITH_AES_256_SHA
 server.ssl.protocol=TLS
 server.ssl.enabled-protocols=TLSv1.2
@@ -208,21 +235,23 @@ server.ssl.enabled-protocols=TLSv1.2
 
 ## Ribbon
 
-```sh
+```properties
 # Fegin自动重试次数
 ribbon.MaxAutoRetries=3
+ribbon.ConnectTimeout=10000
+ribbon.ReadTimeout=120000
 ```
 
 ## 消息开关
 
-```sh
+```properties
 # 发生Http调用异常时通过消息总线发送异常事件
 iplatform.messagebus.exception.httpclient = true
 ```
 
 ## 熔断
 
-```sh
+```properties
 # 默认20，滚动时间窗口内，失败请求数超过此数则断路器开启
 hystrix.command.default.circuitBreaker.requestVolumeThreshold=20
 # 断路器开启后，超过此时间后才自动会关闭
@@ -236,7 +265,7 @@ hystrix.command.default.metrics.rollingStats.timeInMilliseconds=10000
 
 ## 隔离模式
 
-```sh
+```properties
 # 隔离策略，SEMAPHORE=信号量，THREAD=线程池，默认SEMAPHORE
 hystrix.command.default.execution.isolation.strategy=SEMAPHORE
 # 允许请求的最大并发数，超过次数量后续请求将被拒绝
@@ -249,7 +278,7 @@ hystrix.command.default.fallback.isolation.semaphore.maxConcurrentRequests=5000
 
 ## 注册中心
 
-```sh
+```properties
 # 连接到注册中心开关（默认true）
 eureka.client.enabled=true
 eureka.client.register-with-eureka=false
@@ -269,7 +298,7 @@ eureka.server.response-cache-update-interval-ms=5000
 
 ## 跟踪服务
 
-```sh
+```properties
 # 服务跟踪总开关，默认(false)
 spring.sleuth.enabled=false
 # jdbc服务跟踪开关，默认开启
@@ -290,14 +319,14 @@ spring.sleuth.web.skipPattern="/api-docs.*|/autoconfig|/configprops|/dump|/healt
 
 ## 流控
 
-```sh
+```properties
 # 服务流控权重
 eureka.instance.metadataMap.weight=1
 ```
 
 ## 路由标签
 
-```sh
+```properties
 # 或标签
 eureka.instance.metadataMap.labelOr=beijing,shanghai
 
@@ -305,9 +334,18 @@ eureka.instance.metadataMap.labelOr=beijing,shanghai
 eureka.instance.metadataMap.labelAnd=beijing,shanghai
 ```
 
+## 日志级别
+
+```properties
+# 全局日志级别
+logging.level=INFO
+# 设置某个包的日志级别
+logging.level.{packageName}=DEBUG
+```
+
 ## 集中日志
 
-```sh
+```properties
 # 集中日志开关,默认false
 logger.kafka.enabled=false
 # 集中日志分区数,默认20
@@ -322,7 +360,7 @@ logger.kafka.zookeeper=localhost:2181
 
 ## 控制命令
 
-```sh
+```properties
 # 允许远程访问的ip白名单
 endpoints.shutdown.allowip=192.168.1.100,192.168.1.101
 ```

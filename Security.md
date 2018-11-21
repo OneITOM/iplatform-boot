@@ -160,10 +160,10 @@ curl -v -X OPTIONS http://127.0.0.1:5000
 Allow: HEAD, GET, OPTIONS
 ```
 
-* 通过参数配置允许哪些方法
+* 通过参数配置要禁用哪些方法
 
 ```properties
-server.tomcat.port-header=HEAD,PUT,DELETE,OPTIONS,TRACE,COPY,SEARCH,PROPFIND
+server.tomcat.disabled.methods=HEAD,OPTIONS,TRACE
 ```
 
 ### <a id="3.5"></a>SSL/TLS受诫礼(BAR-MITZVAH)攻击漏洞
