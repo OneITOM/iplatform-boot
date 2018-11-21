@@ -133,7 +133,7 @@ Spring版本升级到4.2.9
 
 修改admin的默认密码为admin@boco
 
-## iplatform-boot 0.0.7
+## iplatform-boot 1.0.0
 
 ### 新功能
 
@@ -152,6 +152,8 @@ Spring版本升级到4.2.9
 页面支持URL地址重写标签#ProxyURL.resolverURL（需要启动[访问代理服务](iplatform-common/DiscoveryHAProxy.md)）
 
 集成数据库版本管理Flyway
+
+增加@RateLimit支持RESTful API访问限速
 
 ### Bug修复
 
@@ -195,23 +197,15 @@ JDBC客户端分片
 
 增加SQL敏感词定义，默认不允许drop table
 
-服务跟踪-ActiveMQ
-
-服务跟踪-Redis
-
-服务跟踪-Kafka
+调用链跟踪-ActiveMQ、Redis、Kafka
 
 Fegin异步调用支持
 
-分布式事务
+分布式事务框架集成
 
 页面提交增加csrf防御
 
 支持HTTP2.0
-
-Remote Shell
-
-接口访问限速
 
 
 
