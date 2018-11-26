@@ -78,8 +78,9 @@ MongoDB是一种NoSql非关系型数据库，以键值对(key-value)存储，它
 在application.yml文件写入mongodb数据源：
 	
 	1,默认端口无密码：
-`spring.data.mongodb.uri`=mongodb://[ip]/[databaseName]
-
+```properties
+spring.data.mongodb.uri`=mongodb://[ip]/[databaseName]
+```
 	2,配置端口无密码：
 `spring.data.mongodb.uri`=mongodb://[ip]:[port]/[databaseName]
 
