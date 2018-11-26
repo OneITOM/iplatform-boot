@@ -11,7 +11,7 @@ MongoDB是一种NoSql非关系型数据库，以键值对(key-value)存储，它
 		+ 快速的读写 
 		+ 低廉的成本 
 		+ 灵活的数据结构
-
+	
 	劣势方面：
 		+ 不提供对SQL的支持
 		+ 语法不同于传统SQL，学习成本
@@ -92,7 +92,7 @@ MongoDB是一种NoSql非关系型数据库，以键值对(key-value)存储，它
 直接在代码中绑定注入即可
 
 	@Autowired
-    private MongoTemplate mongoTemplate;
+	private MongoTemplate mongoTemplate;
 
 具体API可参见  [MongoTemplate API](https://docs.spring.io/spring-data/mongodb/docs/current/api/org/springframework/data/mongodb/core/MongoTemplate.html)
 
@@ -103,7 +103,7 @@ MongoDB是一种NoSql非关系型数据库，以键值对(key-value)存储，它
 		query.limit(pageSize);
 		// 排序(DESC：降序, ASC：升序)
 		query.with(new Sort(Direction.DESC, key));	
-		
+
 ### MongoDB的查询
 Mongodb提供了Criteria对象，帮助我们实现数据的查询功能，何为Criteria对象：
 
@@ -121,18 +121,18 @@ Mongodb提供了Criteria对象，帮助我们实现数据的查询功能，何�
 
 	语法：Criteria criteria = new Criteria();
 	     criteria = criteria.and(key).is(value);
-             criteria = criteria.and(key).ne(value); 
-
+	         criteria = criteria.and(key).ne(value); 
+	
 	Sql：where key = value, where key <> value
 
 2，大于">", 大于等于">=", 小于"<", 小于等于"<="
 
 	语法：Criteria criteria = new Criteria();
 	     criteria = criteria.and(key).gt(value);
-             criteria = criteria.and(key).gte(value);
+	         criteria = criteria.and(key).gte(value);
 	     criteria = criteria.and(key).lt(value);
 	     criteria = criteria.and(key).lte(value); 
-
+	
 	Sql：where key > value, where key >= value, where key < value, where key <= value
 
 3, "in", "not in" (参数是数组)
@@ -140,14 +140,14 @@ Mongodb提供了Criteria对象，帮助我们实现数据的查询功能，何�
 	语法：Criteria criteria = new Criteria();
 	     criteria = criteria.and(key).in(values);
 	     criteria = criteria.and(key).nin(values); 
-
+	
 	Sql：where key in (values), where key not in (values)
 
 4，模糊查询"like"
 
 	语法：Criteria criteria = new Criteria();
 	     criteria = criteria.and(key).regex(".*?" + queryValue + ".*");
-
+	
 	Sql：where key like '%value%'
 
 以上条件基本可以涵盖绝大部分的查询需求了，只需根据业务场景来灵活组合查询条件即可（andOperator, orOperator）
@@ -170,21 +170,24 @@ Mongodb提供了Criteria对象，帮助我们实现数据的查询功能，何�
 Aggregation简单来说，就是提供数据统计、分析、分类的方法，常用于数据统计报表，配合ECharts绘制统计分析图表等，一个Aggregation操作，接收指定collection的数据集，通过计算后返回result数据
 
 使用mongoTemplate来实现按资源类型统计数据
-
-	Criteria criteria = new Criteria();
-	// 此处只统计PC服务器，小型机和路由器数据
- 	criteria = criteria.and("BMCLASSNAME").in({"ISS","EPS","CMDB_ROUTER"}); 
-	Aggregation agg = Aggregation.newAggregation(    
+```java
+Criteria criteria = new Criteria();
+// 此处只统计PC服务器，小型机和路由器数据
+criteria = criteria.and("BMCLASSNAME").in({"ISS","EPS","CMDB_ROUTER"}); 
+Aggregation agg = Aggregation.newAggregation(    
             Aggregation.match(criteria),//条件  
             Aggregation.group("BMCLASSNAME").count().as("count"),//分组字段    
             Aggregation.sort(sort),//排序  
             Aggregation.skip(page.getFirstResult()),//过滤  
             Aggregation.limit(pageSize)//页数  
-         );    
-    AggregationResults<JSONObject> outputType=mongoTemplate.aggregate(agg,"cmdb",JSONObject.class);    
-    List<JSONObject> list=outputType.getMappedResults();
-	
-	Sql:select BMCLASSNAME,count(1) from cmdb where BMCLASSNAME in ('ISS','EPS','CMDB_ROUTER') group by BMCLASSNAME
+);    
+AggregationResults<JSONObject> outputType=mongoTemplate.aggregate(agg,"cmdb",JSONObject.class);    
+List<JSONObject> list=outputType.getMappedResults();
+```
+
+```sql
+select BMCLASSNAME,count(1) from cmdb where BMCLASSNAME in ('ISS','EPS','CMDB_ROUTER') group by BMCLASSNAME
+```
 
 更多的Aggregation的用法及API可参见 [Aggregation API](https://www.baeldung.com/spring-data-mongodb-projections-aggregations)
 
