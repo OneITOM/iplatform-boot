@@ -89,4 +89,4 @@ IPLATFORM-BOOT 是以 SpringCloud Brixton.RELEASE 为核心的微服务开发框
 
 ## 6.贡献者
 
-文档：[coderwls](https://github.com/coderwls) [duzhen](https://github.com/duzhen020623) [Yu Shengqiang](https://github.com/ShefronYudy)
+文档：[coderwls](https://github.com/coderwls) [duzhen](https://github.com/duzhen020623) [Yu Shengqiang](https://github.com/ShefronYudy) [yubowinner](https://github.com/yubowinner)
