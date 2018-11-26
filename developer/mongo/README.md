@@ -77,33 +77,37 @@ MongoDB是一种NoSql非关系型数据库，以键值对(key-value)存储，它
 ### 数据源配置
 在application.yml文件写入mongodb数据源：
 	
-	1,默认端口无密码：
-`spring.data.mongodb.uri`=mongodb://[ip]/[databaseName]
-
-	2,配置端口无密码：
-`spring.data.mongodb.uri`=mongodb://[ip]:[port]/[databaseName]
-
-	3,配置端口有密码：
-`spring.data.mongodb.uri`=mongodb://[username]:[password]@[ip]:[port]/[databaseName]
-
-	例:spring.data.mongodb.uri=mongodb://bomcbp:bomcbp@192.168.55.30:27017/datashare
+1,默认端口无密码：
+```properties
+spring.data.mongodb.uri=mongodb://[ip]/[databaseName]
+```
+2,配置端口无密码：
+```properties
+spring.data.mongodb.uri=mongodb://[ip]:[port]/[databaseName]
+```
+3,配置端口有密码：
+```properties
+spring.data.mongodb.uri=mongodb://[username]:[password]@[ip]:[port]/[databaseName]
+```
+例:spring.data.mongodb.uri=mongodb://bomcbp:bomcbp@192.168.55.30:27017/datashare
 
 ### 使用示例
 直接在代码中绑定注入即可
-
-	@Autowired
-	private MongoTemplate mongoTemplate;
-
+```java
+@Autowired
+private MongoTemplate mongoTemplate;
+```
 具体API可参见  [MongoTemplate API](https://docs.spring.io/spring-data/mongodb/docs/current/api/org/springframework/data/mongodb/core/MongoTemplate.html)
 
 ### Query的翻页和排序
-		Query query = new Query(criteria);
-		// 翻页
-		query.skip((offsite - 1) * pageSize);
-		query.limit(pageSize);
-		// 排序(DESC：降序, ASC：升序)
-		query.with(new Sort(Direction.DESC, key));	
-
+```java
+Query query = new Query(criteria);
+// 翻页
+query.skip((offsite - 1) * pageSize);
+query.limit(pageSize);
+// 排序(DESC：降序, ASC：升序)
+query.with(new Sort(Direction.DESC, key));
+```
 ### MongoDB的查询
 Mongodb提供了Criteria对象，帮助我们实现数据的查询功能，何为Criteria对象：
 
@@ -118,52 +122,56 @@ Mongodb提供了Criteria对象，帮助我们实现数据的查询功能，何�
 前提：mongodb对数据类型敏感，key = 1 和 key = '1'的查询解雇是不一样的
 
 1，等于"="，不等于"<>"
-
-	语法：Criteria criteria = new Criteria();
-	     criteria = criteria.and(key).is(value);
-	         criteria = criteria.and(key).ne(value); 
-	
-	Sql：where key = value, where key <> value
-
+```java
+Criteria criteria = new Criteria();
+criteria = criteria.and(key).is(value);
+criteria = criteria.and(key).ne(value); 
+```
+```sql
+where key = value, where key <> value
+```
 2，大于">", 大于等于">=", 小于"<", 小于等于"<="
-
-	语法：Criteria criteria = new Criteria();
-	     criteria = criteria.and(key).gt(value);
-	         criteria = criteria.and(key).gte(value);
-	     criteria = criteria.and(key).lt(value);
-	     criteria = criteria.and(key).lte(value); 
-	
-	Sql：where key > value, where key >= value, where key < value, where key <= value
-
+```java
+Criteria criteria = new Criteria();
+criteria = criteria.and(key).gt(value);
+criteria = criteria.and(key).gte(value);
+criteria = criteria.and(key).lt(value);
+criteria = criteria.and(key).lte(value); 
+```
+```sql
+where key > value, where key >= value, where key < value, where key <= value
+```
 3, "in", "not in" (参数是数组)
-
-	语法：Criteria criteria = new Criteria();
-	     criteria = criteria.and(key).in(values);
-	     criteria = criteria.and(key).nin(values); 
-	
-	Sql：where key in (values), where key not in (values)
-
+```java
+Criteria criteria = new Criteria();
+criteria = criteria.and(key).in(values);
+criteria = criteria.and(key).nin(values); 
+```
+```sql
+where key in (values), where key not in (values)
+```
 4，模糊查询"like"
-
-	语法：Criteria criteria = new Criteria();
-	     criteria = criteria.and(key).regex(".*?" + queryValue + ".*");
-	
-	Sql：where key like '%value%'
-
+```java
+Criteria criteria = new Criteria();
+criteria = criteria.and(key).regex(".*?" + queryValue + ".*");
+```
+```sql
+where key like '%value%'
+```
 以上条件基本可以涵盖绝大部分的查询需求了，只需根据业务场景来灵活组合查询条件即可（andOperator, orOperator）
 
 例：在user集合中，查询所有的[男性],且[年龄]大于等于30的，且[现住址]不在'大东区','苏家屯','于洪区'的，且[老家]在'抚顺'或'阜新'，且姓名中含有'于'字的这些人（就把我给选出来了*^_^*）
-	
-	Criteria criteria = new Criteria();
- 	criteria = criteria.and("sex").is("male"); 
-	criteria = criteria.and("age").gte(30);
-	criteria = criteria.and("address").nin({'大东区','苏家屯','于洪区'});
-	criteria = criteria.and("hometown").in({'抚顺','阜新'});
-	criteria = criteria.and("name").regex(".*?于.*");
-    Query query = new Query(criteria);
-	// 查询user集合
-	return mongoTemplate.find(query, JSONObject.class, "user");  
-
+```java	
+Criteria criteria = new Criteria();
+criteria = criteria.and("sex").is("male"); 
+criteria = criteria.and("age").gte(30);
+criteria = criteria.and("address").nin({'大东区','苏家屯','于洪区'});
+criteria = criteria.and("hometown").in({'抚顺','阜新'});
+criteria = criteria.and("name").regex(".*?于.*");
+Query query = new Query(criteria);
+// 查询user集合
+return mongoTemplate.find(query, JSONObject.class, "user");  
+```
 更多的Criteria查询对象的用法及API可参见 [Criteria API](https://docs.spring.io/spring-data/mongodb/docs/current/api/org/springframework/data/mongodb/core/query/Criteria.html)
 
 ### 聚合函数
@@ -175,20 +183,18 @@ Criteria criteria = new Criteria();
 // 此处只统计PC服务器，小型机和路由器数据
 criteria = criteria.and("BMCLASSNAME").in({"ISS","EPS","CMDB_ROUTER"}); 
 Aggregation agg = Aggregation.newAggregation(    
-            Aggregation.match(criteria),//条件  
-            Aggregation.group("BMCLASSNAME").count().as("count"),//分组字段    
-            Aggregation.sort(sort),//排序  
-            Aggregation.skip(page.getFirstResult()),//过滤  
-            Aggregation.limit(pageSize)//页数  
-);    
+    Aggregation.match(criteria),//条件  
+    Aggregation.group("BMCLASSNAME").count().as("count"),//分组字段    
+    Aggregation.sort(sort),//排序  
+    Aggregation.skip(page.getFirstResult()),//过滤  
+    Aggregation.limit(pageSize)//页数  
+ );    
 AggregationResults<JSONObject> outputType=mongoTemplate.aggregate(agg,"cmdb",JSONObject.class);    
 List<JSONObject> list=outputType.getMappedResults();
-```
-
+```	
 ```sql
 select BMCLASSNAME,count(1) from cmdb where BMCLASSNAME in ('ISS','EPS','CMDB_ROUTER') group by BMCLASSNAME
 ```
-
 更多的Aggregation的用法及API可参见 [Aggregation API](https://www.baeldung.com/spring-data-mongodb-projections-aggregations)
 
 ### Mongodb的事务 -- 未完待续
