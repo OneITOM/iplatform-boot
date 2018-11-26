@@ -130,66 +130,70 @@ criteria = criteria.and(key).ne(value);
 where key = value, where key <> value
 ```
 2，大于">", 大于等于">=", 小于"<", 小于等于"<="
-
-	语法：Criteria criteria = new Criteria();
-	     criteria = criteria.and(key).gt(value);
-             criteria = criteria.and(key).gte(value);
-	     criteria = criteria.and(key).lt(value);
-	     criteria = criteria.and(key).lte(value); 
-
-	Sql：where key > value, where key >= value, where key < value, where key <= value
-
+```java
+Criteria criteria = new Criteria();
+criteria = criteria.and(key).gt(value);
+criteria = criteria.and(key).gte(value);
+criteria = criteria.and(key).lt(value);
+criteria = criteria.and(key).lte(value); 
+```
+```sql
+where key > value, where key >= value, where key < value, where key <= value
+```
 3, "in", "not in" (参数是数组)
-
-	语法：Criteria criteria = new Criteria();
-	     criteria = criteria.and(key).in(values);
-	     criteria = criteria.and(key).nin(values); 
-
-	Sql：where key in (values), where key not in (values)
-
+```java
+Criteria criteria = new Criteria();
+criteria = criteria.and(key).in(values);
+criteria = criteria.and(key).nin(values); 
+```
+```sql
+where key in (values), where key not in (values)
+```
 4，模糊查询"like"
-
-	语法：Criteria criteria = new Criteria();
-	     criteria = criteria.and(key).regex(".*?" + queryValue + ".*");
-
-	Sql：where key like '%value%'
-
+```java
+Criteria criteria = new Criteria();
+criteria = criteria.and(key).regex(".*?" + queryValue + ".*");
+```
+```sql
+where key like '%value%'
+```
 以上条件基本可以涵盖绝大部分的查询需求了，只需根据业务场景来灵活组合查询条件即可（andOperator, orOperator）
 
 例：在user集合中，查询所有的[男性],且[年龄]大于等于30的，且[现住址]不在'大东区','苏家屯','于洪区'的，且[老家]在'抚顺'或'阜新'，且姓名中含有'于'字的这些人（就把我给选出来了*^_^*）
-	
-	Criteria criteria = new Criteria();
- 	criteria = criteria.and("sex").is("male"); 
-	criteria = criteria.and("age").gte(30);
-	criteria = criteria.and("address").nin({'大东区','苏家屯','于洪区'});
-	criteria = criteria.and("hometown").in({'抚顺','阜新'});
-	criteria = criteria.and("name").regex(".*?于.*");
-    Query query = new Query(criteria);
-	// 查询user集合
-	return mongoTemplate.find(query, JSONObject.class, "user");  
-
+```java	
+Criteria criteria = new Criteria();
+criteria = criteria.and("sex").is("male"); 
+criteria = criteria.and("age").gte(30);
+criteria = criteria.and("address").nin({'大东区','苏家屯','于洪区'});
+criteria = criteria.and("hometown").in({'抚顺','阜新'});
+criteria = criteria.and("name").regex(".*?于.*");
+Query query = new Query(criteria);
+// 查询user集合
+return mongoTemplate.find(query, JSONObject.class, "user");  
+```
 更多的Criteria查询对象的用法及API可参见 [Criteria API](https://docs.spring.io/spring-data/mongodb/docs/current/api/org/springframework/data/mongodb/core/query/Criteria.html)
 
 ### 聚合函数
 Aggregation简单来说，就是提供数据统计、分析、分类的方法，常用于数据统计报表，配合ECharts绘制统计分析图表等，一个Aggregation操作，接收指定collection的数据集，通过计算后返回result数据
 
 使用mongoTemplate来实现按资源类型统计数据
-
-	Criteria criteria = new Criteria();
-	// 此处只统计PC服务器，小型机和路由器数据
- 	criteria = criteria.and("BMCLASSNAME").in({"ISS","EPS","CMDB_ROUTER"}); 
-	Aggregation agg = Aggregation.newAggregation(    
-            Aggregation.match(criteria),//条件  
-            Aggregation.group("BMCLASSNAME").count().as("count"),//分组字段    
-            Aggregation.sort(sort),//排序  
-            Aggregation.skip(page.getFirstResult()),//过滤  
-            Aggregation.limit(pageSize)//页数  
-         );    
-    AggregationResults<JSONObject> outputType=mongoTemplate.aggregate(agg,"cmdb",JSONObject.class);    
-    List<JSONObject> list=outputType.getMappedResults();
-	
-	Sql:select BMCLASSNAME,count(1) from cmdb where BMCLASSNAME in ('ISS','EPS','CMDB_ROUTER') group by BMCLASSNAME
-
+```java	
+Criteria criteria = new Criteria();
+// 此处只统计PC服务器，小型机和路由器数据
+criteria = criteria.and("BMCLASSNAME").in({"ISS","EPS","CMDB_ROUTER"}); 
+Aggregation agg = Aggregation.newAggregation(    
+    Aggregation.match(criteria),//条件  
+    Aggregation.group("BMCLASSNAME").count().as("count"),//分组字段    
+    Aggregation.sort(sort),//排序  
+    Aggregation.skip(page.getFirstResult()),//过滤  
+    Aggregation.limit(pageSize)//页数  
+ );    
+AggregationResults<JSONObject> outputType=mongoTemplate.aggregate(agg,"cmdb",JSONObject.class);    
+List<JSONObject> list=outputType.getMappedResults();
+```	
+```sql
+select BMCLASSNAME,count(1) from cmdb where BMCLASSNAME in ('ISS','EPS','CMDB_ROUTER') group by BMCLASSNAME
+```
 更多的Aggregation的用法及API可参见 [Aggregation API](https://www.baeldung.com/spring-data-mongodb-projections-aggregations)
 
 ### Mongodb的事务 -- 未完待续
