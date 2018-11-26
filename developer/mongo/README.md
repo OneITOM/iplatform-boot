@@ -77,17 +77,19 @@ MongoDB是一种NoSql非关系型数据库，以键值对(key-value)存储，它
 ### 数据源配置
 在application.yml文件写入mongodb数据源：
 	
-	1,默认端口无密码：
+1,默认端口无密码：
 ```properties
-spring.data.mongodb.uri`=mongodb://[ip]/[databaseName]
+spring.data.mongodb.uri=mongodb://[ip]/[databaseName]
 ```
-	2,配置端口无密码：
-`spring.data.mongodb.uri`=mongodb://[ip]:[port]/[databaseName]
-
-	3,配置端口有密码：
-`spring.data.mongodb.uri`=mongodb://[username]:[password]@[ip]:[port]/[databaseName]
-
-	例:spring.data.mongodb.uri=mongodb://bomcbp:bomcbp@192.168.55.30:27017/datashare
+2,配置端口无密码：
+```properties
+spring.data.mongodb.uri=mongodb://[ip]:[port]/[databaseName]
+```
+3,配置端口有密码：
+```properties
+spring.data.mongodb.uri=mongodb://[username]:[password]@[ip]:[port]/[databaseName]
+```
+例:spring.data.mongodb.uri=mongodb://bomcbp:bomcbp@192.168.55.30:27017/datashare
 
 ### 使用示例
 直接在代码中绑定注入即可
