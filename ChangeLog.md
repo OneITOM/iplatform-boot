@@ -133,7 +133,7 @@ Spring版本升级到4.2.9
 
 修改admin的默认密码为admin@boco
 
-## iplatform-boot 0.0.7
+## iplatform-boot 1.0.0
 
 ### 新功能
 
@@ -148,6 +148,12 @@ Spring版本升级到4.2.9
 增加断路器指标支持
 
 增加框架级消息总线支持MessageBusService，@MessageBusConsumer
+
+页面支持URL地址重写标签#ProxyURL.resolverURL（需要启动[访问代理服务](iplatform-common/DiscoveryHAProxy.md)）
+
+集成数据库版本管理Flyway
+
+增加@RateLimit支持RESTful API访问限速
 
 ### Bug修复
 
@@ -173,7 +179,11 @@ Spring版本升级到4.2.9
 
 跟踪服务增加lc类型httpclient，httpservice，jdbc
 
-默认不开启服务跟踪功能spring.sleuth.enabled=false
+默认关闭服务跟踪功能，可通过spring.sleuth.enabled=true开启
+
+默认不开启集中配置功能，可通过spring.cloud.config.enabled=true开启
+
+默认不开启HTTPS，可通过 -Dssl=true开启
 
 跟踪服务Span存储到ES的时候在JSON根节点增加succeed，exception_class，optimize_warn_type，lc，serviceInstId属性
 
@@ -181,31 +191,21 @@ Spring版本升级到4.2.9
 
 # Roadmap
 
-数据库版本管理Flyway
-
 JDBC客户端分片
 
 分布式UUID生成器
 
 增加SQL敏感词定义，默认不允许drop table
 
-服务跟踪-ActiveMQ
-
-服务跟踪-Redis
-
-服务跟踪-Kafka
+调用链跟踪-ActiveMQ、Redis、Kafka
 
 Fegin异步调用支持
 
-分布式事务
+分布式事务框架集成
 
 页面提交增加csrf防御
 
 支持HTTP2.0
-
-Remote Shell
-
-Spring Batch
 
 
 
