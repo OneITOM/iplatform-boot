@@ -40,6 +40,10 @@ public class MyService {
 ## 2. 客户端定义
 
 > UI服务中定义FeignClient
+>
+> @FeignClient()中的myproject-service是SERVICE服务的名称 ${spring.application.name}
+>
+> @RequestMapping()中的myprojectservice是SERVICE服务的上下文路径 ${server.contextPath}
 
 ```java
 package [你的ui项目包路径].feign;
@@ -49,10 +53,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-@FeignClient("[service项目名称]")
+@FeignClient("myproject-service")
 public interface MyClient {
 	
-    @RequestMapping(value = "[service项目contextPath]/api/v1/myservice/getData", method = RequestMethod.GET)
+    @RequestMapping(value = "myprojectservice/api/v1/myservice/getData", method = RequestMethod.GET)
     public ResponseEntity<RestResponse<String>> getData();
 	
 }
