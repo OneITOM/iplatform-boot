@@ -97,12 +97,14 @@ MongoDB是一种NoSql非关系型数据库，以键值对(key-value)存储，它
 具体API可参见  [MongoTemplate API](https://docs.spring.io/spring-data/mongodb/docs/current/api/org/springframework/data/mongodb/core/MongoTemplate.html)
 
 ### Query的翻页和排序
-		Query query = new Query(criteria);
-		// 翻页
-		query.skip((offsite - 1) * pageSize);
-		query.limit(pageSize);
-		// 排序(DESC：降序, ASC：升序)
-		query.with(new Sort(Direction.DESC, key));	
+	```java
+	Query query = new Query(criteria);
+	// 翻页
+	query.skip((offsite - 1) * pageSize);
+	query.limit(pageSize);
+	// 排序(DESC：降序, ASC：升序)
+	query.with(new Sort(Direction.DESC, key));
+	```
 		
 ### MongoDB的查询
 Mongodb提供了Criteria对象，帮助我们实现数据的查询功能，何为Criteria对象：
