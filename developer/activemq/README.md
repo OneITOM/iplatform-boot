@@ -73,7 +73,7 @@ private void testActiveMQ(){
 ```java
 @ApiOperation("Q_MS_TEST消息接收")
 @JmsListener(destination = "Q_MS_TEST", containerFactory = "queueListenerContainerFactory")
-private void receiveQueueMessage1(String message){
+private void receiveQueueMessage(String message){
 
 	System.out.println("Q_MS_TEST:"+message);
 
