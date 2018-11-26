@@ -11,7 +11,7 @@ MongoDB是一种NoSql非关系型数据库，以键值对(key-value)存储，它
 		+ 快速的读写 
 		+ 低廉的成本 
 		+ 灵活的数据结构
-
+	
 	劣势方面：
 		+ 不提供对SQL的支持
 		+ 语法不同于传统SQL，学习成本
@@ -97,7 +97,6 @@ spring.data.mongodb.uri=mongodb://[username]:[password]@[ip]:[port]/[databaseNam
 @Autowired
 private MongoTemplate mongoTemplate;
 ```
-
 具体API可参见  [MongoTemplate API](https://docs.spring.io/spring-data/mongodb/docs/current/api/org/springframework/data/mongodb/core/MongoTemplate.html)
 
 ### Query的翻页和排序
@@ -109,7 +108,6 @@ query.limit(pageSize);
 // 排序(DESC：降序, ASC：升序)
 query.with(new Sort(Direction.DESC, key));
 ```
-		
 ### MongoDB的查询
 Mongodb提供了Criteria对象，帮助我们实现数据的查询功能，何为Criteria对象：
 
@@ -180,7 +178,7 @@ return mongoTemplate.find(query, JSONObject.class, "user");
 Aggregation简单来说，就是提供数据统计、分析、分类的方法，常用于数据统计报表，配合ECharts绘制统计分析图表等，一个Aggregation操作，接收指定collection的数据集，通过计算后返回result数据
 
 使用mongoTemplate来实现按资源类型统计数据
-```java	
+```java
 Criteria criteria = new Criteria();
 // 此处只统计PC服务器，小型机和路由器数据
 criteria = criteria.and("BMCLASSNAME").in({"ISS","EPS","CMDB_ROUTER"}); 

@@ -32,7 +32,7 @@ o.i.m.core.messagebus.MessageBusService.initActiveQM : 框架消息总线初始�
 2. 使用消息总线服务发送消息
 
     ```java
-    if(messageBusService!=null && messageBusService.isConnected){
+    if(messageBusService!=null && messageBusService.isConnected()){
       messageBusService.getQueueJmsTemplate().send("topic或者queue名称", new MessageCreator() {
           @Override
           public Message createMessage(Session session) throws JMSException {
@@ -44,30 +44,23 @@ o.i.m.core.messagebus.MessageBusService.initActiveQM : 框架消息总线初始�
 
 ## 4. 接收消息
 
-1. 服务类继承抽象类AbstractMessageBusListener
+服务类继承抽象类AbstractMessageBusListener，并实现onMessageBus监听方法
 
-   ```java
-   @RestController
-   public class TestService extends AbstractMessageBusListener {
-   	
-   }
-   ```
-
-2. 实现抽象类的监听方法
-
-   ```java
-   @MessageBusConsumer(destination = "topic或者queue名称")
-   public void onMessageBus(Message message){
-   	if(message instanceof TextMessage){
-   		try {
-   			System.out.println(((TextMessage)message).getText());
-   		} catch (JMSException e) {
-   			LOG.error("消息接收错误",e)
-   		}
-   	}
-   } 
-   ```
-
+```java
+@Service
+public class TestService extends AbstractMessageBusListener {
+    @MessageBusConsumer(destination = "topic或者queue名称")
+    public void onMessageBus(Message message){
+        if(message instanceof TextMessage){
+            try {
+                System.out.println(((TextMessage)message).getText());
+            } catch (JMSException e) {
+                LOG.error("消息接收错误",e);
+            }
+        }
+    } 	
+}
+```
 ## 5. 配置参数
 
 ```properties

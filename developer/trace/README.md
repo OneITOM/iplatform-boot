@@ -12,8 +12,8 @@
 ## 服务参数配置
 
 ```properties
-# 跟踪服务开关（默认true）
-spring.sleuth.enabled=true
+# 跟踪服务开关（默认false）
+spring.sleuth.enabled=false
 # JDBC跟踪服务开关（默认true）
 spring.sleuth.mybatis.enabled=true
 # 数据上报方式（可选项是 activemq、http），默认activemq
@@ -98,8 +98,6 @@ eureka.instance.metadataMap.trackSampling=1
   * busisys
 * 服务实例ID
   * serviceInstId
-* 移动平均耗时
-  * durationMoveAvg
 * 性能警告百分比阀值
   * optimize_warn_pct
 * 性能警告类型
@@ -179,6 +177,10 @@ eureka.instance.metadataMap.trackSampling=1
 > * httpclient.path HTTP客户端调用路径
 > * httpclient.status_code HTTP客户端调用返回码
 > * httpclient.url HTTP客户端调用全路径
+> * httpclient.request.headers.xx 请求消息头
+> * httpclient.request.body 请求参数
+> * httpclient.response.headers.xx 相应消息头
+> * httpclient.response.body 响应参数
 > * sa HTTP客户端调用服务端地址
 
 ```json
@@ -254,6 +256,118 @@ eureka.instance.metadataMap.trackSampling=1
 			"ipv4": "10.50.7.13",
 			"port": 58080
 		}
+	},  {
+		"key": "httpclient.request.headers.accept",
+		"value": "application/json",
+		"endpoint": {
+			"serviceName": "empty-ui",
+			"ipv4": "10.50.7.28",
+			"port": 49890
+		}
+	}, {
+		"key": "httpclient.request.headers.content-length",
+		"value": "0",
+		"endpoint": {
+			"serviceName": "empty-ui",
+			"ipv4": "10.50.7.28",
+			"port": 49890
+		}
+	}, {
+		"key": "httpclient.request.headers.x-b3-parentspanid",
+		"value": "641a5fc4d184a0e5",
+		"endpoint": {
+			"serviceName": "empty-ui",
+			"ipv4": "10.50.7.28",
+			"port": 49890
+		}
+	}, {
+		"key": "httpclient.request.headers.x-b3-sampled",
+		"value": "1",
+		"endpoint": {
+			"serviceName": "empty-ui",
+			"ipv4": "10.50.7.28",
+			"port": 49890
+		}
+	}, {
+		"key": "httpclient.request.headers.x-b3-spanid",
+		"value": "3254ba97dc3c7b87",
+		"endpoint": {
+			"serviceName": "empty-ui",
+			"ipv4": "10.50.7.28",
+			"port": 49890
+		}
+	}, {
+		"key": "httpclient.request.headers.x-b3-traceid",
+		"value": "641a5fc4d184a0e5",
+		"endpoint": {
+			"serviceName": "empty-ui",
+			"ipv4": "10.50.7.28",
+			"port": 49890
+		}
+	},  {
+		"key": "httpclient.response.headers.content-length",
+		"value": "0",
+		"endpoint": {
+			"serviceName": "empty-ui",
+			"ipv4": "10.50.7.28",
+			"port": 49890
+		}
+	}, {
+		"key": "httpclient.response.headers.trace_service_address",
+		"value": "10.22.1.236",
+		"endpoint": {
+			"serviceName": "empty-ui",
+			"ipv4": "10.50.7.28",
+			"port": 49890
+		}
+	}, {
+		"key": "httpclient.response.headers.trace_service_id",
+		"value": "AUTH-SERVICE",
+		"endpoint": {
+			"serviceName": "empty-ui",
+			"ipv4": "10.50.7.28",
+			"port": 49890
+		}
+	}, {
+		"key": "httpclient.response.headers.trace_service_port",
+		"value": "9998",
+		"endpoint": {
+			"serviceName": "empty-ui",
+			"ipv4": "10.50.7.28",
+			"port": 49890
+		}
+	}, {
+		"key": "httpclient.response.headers.x-b3-parentspanid",
+		"value": "641a5fc4d184a0e5",
+		"endpoint": {
+			"serviceName": "empty-ui",
+			"ipv4": "10.50.7.28",
+			"port": 49890
+		}
+	}, {
+		"key": "httpclient.response.headers.x-b3-sampled",
+		"value": "1",
+		"endpoint": {
+			"serviceName": "empty-ui",
+			"ipv4": "10.50.7.28",
+			"port": 49890
+		}
+	}, {
+		"key": "httpclient.response.headers.x-b3-spanid",
+		"value": "3254ba97dc3c7b87",
+		"endpoint": {
+			"serviceName": "empty-ui",
+			"ipv4": "10.50.7.28",
+			"port": 49890
+		}
+	}, {
+		"key": "httpclient.response.headers.x-b3-traceid",
+		"value": "641a5fc4d184a0e5",
+		"endpoint": {
+			"serviceName": "empty-ui",
+			"ipv4": "10.50.7.28",
+			"port": 49890
+		}
 	}, {
 		"key": "lc",
 		"value": "httpclient",
@@ -269,6 +383,1080 @@ eureka.instance.metadataMap.trackSampling=1
 			"serviceName": "auth-service",
 			"ipv4": "10.22.1.234",
 			"port": 9999
+		}
+	}, {
+		"key": "serviceInstId",
+		"value": "10.50.7.14::empty-service:58080",
+		"endpoint": {
+			"serviceName": "empty-service",
+			"ipv4": "10.50.7.13",
+			"port": 58080
+		}
+	}, {
+		"key": "succeed",
+		"value": "true",
+		"endpoint": {
+			"serviceName": "empty-service",
+			"ipv4": "10.50.7.13",
+			"port": 58080
+		}
+	}]
+}
+```
+
+#### SPAN FeignClient
+
+> 扩展 key
+>
+> * feignclient.method HTTP Method方法类型
+> * httpclient.path HTTP客户端调用路径
+> * httpclient.status_code HTTP客户端调用返回码
+> * httpclient.url HTTP客户端调用全路径
+> * httpclient.request.headers.xx 请求消息头
+> * httpclient.request.body 请求参数
+> * httpclient.response.headers.xx 相应消息头
+> * httpclient.response.body 响应参数
+> * sa HTTP客户端调用服务端地址
+
+```json
+[{
+	"traceId": "56f5f16dc79eba59",
+	"id": "cd4271e88650332d",
+	"name": "http:/tridentservice/allbusisys",
+	"parentId": "56f5f16dc79eba59",
+	"timestamp": 1541407069571000,
+	"duration": 4408000,
+	"annotations": [{
+		"timestamp": 1541407069571000,
+		"value": "cs",
+		"endpoint": {
+			"serviceName": "trident-ui",
+			"ipv4": "10.50.7.12",
+			"port": 50170
+		}
+	}, {
+		"timestamp": 1541407073979000,
+		"value": "cr",
+		"endpoint": {
+			"serviceName": "trident-ui",
+			"ipv4": "10.50.7.12",
+			"port": 50170
+		}
+	}],
+	"binaryAnnotations": [{
+		"key": "busisys",
+		"value": "zhanglei",
+		"endpoint": {
+			"serviceName": "trident-ui",
+			"ipv4": "10.50.7.12",
+			"port": 50170
+		}
+	}, {
+		"key": "durationMoveAvg",
+		"value": "4315000.0",
+		"endpoint": {
+			"serviceName": "trident-ui",
+			"ipv4": "10.50.7.12",
+			"port": 50170
+		}
+	}, {
+		"key": "exception_class",
+		"value": "none",
+		"endpoint": {
+			"serviceName": "trident-ui",
+			"ipv4": "10.50.7.12",
+			"port": 50170
+		}
+	}, {
+		"key": "feignclient.method",
+		"value": "GET",
+		"endpoint": {
+			"serviceName": "trident-ui",
+			"ipv4": "10.50.7.12",
+			"port": 50170
+		}
+	}, {
+		"key": "feignclient.path",
+		"value": "/tridentservice/allBusiSys",
+		"endpoint": {
+			"serviceName": "trident-ui",
+			"ipv4": "10.50.7.12",
+			"port": 50170
+		}
+	}, {
+		"key": "feignclient.request.headers.X-B3-ParentSpanId",
+		"value": "'56f5f16dc79eba59'",
+		"endpoint": {
+			"serviceName": "trident-ui",
+			"ipv4": "10.50.7.12",
+			"port": 50170
+		}
+	}, {
+		"key": "feignclient.request.headers.X-B3-Sampled",
+		"value": "'1'",
+		"endpoint": {
+			"serviceName": "trident-ui",
+			"ipv4": "10.50.7.12",
+			"port": 50170
+		}
+	}, {
+		"key": "feignclient.request.headers.X-B3-SpanId",
+		"value": "'cd4271e88650332d'",
+		"endpoint": {
+			"serviceName": "trident-ui",
+			"ipv4": "10.50.7.12",
+			"port": 50170
+		}
+	}, {
+		"key": "feignclient.request.headers.X-B3-TraceId",
+		"value": "'56f5f16dc79eba59'",
+		"endpoint": {
+			"serviceName": "trident-ui",
+			"ipv4": "10.50.7.12",
+			"port": 50170
+		}
+	}, {
+		"key": "feignclient.request.headers.X-Span-Name",
+		"value": "'http:/tridentservice/allBusiSys'",
+		"endpoint": {
+			"serviceName": "trident-ui",
+			"ipv4": "10.50.7.12",
+			"port": 50170
+		}
+	}, {
+		"key": "feignclient.request.headers.route-label",
+		"value": "''",
+		"endpoint": {
+			"serviceName": "trident-ui",
+			"ipv4": "10.50.7.12",
+			"port": 50170
+		}
+	}, {
+		"key": "feignclient.response.body",
+		"value": "{\"success\":true,\"message\":null,\"data\":[{\"old_id\":null,\"id\":\"trident\",\"tenant_id\":\"admin\",\"name\":\"微服务管控系统\",\"service_group\":\"trident\",\"remark\":\"微服务管控系统\"}]}",
+		"endpoint": {
+			"serviceName": "trident-ui",
+			"ipv4": "10.50.7.12",
+			"port": 50170
+		}
+	}, {
+		"key": "feignclient.response.headers.cache-control",
+		"value": "'no-cache, no-store, max-age=0, must-revalidate'",
+		"endpoint": {
+			"serviceName": "trident-ui",
+			"ipv4": "10.50.7.12",
+			"port": 50170
+		}
+	}, {
+		"key": "feignclient.response.headers.content-type",
+		"value": "'application/json;charset=UTF-8'",
+		"endpoint": {
+			"serviceName": "trident-ui",
+			"ipv4": "10.50.7.12",
+			"port": 50170
+		}
+	}, {
+		"key": "feignclient.response.headers.date",
+		"value": "'Mon, 05 Nov 2018 08:37:52 GMT'",
+		"endpoint": {
+			"serviceName": "trident-ui",
+			"ipv4": "10.50.7.12",
+			"port": 50170
+		}
+	}, {
+		"key": "feignclient.response.headers.expires",
+		"value": "'0'",
+		"endpoint": {
+			"serviceName": "trident-ui",
+			"ipv4": "10.50.7.12",
+			"port": 50170
+		}
+	}, {
+		"key": "feignclient.response.headers.pragma",
+		"value": "'no-cache'",
+		"endpoint": {
+			"serviceName": "trident-ui",
+			"ipv4": "10.50.7.12",
+			"port": 50170
+		}
+	}, {
+		"key": "feignclient.response.headers.server",
+		"value": "'iplatform-boot'",
+		"endpoint": {
+			"serviceName": "trident-ui",
+			"ipv4": "10.50.7.12",
+			"port": 50170
+		}
+	}, {
+		"key": "feignclient.response.headers.set-cookie",
+		"value": "'JSESSIONID=7B0795EF7E3C224819E1EB2369F67671; Path=/tridentservice/; HttpOnly'",
+		"endpoint": {
+			"serviceName": "trident-ui",
+			"ipv4": "10.50.7.12",
+			"port": 50170
+		}
+	}, {
+		"key": "feignclient.response.headers.transfer-encoding",
+		"value": "'chunked'",
+		"endpoint": {
+			"serviceName": "trident-ui",
+			"ipv4": "10.50.7.12",
+			"port": 50170
+		}
+	}, {
+		"key": "feignclient.response.headers.x-application-context",
+		"value": "'trident-service:prod:50171'",
+		"endpoint": {
+			"serviceName": "trident-ui",
+			"ipv4": "10.50.7.12",
+			"port": 50170
+		}
+	}, {
+		"key": "feignclient.response.headers.x-b3-sampled",
+		"value": "'1'",
+		"endpoint": {
+			"serviceName": "trident-ui",
+			"ipv4": "10.50.7.12",
+			"port": 50170
+		}
+	}, {
+		"key": "feignclient.response.headers.x-b3-spanid",
+		"value": "'9bdac02b25e66f05'",
+		"endpoint": {
+			"serviceName": "trident-ui",
+			"ipv4": "10.50.7.12",
+			"port": 50170
+		}
+	}, {
+		"key": "feignclient.response.headers.x-b3-traceid",
+		"value": "'56f5f16dc79eba59'",
+		"endpoint": {
+			"serviceName": "trident-ui",
+			"ipv4": "10.50.7.12",
+			"port": 50170
+		}
+	}, {
+		"key": "feignclient.response.headers.x-content-type-options",
+		"value": "'nosniff'",
+		"endpoint": {
+			"serviceName": "trident-ui",
+			"ipv4": "10.50.7.12",
+			"port": 50170
+		}
+	}, {
+		"key": "feignclient.response.headers.x-xss-protection",
+		"value": "'1; mode=block'",
+		"endpoint": {
+			"serviceName": "trident-ui",
+			"ipv4": "10.50.7.12",
+			"port": 50170
+		}
+	}, {
+		"key": "feignclient.status_code",
+		"value": "200",
+		"endpoint": {
+			"serviceName": "trident-ui",
+			"ipv4": "10.50.7.12",
+			"port": 50170
+		}
+	}, {
+		"key": "feignclient.url",
+		"value": "http://trident-service/tridentservice/allBusiSys?tenant_id=admin",
+		"endpoint": {
+			"serviceName": "trident-ui",
+			"ipv4": "10.50.7.12",
+			"port": 50170
+		}
+	}, {
+		"key": "lc",
+		"value": "feignclient",
+		"endpoint": {
+			"serviceName": "trident-ui",
+			"ipv4": "10.50.7.12",
+			"port": 50170
+		}
+	}, {
+		"key": "optimize_warn_pct",
+		"value": "0",
+		"endpoint": {
+			"serviceName": "trident-ui",
+			"ipv4": "10.50.7.12",
+			"port": 50170
+		}
+	}, {
+		"key": "optimize_warn_type",
+		"value": "none",
+		"endpoint": {
+			"serviceName": "trident-ui",
+			"ipv4": "10.50.7.12",
+			"port": 50170
+		}
+	}, {
+		"key": "sa",
+		"value": true,
+		"endpoint": {
+			"serviceName": "trident-ui",
+			"ipv4": "10.50.7.12",
+			"port": 50170
+		}
+	}, {
+		"key": "serviceInstId",
+		"value": "10.50.7.12::trident-ui:50170",
+		"endpoint": {
+			"serviceName": "trident-ui",
+			"ipv4": "10.50.7.12",
+			"port": 50170
+		}
+	}, {
+		"key": "succeed",
+		"value": "true",
+		"endpoint": {
+			"serviceName": "trident-ui",
+			"ipv4": "10.50.7.12",
+			"port": 50170
+		}
+	}]
+}, {
+	"traceId": "56f5f16dc79eba59",
+	"id": "4aa50656854441ef",
+	"name": "http:/tridentservice/api/v1/service/svrquery/allsvrdir",
+	"parentId": "56f5f16dc79eba59",
+	"timestamp": 1541407074009000,
+	"duration": 72000,
+	"annotations": [{
+		"timestamp": 1541407074009000,
+		"value": "cs",
+		"endpoint": {
+			"serviceName": "trident-ui",
+			"ipv4": "10.50.7.12",
+			"port": 50170
+		}
+	}, {
+		"timestamp": 1541407074081000,
+		"value": "cr",
+		"endpoint": {
+			"serviceName": "trident-ui",
+			"ipv4": "10.50.7.12",
+			"port": 50170
+		}
+	}],
+	"binaryAnnotations": [{
+		"key": "busisys",
+		"value": "zhanglei",
+		"endpoint": {
+			"serviceName": "trident-ui",
+			"ipv4": "10.50.7.12",
+			"port": 50170
+		}
+	}, {
+		"key": "durationMoveAvg",
+		"value": "51000.0",
+		"endpoint": {
+			"serviceName": "trident-ui",
+			"ipv4": "10.50.7.12",
+			"port": 50170
+		}
+	}, {
+		"key": "exception_class",
+		"value": "none",
+		"endpoint": {
+			"serviceName": "trident-ui",
+			"ipv4": "10.50.7.12",
+			"port": 50170
+		}
+	}, {
+		"key": "feignclient.method",
+		"value": "POST",
+		"endpoint": {
+			"serviceName": "trident-ui",
+			"ipv4": "10.50.7.12",
+			"port": 50170
+		}
+	}, {
+		"key": "feignclient.path",
+		"value": "/tridentservice/api/v1/service/svrquery/allSvrDir",
+		"endpoint": {
+			"serviceName": "trident-ui",
+			"ipv4": "10.50.7.12",
+			"port": 50170
+		}
+	}, {
+		"key": "feignclient.request.headers.X-B3-ParentSpanId",
+		"value": "'56f5f16dc79eba59'",
+		"endpoint": {
+			"serviceName": "trident-ui",
+			"ipv4": "10.50.7.12",
+			"port": 50170
+		}
+	}, {
+		"key": "feignclient.request.headers.X-B3-Sampled",
+		"value": "'1'",
+		"endpoint": {
+			"serviceName": "trident-ui",
+			"ipv4": "10.50.7.12",
+			"port": 50170
+		}
+	}, {
+		"key": "feignclient.request.headers.X-B3-SpanId",
+		"value": "'4aa50656854441ef'",
+		"endpoint": {
+			"serviceName": "trident-ui",
+			"ipv4": "10.50.7.12",
+			"port": 50170
+		}
+	}, {
+		"key": "feignclient.request.headers.X-B3-TraceId",
+		"value": "'56f5f16dc79eba59'",
+		"endpoint": {
+			"serviceName": "trident-ui",
+			"ipv4": "10.50.7.12",
+			"port": 50170
+		}
+	}, {
+		"key": "feignclient.request.headers.X-Span-Name",
+		"value": "'http:/tridentservice/api/v1/service/svrquery/allSvrDir'",
+		"endpoint": {
+			"serviceName": "trident-ui",
+			"ipv4": "10.50.7.12",
+			"port": 50170
+		}
+	}, {
+		"key": "feignclient.request.headers.route-label",
+		"value": "''",
+		"endpoint": {
+			"serviceName": "trident-ui",
+			"ipv4": "10.50.7.12",
+			"port": 50170
+		}
+	}, {
+		"key": "feignclient.response.body",
+		"value": "{...}",
+		"endpoint": {
+			"serviceName": "trident-ui",
+			"ipv4": "10.50.7.12",
+			"port": 50170
+		}
+	}, {
+		"key": "feignclient.response.headers.cache-control",
+		"value": "'no-cache, no-store, max-age=0, must-revalidate'",
+		"endpoint": {
+			"serviceName": "trident-ui",
+			"ipv4": "10.50.7.12",
+			"port": 50170
+		}
+	}, {
+		"key": "feignclient.response.headers.content-type",
+		"value": "'application/json;charset=UTF-8'",
+		"endpoint": {
+			"serviceName": "trident-ui",
+			"ipv4": "10.50.7.12",
+			"port": 50170
+		}
+	}, {
+		"key": "feignclient.response.headers.date",
+		"value": "'Mon, 05 Nov 2018 08:37:52 GMT'",
+		"endpoint": {
+			"serviceName": "trident-ui",
+			"ipv4": "10.50.7.12",
+			"port": 50170
+		}
+	}, {
+		"key": "feignclient.response.headers.expires",
+		"value": "'0'",
+		"endpoint": {
+			"serviceName": "trident-ui",
+			"ipv4": "10.50.7.12",
+			"port": 50170
+		}
+	}, {
+		"key": "feignclient.response.headers.pragma",
+		"value": "'no-cache'",
+		"endpoint": {
+			"serviceName": "trident-ui",
+			"ipv4": "10.50.7.12",
+			"port": 50170
+		}
+	}, {
+		"key": "feignclient.response.headers.server",
+		"value": "'iplatform-boot'",
+		"endpoint": {
+			"serviceName": "trident-ui",
+			"ipv4": "10.50.7.12",
+			"port": 50170
+		}
+	}, {
+		"key": "feignclient.response.headers.set-cookie",
+		"value": "'JSESSIONID=9D1CC680529972FCF13D37F41608A4F3; Path=/tridentservice/; HttpOnly'",
+		"endpoint": {
+			"serviceName": "trident-ui",
+			"ipv4": "10.50.7.12",
+			"port": 50170
+		}
+	}, {
+		"key": "feignclient.response.headers.transfer-encoding",
+		"value": "'chunked'",
+		"endpoint": {
+			"serviceName": "trident-ui",
+			"ipv4": "10.50.7.12",
+			"port": 50170
+		}
+	}, {
+		"key": "feignclient.response.headers.x-application-context",
+		"value": "'trident-service:prod:50171'",
+		"endpoint": {
+			"serviceName": "trident-ui",
+			"ipv4": "10.50.7.12",
+			"port": 50170
+		}
+	}, {
+		"key": "feignclient.response.headers.x-b3-sampled",
+		"value": "'1'",
+		"endpoint": {
+			"serviceName": "trident-ui",
+			"ipv4": "10.50.7.12",
+			"port": 50170
+		}
+	}, {
+		"key": "feignclient.response.headers.x-b3-spanid",
+		"value": "'c26f80471b02d0ee'",
+		"endpoint": {
+			"serviceName": "trident-ui",
+			"ipv4": "10.50.7.12",
+			"port": 50170
+		}
+	}, {
+		"key": "feignclient.response.headers.x-b3-traceid",
+		"value": "'56f5f16dc79eba59'",
+		"endpoint": {
+			"serviceName": "trident-ui",
+			"ipv4": "10.50.7.12",
+			"port": 50170
+		}
+	}, {
+		"key": "feignclient.response.headers.x-content-type-options",
+		"value": "'nosniff'",
+		"endpoint": {
+			"serviceName": "trident-ui",
+			"ipv4": "10.50.7.12",
+			"port": 50170
+		}
+	}, {
+		"key": "feignclient.response.headers.x-xss-protection",
+		"value": "'1; mode=block'",
+		"endpoint": {
+			"serviceName": "trident-ui",
+			"ipv4": "10.50.7.12",
+			"port": 50170
+		}
+	}, {
+		"key": "feignclient.status_code",
+		"value": "200",
+		"endpoint": {
+			"serviceName": "trident-ui",
+			"ipv4": "10.50.7.12",
+			"port": 50170
+		}
+	}, {
+		"key": "feignclient.url",
+		"value": "http://trident-service/tridentservice/api/v1/service/svrquery/allSvrDir?busisys_id=trident",
+		"endpoint": {
+			"serviceName": "trident-ui",
+			"ipv4": "10.50.7.12",
+			"port": 50170
+		}
+	}, {
+		"key": "lc",
+		"value": "feignclient",
+		"endpoint": {
+			"serviceName": "trident-ui",
+			"ipv4": "10.50.7.12",
+			"port": 50170
+		}
+	}, {
+		"key": "optimize_warn_pct",
+		"value": "0",
+		"endpoint": {
+			"serviceName": "trident-ui",
+			"ipv4": "10.50.7.12",
+			"port": 50170
+		}
+	}, {
+		"key": "optimize_warn_type",
+		"value": "none",
+		"endpoint": {
+			"serviceName": "trident-ui",
+			"ipv4": "10.50.7.12",
+			"port": 50170
+		}
+	}, {
+		"key": "sa",
+		"value": true,
+		"endpoint": {
+			"serviceName": "trident-ui",
+			"ipv4": "10.50.7.12",
+			"port": 50170
+		}
+	}, {
+		"key": "serviceInstId",
+		"value": "10.50.7.12::trident-ui:50170",
+		"endpoint": {
+			"serviceName": "trident-ui",
+			"ipv4": "10.50.7.12",
+			"port": 50170
+		}
+	}, {
+		"key": "succeed",
+		"value": "true",
+		"endpoint": {
+			"serviceName": "trident-ui",
+			"ipv4": "10.50.7.12",
+			"port": 50170
+		}
+	}]
+}, {
+	"traceId": "56f5f16dc79eba59",
+	"id": "d0502655c64e74c7",
+	"name": "http:/tridentservice/getbusisyscount",
+	"parentId": "56f5f16dc79eba59",
+	"timestamp": 1541407074097000,
+	"duration": 60000,
+	"annotations": [{
+		"timestamp": 1541407074097000,
+		"value": "cs",
+		"endpoint": {
+			"serviceName": "trident-ui",
+			"ipv4": "10.50.7.12",
+			"port": 50170
+		}
+	}, {
+		"timestamp": 1541407074157000,
+		"value": "cr",
+		"endpoint": {
+			"serviceName": "trident-ui",
+			"ipv4": "10.50.7.12",
+			"port": 50170
+		}
+	}],
+	"binaryAnnotations": [{
+		"key": "busisys",
+		"value": "zhanglei",
+		"endpoint": {
+			"serviceName": "trident-ui",
+			"ipv4": "10.50.7.12",
+			"port": 50170
+		}
+	}, {
+		"key": "durationMoveAvg",
+		"value": "56000.0",
+		"endpoint": {
+			"serviceName": "trident-ui",
+			"ipv4": "10.50.7.12",
+			"port": 50170
+		}
+	}, {
+		"key": "exception_class",
+		"value": "none",
+		"endpoint": {
+			"serviceName": "trident-ui",
+			"ipv4": "10.50.7.12",
+			"port": 50170
+		}
+	}, {
+		"key": "feignclient.method",
+		"value": "GET",
+		"endpoint": {
+			"serviceName": "trident-ui",
+			"ipv4": "10.50.7.12",
+			"port": 50170
+		}
+	}, {
+		"key": "feignclient.path",
+		"value": "/tridentservice/getBusiSysCount",
+		"endpoint": {
+			"serviceName": "trident-ui",
+			"ipv4": "10.50.7.12",
+			"port": 50170
+		}
+	}, {
+		"key": "feignclient.request.headers.X-B3-ParentSpanId",
+		"value": "'56f5f16dc79eba59'",
+		"endpoint": {
+			"serviceName": "trident-ui",
+			"ipv4": "10.50.7.12",
+			"port": 50170
+		}
+	}, {
+		"key": "feignclient.request.headers.X-B3-Sampled",
+		"value": "'1'",
+		"endpoint": {
+			"serviceName": "trident-ui",
+			"ipv4": "10.50.7.12",
+			"port": 50170
+		}
+	}, {
+		"key": "feignclient.request.headers.X-B3-SpanId",
+		"value": "'d0502655c64e74c7'",
+		"endpoint": {
+			"serviceName": "trident-ui",
+			"ipv4": "10.50.7.12",
+			"port": 50170
+		}
+	}, {
+		"key": "feignclient.request.headers.X-B3-TraceId",
+		"value": "'56f5f16dc79eba59'",
+		"endpoint": {
+			"serviceName": "trident-ui",
+			"ipv4": "10.50.7.12",
+			"port": 50170
+		}
+	}, {
+		"key": "feignclient.request.headers.X-Span-Name",
+		"value": "'http:/tridentservice/getBusiSysCount'",
+		"endpoint": {
+			"serviceName": "trident-ui",
+			"ipv4": "10.50.7.12",
+			"port": 50170
+		}
+	}, {
+		"key": "feignclient.request.headers.route-label",
+		"value": "''",
+		"endpoint": {
+			"serviceName": "trident-ui",
+			"ipv4": "10.50.7.12",
+			"port": 50170
+		}
+	}, {
+		"key": "feignclient.response.body",
+		"value": "{\"success\":true,\"message\":null,\"data\":{\"svrCount\":12,\"insCount\":12,\"hostCount\":2}}",
+		"endpoint": {
+			"serviceName": "trident-ui",
+			"ipv4": "10.50.7.12",
+			"port": 50170
+		}
+	}, {
+		"key": "feignclient.response.headers.cache-control",
+		"value": "'no-cache, no-store, max-age=0, must-revalidate'",
+		"endpoint": {
+			"serviceName": "trident-ui",
+			"ipv4": "10.50.7.12",
+			"port": 50170
+		}
+	}, {
+		"key": "feignclient.response.headers.content-type",
+		"value": "'application/json;charset=UTF-8'",
+		"endpoint": {
+			"serviceName": "trident-ui",
+			"ipv4": "10.50.7.12",
+			"port": 50170
+		}
+	}, {
+		"key": "feignclient.response.headers.date",
+		"value": "'Mon, 05 Nov 2018 08:37:52 GMT'",
+		"endpoint": {
+			"serviceName": "trident-ui",
+			"ipv4": "10.50.7.12",
+			"port": 50170
+		}
+	}, {
+		"key": "feignclient.response.headers.expires",
+		"value": "'0'",
+		"endpoint": {
+			"serviceName": "trident-ui",
+			"ipv4": "10.50.7.12",
+			"port": 50170
+		}
+	}, {
+		"key": "feignclient.response.headers.pragma",
+		"value": "'no-cache'",
+		"endpoint": {
+			"serviceName": "trident-ui",
+			"ipv4": "10.50.7.12",
+			"port": 50170
+		}
+	}, {
+		"key": "feignclient.response.headers.server",
+		"value": "'iplatform-boot'",
+		"endpoint": {
+			"serviceName": "trident-ui",
+			"ipv4": "10.50.7.12",
+			"port": 50170
+		}
+	}, {
+		"key": "feignclient.response.headers.set-cookie",
+		"value": "'JSESSIONID=9D486B7C0AA179181117BB38F9164899; Path=/tridentservice/; HttpOnly'",
+		"endpoint": {
+			"serviceName": "trident-ui",
+			"ipv4": "10.50.7.12",
+			"port": 50170
+		}
+	}, {
+		"key": "feignclient.response.headers.transfer-encoding",
+		"value": "'chunked'",
+		"endpoint": {
+			"serviceName": "trident-ui",
+			"ipv4": "10.50.7.12",
+			"port": 50170
+		}
+	}, {
+		"key": "feignclient.response.headers.x-application-context",
+		"value": "'trident-service:prod:50171'",
+		"endpoint": {
+			"serviceName": "trident-ui",
+			"ipv4": "10.50.7.12",
+			"port": 50170
+		}
+	}, {
+		"key": "feignclient.response.headers.x-b3-sampled",
+		"value": "'1'",
+		"endpoint": {
+			"serviceName": "trident-ui",
+			"ipv4": "10.50.7.12",
+			"port": 50170
+		}
+	}, {
+		"key": "feignclient.response.headers.x-b3-spanid",
+		"value": "'3677accfcd75af45'",
+		"endpoint": {
+			"serviceName": "trident-ui",
+			"ipv4": "10.50.7.12",
+			"port": 50170
+		}
+	}, {
+		"key": "feignclient.response.headers.x-b3-traceid",
+		"value": "'56f5f16dc79eba59'",
+		"endpoint": {
+			"serviceName": "trident-ui",
+			"ipv4": "10.50.7.12",
+			"port": 50170
+		}
+	}, {
+		"key": "feignclient.response.headers.x-content-type-options",
+		"value": "'nosniff'",
+		"endpoint": {
+			"serviceName": "trident-ui",
+			"ipv4": "10.50.7.12",
+			"port": 50170
+		}
+	}, {
+		"key": "feignclient.response.headers.x-xss-protection",
+		"value": "'1; mode=block'",
+		"endpoint": {
+			"serviceName": "trident-ui",
+			"ipv4": "10.50.7.12",
+			"port": 50170
+		}
+	}, {
+		"key": "feignclient.status_code",
+		"value": "200",
+		"endpoint": {
+			"serviceName": "trident-ui",
+			"ipv4": "10.50.7.12",
+			"port": 50170
+		}
+	}, {
+		"key": "feignclient.url",
+		"value": "http://trident-service/tridentservice/getBusiSysCount?busisys_id=trident",
+		"endpoint": {
+			"serviceName": "trident-ui",
+			"ipv4": "10.50.7.12",
+			"port": 50170
+		}
+	}, {
+		"key": "lc",
+		"value": "feignclient",
+		"endpoint": {
+			"serviceName": "trident-ui",
+			"ipv4": "10.50.7.12",
+			"port": 50170
+		}
+	}, {
+		"key": "optimize_warn_pct",
+		"value": "0",
+		"endpoint": {
+			"serviceName": "trident-ui",
+			"ipv4": "10.50.7.12",
+			"port": 50170
+		}
+	}, {
+		"key": "optimize_warn_type",
+		"value": "none",
+		"endpoint": {
+			"serviceName": "trident-ui",
+			"ipv4": "10.50.7.12",
+			"port": 50170
+		}
+	}, {
+		"key": "sa",
+		"value": true,
+		"endpoint": {
+			"serviceName": "trident-ui",
+			"ipv4": "10.50.7.12",
+			"port": 50170
+		}
+	}, {
+		"key": "serviceInstId",
+		"value": "10.50.7.12::trident-ui:50170",
+		"endpoint": {
+			"serviceName": "trident-ui",
+			"ipv4": "10.50.7.12",
+			"port": 50170
+		}
+	}, {
+		"key": "succeed",
+		"value": "true",
+		"endpoint": {
+			"serviceName": "trident-ui",
+			"ipv4": "10.50.7.12",
+			"port": 50170
+		}
+	}]
+}]
+```
+
+#### SPAN HttpService
+
+> 扩展 key
+>
+> * httpservice.host 服务主机名
+> * httpservice.method 服务方法名
+> * httpservice.path 服务路径
+> * httpservice.remoteaddr 远程请求地址
+> * httpservice.url 服务全路径
+> * httpservice.request.headers.xx 请求消息头
+> * httpservice.request.paramters 请求参数
+> * httpservice.request.attribute 请求参数
+> * httpservice.request.body 请求参数
+> * httpservice.response.headers.xx 响应消息头
+> * httpservice.response.body 响应参数
+> * httpservice.cookies.xxx Cookie
+
+```json
+{
+	"traceId": "b1ce90a546e67ba5",
+	"id": "b1ce90a546e67ba5",
+	"name": "http:/api/v1/test/testmethodwithdb",
+	"timestamp": 1538033736991000,
+	"duration": 901000,
+	"annotations": [{
+		"timestamp": 1538033736991000,
+		"value": "sr",
+		"endpoint": {
+			"serviceName": "empty-service",
+			"ipv4": "10.50.7.13",
+			"port": 58080
+		}
+	}, {
+		"timestamp": 1538033737892000,
+		"value": "ss",
+		"endpoint": {
+			"serviceName": "empty-service",
+			"ipv4": "10.50.7.13",
+			"port": 58080
+		}
+	}],
+	"binaryAnnotations": [{
+		"key": "busisys",
+		"value": "OneITOM",
+		"endpoint": {
+			"serviceName": "empty-service",
+			"ipv4": "10.50.7.13",
+			"port": 58080
+		}
+	}, {
+		"key": "durationMoveAvg",
+		"value": "901000.0",
+		"endpoint": {
+			"serviceName": "empty-service",
+			"ipv4": "10.50.7.13",
+			"port": 58080
+		}
+	}, {
+		"key": "httpservice.host",
+		"value": "0.0.0.0",
+		"endpoint": {
+			"serviceName": "empty-service",
+			"ipv4": "10.50.7.13",
+			"port": 58080
+		}
+	}, {
+		"key": "httpservice.method",
+		"value": "GET",
+		"endpoint": {
+			"serviceName": "empty-service",
+			"ipv4": "10.50.7.13",
+			"port": 58080
+		}
+	}, {
+		"key": "httpservice.path",
+		"value": "/api/v1/test/testmethodwithdb",
+		"endpoint": {
+			"serviceName": "empty-service",
+			"ipv4": "10.50.7.13",
+			"port": 58080
+		}
+	}, {
+		"key": "httpservice.remoteaddr",
+		"value": "127.0.0.1",
+		"endpoint": {
+			"serviceName": "empty-service",
+			"ipv4": "10.50.7.13",
+			"port": 58080
+		}
+	}, {
+		"key": "httpservice.url",
+		"value": "https://0.0.0.0:58080/emptyservice//api/v1/test/testmethodwithdb?access_token=8af3680b14a233b58b9bdfa463d7172064e6181d2b4cffbc4f391920eb1f8ae34362a16fbc81377dc4790e2c6053d1097b0acb26a28fa4a70086fe3199199657be312b11d2e2f7a0a086c4c65ff88dbd204e0ebd2ba94e73e4b40a0c9bd65dd5",
+		"endpoint": {
+			"serviceName": "empty-service",
+			"ipv4": "10.50.7.13",
+			"port": 58080
+		}
+	}, {
+		"key": "httpservice.request.headers.accept",
+		"value": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+		"endpoint": {
+			"serviceName": "empty-ui",
+			"ipv4": "10.50.7.28",
+			"port": 49434
+		}
+	}, {
+		"key": "httpservice.request.headers.accept-encoding",
+		"value": "gzip, deflate",
+		"endpoint": {
+			"serviceName": "empty-ui",
+			"ipv4": "10.50.7.28",
+			"port": 49434
+		}
+	}, {
+		"key": "httpservice.response.headers.cache-control",
+		"value": "no-cache, no-store, max-age=0, must-revalidate",
+		"endpoint": {
+			"serviceName": "empty-ui",
+			"ipv4": "10.50.7.28",
+			"port": 49434
+		}
+	}, {
+		"key": "httpservice.response.headers.content-language",
+		"value": "zh-CN",
+		"endpoint": {
+			"serviceName": "empty-ui",
+			"ipv4": "10.50.7.28",
+			"port": 49434
+		}
+	}, {
+		"key": "httpservice.cookies.JSESSIONID",
+		"value": "[{\"name\":\"JSESSIONID\",\"value\":\"2B0495D3083676D0033ED0463E66BD64\",\"version\":0,\"comment\":null,\"domain\":null,\"maxAge\":-1,\"path\":null,\"secure\":false,\"httpOnly\":false}]",
+		"endpoint": {
+			"serviceName": "empty-ui",
+			"ipv4": "10.50.7.28",
+			"port": 50761
+		}
+	}, {
+		"key": "lc",
+		"value": "httpservice",
+		"endpoint": {
+			"serviceName": "empty-service",
+			"ipv4": "10.50.7.13",
+			"port": 58080
 		}
 	}, {
 		"key": "serviceInstId",
@@ -394,124 +1582,6 @@ eureka.instance.metadataMap.trackSampling=1
 	}, {
 		"key": "lc",
 		"value": "jdbc",
-		"endpoint": {
-			"serviceName": "empty-service",
-			"ipv4": "10.50.7.13",
-			"port": 58080
-		}
-	}, {
-		"key": "serviceInstId",
-		"value": "10.50.7.14::empty-service:58080",
-		"endpoint": {
-			"serviceName": "empty-service",
-			"ipv4": "10.50.7.13",
-			"port": 58080
-		}
-	}, {
-		"key": "succeed",
-		"value": "true",
-		"endpoint": {
-			"serviceName": "empty-service",
-			"ipv4": "10.50.7.13",
-			"port": 58080
-		}
-	}]
-}
-```
-
-#### SPAN HttpService
-
-> 扩展 key
->
-> * httpservice.host 服务主机名
-> * httpservice.method 服务方法名
-> * httpservice.path 服务路径
-> * httpservice.remoteaddr 远程请求地址
-> * httpservice.url 服务全路径
-
-```json
-{
-	"traceId": "b1ce90a546e67ba5",
-	"id": "b1ce90a546e67ba5",
-	"name": "http:/api/v1/test/testmethodwithdb",
-	"timestamp": 1538033736991000,
-	"duration": 901000,
-	"annotations": [{
-		"timestamp": 1538033736991000,
-		"value": "sr",
-		"endpoint": {
-			"serviceName": "empty-service",
-			"ipv4": "10.50.7.13",
-			"port": 58080
-		}
-	}, {
-		"timestamp": 1538033737892000,
-		"value": "ss",
-		"endpoint": {
-			"serviceName": "empty-service",
-			"ipv4": "10.50.7.13",
-			"port": 58080
-		}
-	}],
-	"binaryAnnotations": [{
-		"key": "busisys",
-		"value": "OneITOM",
-		"endpoint": {
-			"serviceName": "empty-service",
-			"ipv4": "10.50.7.13",
-			"port": 58080
-		}
-	}, {
-		"key": "durationMoveAvg",
-		"value": "901000.0",
-		"endpoint": {
-			"serviceName": "empty-service",
-			"ipv4": "10.50.7.13",
-			"port": 58080
-		}
-	}, {
-		"key": "httpservice.host",
-		"value": "0.0.0.0",
-		"endpoint": {
-			"serviceName": "empty-service",
-			"ipv4": "10.50.7.13",
-			"port": 58080
-		}
-	}, {
-		"key": "httpservice.method",
-		"value": "GET",
-		"endpoint": {
-			"serviceName": "empty-service",
-			"ipv4": "10.50.7.13",
-			"port": 58080
-		}
-	}, {
-		"key": "httpservice.path",
-		"value": "/api/v1/test/testmethodwithdb",
-		"endpoint": {
-			"serviceName": "empty-service",
-			"ipv4": "10.50.7.13",
-			"port": 58080
-		}
-	}, {
-		"key": "httpservice.remoteaddr",
-		"value": "127.0.0.1",
-		"endpoint": {
-			"serviceName": "empty-service",
-			"ipv4": "10.50.7.13",
-			"port": 58080
-		}
-	}, {
-		"key": "httpservice.url",
-		"value": "https://0.0.0.0:58080/emptyservice//api/v1/test/testmethodwithdb?access_token=8af3680b14a233b58b9bdfa463d7172064e6181d2b4cffbc4f391920eb1f8ae34362a16fbc81377dc4790e2c6053d1097b0acb26a28fa4a70086fe3199199657be312b11d2e2f7a0a086c4c65ff88dbd204e0ebd2ba94e73e4b40a0c9bd65dd5",
-		"endpoint": {
-			"serviceName": "empty-service",
-			"ipv4": "10.50.7.13",
-			"port": 58080
-		}
-	}, {
-		"key": "lc",
-		"value": "httpservice",
 		"endpoint": {
 			"serviceName": "empty-service",
 			"ipv4": "10.50.7.13",
