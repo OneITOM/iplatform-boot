@@ -90,9 +90,10 @@ MongoDB是一种NoSql非关系型数据库，以键值对(key-value)存储，它
 
 ### 使用示例
 直接在代码中绑定注入即可
-
-	@Autowired
-    private MongoTemplate mongoTemplate;
+```java
+@Autowired
+private MongoTemplate mongoTemplate;
+```
 
 具体API可参见  [MongoTemplate API](https://docs.spring.io/spring-data/mongodb/docs/current/api/org/springframework/data/mongodb/core/MongoTemplate.html)
 
@@ -120,13 +121,14 @@ Mongodb提供了Criteria对象，帮助我们实现数据的查询功能，何�
 前提：mongodb对数据类型敏感，key = 1 和 key = '1'的查询解雇是不一样的
 
 1，等于"="，不等于"<>"
-
-	语法：Criteria criteria = new Criteria();
-	     criteria = criteria.and(key).is(value);
-             criteria = criteria.and(key).ne(value); 
-
-	Sql：where key = value, where key <> value
-
+```java
+Criteria criteria = new Criteria();
+criteria = criteria.and(key).is(value);
+criteria = criteria.and(key).ne(value); 
+```
+```sql
+where key = value, where key <> value
+```
 2，大于">", 大于等于">=", 小于"<", 小于等于"<="
 
 	语法：Criteria criteria = new Criteria();
