@@ -40,7 +40,7 @@ spring.redis.password=
 
 ```java
 @Autowired
-protected RedisTemplate<String, Object> redisTemplate;
+protected RedisTemplate<String, String> redisTemplate;
 
 //计数器加1并返回
 private long recordRate(String key, long duration, TimeUnit unit) {

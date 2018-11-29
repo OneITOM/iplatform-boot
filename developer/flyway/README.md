@@ -78,7 +78,7 @@ src/main/resources/db/oracle/V1__初始化.sql
 
 > 初始化数据库脚本
 
-定义 V1__初始化.sql
+定义 V1.0.0.100.1__初始化.sql
 
 ```sql
 /* 账号表 */
@@ -94,19 +94,16 @@ CREATE TABLE DEMO (
 ```shell
 Flyway Community Edition 5.2.1 by Boxfuse
 Database: jdbc:mysql://127.0.0.1:3306/mydb (MySQL 5.5)
-Successfully validated 1 migration (execution time 00:00.041s)
-Creating Schema History table: `mydb`.`flyway_schema_my-service`
-Successfully baselined schema with version: 0
-Current version of schema `mydb`: 0
-Migrating schema `mydb` to version 1 - 初始化
-Successfully applied 1 migration to schema `mydb` (execution time 00:00.089s)
+Successfully validated 1 migration (execution time 00:00.026s)
+Creating Schema History table: `mydb`.`flyway_schema_myproject-service`
+Current version of schema `mydb`: << Empty Schema >>
+Migrating schema `authdb` to version 1.0.0.100.1 - 初始化
+Successfully applied 1 migration to schema `mydb` (execution time 00:00.152s)
 ```
 
 可以看到在数据库mydb中创建了版本记录表 "flyway_schema_my-service"，记录表命名格式为flyway_schema_${spring.application.name}
 
-初始化了基线版本0
-
-并执行了版本1到版本0的合并
+初始化了基线版本 1.0.0.100.1
 
 flyway_schema_my-service表中可以看到如下记录
 
@@ -114,9 +111,9 @@ flyway_schema_my-service表中可以看到如下记录
 
 #### 4.2. V2
 
-> 我们尝试在V2中修改表结构
+> 我们尝试在V1.0.0.100.2中修改表结构
 
-定义 V2__增加字段.sql
+定义 V1.0.0.100.2__增加字段.sql
 
 ```sql
 /* DEMO表增加 age 字段 */
@@ -128,15 +125,13 @@ alter table DEMO add age int;
 ```shell
 Flyway Community Edition 5.2.1 by Boxfuse
 Database: jdbc:mysql://127.0.0.1:3306/mydb (MySQL 5.5)
-Successfully validated 3 migrations (execution time 00:00.071s)
-Current version of schema `mydb`: 1
-Migrating schema `mydb` to version 2 - 增加字段
-Successfully applied 1 migration to schema `mydb` (execution time 00:00.111s)
+Successfully validated 2 migrations (execution time 00:00.148s)
+Current version of schema `mydb`: 1.0.0.100.1
+Migrating schema `mydb` to version 1.0.0.100.2 - 增加字段
+Successfully applied 1 migration to schema `mydb` (execution time 00:00.272s)
 ```
 
-合并了第三个版本（因为是从0开始）
-
-执行了版本1到版本2的合并
+升级到了1.0.0.100.2版本
 
 flyway_schema_my-service表中可以看到如下记录
 
@@ -146,7 +141,7 @@ flyway_schema_my-service表中可以看到如下记录
 
 > 我们尝试增加一些初始化数据
 
-定义V2.1_插入DEMO表初始化数据.sql
+定义 V1.0.0.100.2.1__插入DEMO表初始化数据.sql
 
 ```sql
 /* 增加初始化数据 */
@@ -158,15 +153,13 @@ INSERT INTO DEMO (username,truename,mobile,age) value ('user','user','186xxx',40
 ```shell
 Flyway Community Edition 5.2.1 by Boxfuse
 Database: jdbc:mysql://127.0.0.1:3306/mydb (MySQL 5.5)
-Successfully validated 4 migrations (execution time 00:00.068s)
-Current version of schema `mydb`: 2
-Migrating schema `mydb` to version 2.1 - 插入DEMO表初始化数据
-Successfully applied 1 migration to schema `mydb` (execution time 00:00.120s)
+Successfully validated 3 migrations (execution time 00:00.039s)
+Current version of schema `mydb`: 1.0.0.100.2
+Migrating schema `mydb` to version 1.0.0.100.2.1 - 插入DEMO表初始化数据
+Successfully applied 1 migration to schema `mydb` (execution time 00:00.054s)
 ```
 
-合并了第四个版本
-
-执行了版本2到版本3的合并
+升级到了1.0.0.100.2.1版本
 
 ## <a id="5">5</a>. 已有项目迁移到版本管理
 
@@ -189,9 +182,9 @@ CREATE TABLE DEMO (
 );
 ```
 
-增加启动参数，设置基线版本参数为1.0.0.100.1
+增加启动参数，设置基线版本参数与初始化脚本的版本号一致 1.0.0.100.1
 
-> 注意这里一定要指定为1.0.0.100.1，这样才可以避免 V1.0.0.100.1__初始化.sql 再次被执行
+> 这样可以避免这个版本号以及之前的脚本再次被执行
 
 ```properties
 flyway.baseline-version=1.0.0.100.1
@@ -202,8 +195,8 @@ flyway.baseline-version=1.0.0.100.1
 ```shell
 Flyway Community Edition 5.2.1 by Boxfuse
 Database: jdbc:mysql://127.0.0.1:3306/mydb (MySQL 5.5)
-Successfully validated 1 migration (execution time 00:00.030s)
-Creating Schema History table: `mydb`.`flyway_schema_my-service`
+Successfully validated 1 migration (execution time 00:00.040s)
+Creating Schema History table: `mydb`.`flyway_schema_myproject-service`
 Successfully baselined schema with version: 1.0.0.100.1
 Current version of schema `mydb`: 1.0.0.100.1
 Schema `mydb` is up to date. No migration necessary.
@@ -211,13 +204,13 @@ Schema `mydb` is up to date. No migration necessary.
 
 可以看到已经初始化了版本表 flyway_schema_auth-service
 
-设置并且当前版本为1
+设置并且当前版本为1.0.0.100.1
 
 flyway_schema_my-service表中可以看到如下记录
 
 ![image-20181120142639338](images/base_v1.png)
 
-可以看到基线版本是从1.0.0.100.1开始的
+可以看到基线版本是从1.0.0.100.1开始的，并且1.0.0.100.1这个脚本没有被执行
 
 #### 5.2. 后续版本管理
 
