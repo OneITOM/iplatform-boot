@@ -33,6 +33,14 @@ myapp:
     - word1
     - word2
     - word3
+  pairs:
+    - name: name1
+      age: 1
+    - name: name2
+      age: 2
+    - name: name3
+      age: 3
+  array: array1,array2,array3
 ```
 
 外部定义格式
@@ -117,6 +125,7 @@ public class MyAppConfig {
     private Integer counter;
     private Boolean enabled;
     private String[] words;
+    private Pair[] pairs;
     private Map<String,String> params;
     
     //getter
