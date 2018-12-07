@@ -117,7 +117,7 @@ private String username;
 
 @Value("${myapp.counter}")
 private Integer counter;
-```
+
 @Value("${myapp.array}")
 private String[] array;
 ```
