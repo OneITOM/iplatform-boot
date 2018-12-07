@@ -33,6 +33,14 @@ myapp:
     - word1
     - word2
     - word3
+  pairs:
+    - name: name1
+      age: 1
+    - name: name2
+      age: 2
+    - name: name3
+      age: 3
+  array: array1,array2,array3
 ```
 
 外部定义格式
@@ -49,6 +57,13 @@ myapp.params.third=3
 myapp.words[0]=word1
 myapp.words[1]=word2
 myapp.words[2]=word3
+myapp.pairs[0].name=name1
+myapp.pairs[0].age=1
+myapp.pairs[1].name=name2
+myapp.pairs[1].age=2
+myapp.pairs[2].name=name3
+myapp.pairs[2].age=3
+myapp.array=array1,array2,array3
 ```
 
 ## 格式规约
@@ -117,6 +132,7 @@ public class MyAppConfig {
     private Integer counter;
     private Boolean enabled;
     private String[] words;
+    private Pair[] pairs;
     private Map<String,String> params;
     
     //getter
