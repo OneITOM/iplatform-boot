@@ -118,6 +118,9 @@ private String username;
 @Value("${myapp.counter}")
 private Integer counter;
 ```
+@Value("${myapp.array}")
+private String[] array;
+```
 
 ### 2. ConfigurationProperties
 
@@ -132,6 +135,7 @@ public class MyAppConfig {
     private Integer counter;
     private Boolean enabled;
     private String[] words;
+    private String[] array;
     private Pair[] pairs;
     private Map<String,String> params;
     
@@ -147,6 +151,7 @@ public class MyAppConfig {
 
 ```java
 IPlatformApplication.getEnvironment().getProperty("myapp.password")
+IPlatformApplication.getEnvironment().getProperty("myapp.array", String[].class);
 ```
 
 
