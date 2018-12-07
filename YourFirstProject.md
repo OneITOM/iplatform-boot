@@ -31,6 +31,7 @@
   -Dpackage=org.iplatform.myproject \
   -Dversion=0.0.1-SNAPSHOT \
   -DarchetypeCatalog=http://127.0.0.1/nexus/content/repositories/releases \
+  -DarchetypeRepository=http://127.0.0.1/nexus/content/repositories/releases \
   -DarchetypeGroupId=org.iplatform.archetypes \
   -DarchetypeArtifactId=iplatform-all-archetype \
   -DarchetypeVersion=0.0.8 \

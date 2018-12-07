@@ -42,9 +42,7 @@ sh run.sh restart
 | discovery.server.address    | 是   |        | 定义注册服务的地址，当集群模式时配置多个地址逗号分隔  discovery.server.address=https://192.168.0.1:8761/eureka/,https://192.168.0.2:8761/eureka/ |
 | server.host                 | 是   |        | 服务绑定IP                                                   |
 | server.port                 |      | 8761   | 服务绑定端口                                                 |
-| spring.cloud.config.enable  | 是   | true   | 开启集中配置功能                                             |
-| spring.cloud.config.profile | 是   |        | 集中配置环境名，例如：生产环境                               |
-| spring.data.mongodb.uri     | 是   |        | 集中配置存储mongodb地址，mongodb://localhost/config-db，spring.cloud.config.enable=true是必须配置 |
+| spring.data.mongodb.uri     | 是   |        | 集中配置存储mongodb地址，mongodb://localhost/config-db        |
 | spring.activemq.broker-url  | 是   |        | 集中配置推送ActiveMQ地址，tcp://localhost:61616              |
 
 ## 5. 界面
