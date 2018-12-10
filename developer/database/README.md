@@ -276,6 +276,8 @@ public class TestService {
             pageInfoTable.setRows(dataList);
         }catch(Exception e){
             LOG.error("", e);
+        }finally{
+            PageHelper.cleanPage();
         }
         return pageInfoTable;
     }
