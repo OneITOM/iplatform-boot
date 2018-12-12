@@ -231,13 +231,25 @@ flyway.table=flyway_schema_xxx
 由于spring中bean的加载顺序问题，flyway的初始化可能晚于某个具体的bean，当在该bean的构造方法或者是@PostConstruct修饰的方法中对flyway脚本中新增的表或字段进行操作时，会报不存在的错误，针对此种情况可通过注解@DependsOn({"flywayInitializer"})处理，确保该bean的实例化在flyway之后
 
 ```java
-@PostConstruct
-public void init() {
-    LOG.info("类实例化");
-    try {
-        mapper.initData();
-    } catch (SQLException e) {
-        e.printStackTrace();
+@Service
+@RestController
+@RequestMapping("/api/v1")
+@DependsOn({"flywayInitializer"})
+public class IndexService {
+    
+    private static final Logger LOG = LoggerFactory.getLogger(IndexService.class);
+
+    @Autowired
+	AttachMapper mapper;
+    
+    @PostConstruct
+    public void init() {
+        LOG.info("类实例化");
+        try {
+			mapper.initData();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
     }
 }
 ```
