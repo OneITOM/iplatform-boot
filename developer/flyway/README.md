@@ -246,10 +246,10 @@ public class IndexService {
     public void init() {
         LOG.info("类实例化");
         try {
-			mapper.initData();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
+		mapper.initData();
+	} catch (SQLException e) {
+		e.printStackTrace();
+	}
     }
 }
 ```
