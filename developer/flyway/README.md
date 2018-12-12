@@ -240,15 +240,15 @@ public class IndexService {
     private static final Logger LOG = LoggerFactory.getLogger(IndexService.class);
 
     @Autowired
-	AttachMapper mapper;
+    AttachMapper mapper;
     
     @PostConstruct
     public void init() {
         LOG.info("类实例化");
         try {
-		mapper.initData();
+	    mapper.initData();
 	} catch (SQLException e) {
-		e.printStackTrace();
+	    e.printStackTrace();
 	}
     }
 }
