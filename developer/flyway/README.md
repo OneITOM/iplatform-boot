@@ -70,7 +70,7 @@ oracle文件位置
 
 src/main/resources/db/oracle/V1__初始化.sql
 
-## 4. 举个栗子
+## 4. 举个例子
 
 > 以下步骤的前提是项目初期就采用Flyway进行数据库版本管理，如果是已有项目纳入数据库版本管理，请参考[已有项目迁移到版本管理](#user-content-5)
 
@@ -216,7 +216,45 @@ flyway_schema_my-service表中可以看到如下记录
 
 后续版本管理与举例中的后续方式是相同的
 
-## 6. 你需要知道的
+## 6. 特殊说明
+
+#### 6.1. flyway管理表命名问题
+
+flyway管理表默认命名为flyway_schema_应用名称，由于oracle中表名的最大长度不超过30个字符，很容易超长，针对此种情况可通过如下参数自定义表名
+
+```properties
+flyway.table=flyway_schema_xxx
+```
+
+#### 6.2. flyway加载顺序问题
+
+由于spring中bean的加载顺序问题，flyway的初始化可能晚于某个具体的bean，当在该bean的构造方法或者是@PostConstruct修饰的方法中对flyway脚本中新增的表或字段进行操作时，会报不存在的错误，针对此种情况可通过注解@DependsOn({"flywayInitializer"})处理，确保该bean的实例化在flyway之后
+
+```java
+@Service
+@RestController
+@RequestMapping("/api/v1")
+@DependsOn({"flywayInitializer"})
+public class IndexService {
+    
+    private static final Logger LOG = LoggerFactory.getLogger(IndexService.class);
+
+    @Autowired
+    AttachMapper mapper;
+    
+    @PostConstruct
+    public void init() {
+        LOG.info("类实例化");
+        try {
+	    mapper.initData();
+	} catch (SQLException e) {
+	    e.printStackTrace();
+	}
+    }
+}
+```
+
+## 7. 你需要知道的
 
 一旦SQL脚本使用版本管理，那么就不能随意修改已经发布的版本文件，后续修改只能采用版本迭代方式，在使用中需要注意以下几点
 
