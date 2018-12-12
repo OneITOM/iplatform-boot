@@ -14,6 +14,9 @@ flyway.enabled=true
 
 # 禁用spring.datasouce的脚本管理，默认是false
 spring.datasource.initialize=false
+
+# 可以自定义flyway管理表名称，默认是flyway_schema_应用名称
+flyway.table=flyway_schema_xxx
 ```
 
 ## 2. 配置数据源
@@ -70,7 +73,7 @@ oracle文件位置
 
 src/main/resources/db/oracle/V1__初始化.sql
 
-## 4. 举个栗子
+## 4. 举个例子
 
 > 以下步骤的前提是项目初期就采用Flyway进行数据库版本管理，如果是已有项目纳入数据库版本管理，请参考[已有项目迁移到版本管理](#user-content-5)
 
