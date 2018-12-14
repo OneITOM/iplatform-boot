@@ -51,7 +51,7 @@ logger.kafka.replication=1
 
 ### Topic
 
-服务发送的topic自动创建，默认名称是服务名${spring.application.name}-log
+服务发送的topic自动创建，iplatform-{spring.application.name}-log
 
 ### Key
 
@@ -119,18 +119,180 @@ ProducerConfig values:
 
 ```json
 {
-	"ip": "10.50.7.9",
+	"ip": "192.168.0.1",
+        "busisys": "OneITOM",
 	"timestamp": 1538965917237,
-	"serviceId": "empty-service",
-	"serviceInstId": "10.50.7.38::empty-service:58080",
+	"serviceId": "example-service",
+	"serviceInstId": "192.168.0.1::example-service:58080",
 	"traceid": "6959dcf98356c725",
 	"tracespanid": "9ef659e1deb2126c",
 	"level": "INFO",
 	"thread": "http-nio-58080-exec-4",
-	"logger": "org.iplatform.microservices.core.sleuth.instrument.mybatis.SQLInterceptor",
+	"logger": " o.i.m.c.s.i.m.SQLInterceptor",
 	"message": "sqltrace [insert into empty_test (is_enable,create_time) values (true,'2018-10-8 10:31:49')] cost [49ms]"
 }
 ```
 
+| key           | value                              | 说明                 |
+| ------------- | ---------------------------------- | -------------------- |
+| ip            | 192.168.0.1                        | 应用所在服务器IP地址 |
+| busisys       | OneITOM                            | 应用所属业务系统名称 |
+| timestamp     | 1538965917237                      | 日志产生时间         |
+| serviceId     | example-service                    | 服务ID               |
+| serviceInstId | 192.168.0.1::example-service:58080 | 服务实例ID           |
+| traceid       | 6959dcf98356c725                   | 跟踪ID               |
+| tracespanid   | 9ef659e1deb2126c                   | 当前环节SPANID       |
+| level         | INFO                               | 日志级别             |
+| thread        | http-nio-58080-exec-4              | 线程ID               |
+| logger        | o.i.m.c.s.i.m.SQLInterceptor       | 日志产生类名         |
+| message       |                                    | 日志正文             |
+
+## 日志存储到ES
+
+> 使用Logstash实现Kafka中日志数据集中存储在Elasticsearch
+
+### logstash部署
+> 依赖
+
+- jdk1.8
+- logstash-5.6.12.tar.gz
+- kafka-0.9.*及以上
+- elasticsearch-2.4.*及以上
+
+```
+tar -zxvf logtash-5.6.12.tar.gz
+```
+
+### logstash配置
+
+> logstash配置文件trident-logstash.conf
+
+```
+input {
+  
+  kafka {
+    bootstrap_servers => "127.0.0.1:9092"
+    group_id => "logstash-trident-newgroup"
+    topics_pattern => "iplatform.*"
+    consumer_threads => 20
+    codec => "json"
+    auto_offset_reset => "earliest"
+    auto_commit_interval_ms => "5000"
+    enable_auto_commit => "true"
+  }
+
+}
+
+filter {
+
+  mutate {
+    rename => {
+        "traceid" => "traceId"
+    }
+    lowercase => [ "busisys", "serviceId" ]
+  }
+
+}
+
+output {
+
+ # stdout {
+ #     codec => rubydebug
+ # }
+
+  elasticsearch {
+    hosts => ["10.22.1.236:9200"]
+    index => "%{busisys}-%{serviceId}-%{+YYYY.MM.dd}"
+    template_name => "trident-template"
+    template => "/opt/logstash-5.6.12/conf/trident-template.json"
+    template_overwrite => true
+    document_type => "logs"
+  }
+
+}
+ 
+```
+
+> logstash使用elasticsearch模板trident-template.json
+
+```
+{
+	"template": "*",
+	"settings": {
+		"index.refresh_interval": "5s",
+		"index.number_of_shards": "5",
+		"index.number_of_replicas": "1"
+	},
+	"mappings": {
+		"_default_": {
+			"dynamic_templates": [{
+				"message_field": {
+					"mapping": {
+						"fielddata": {
+							"format": "disabled"
+						},
+						"index": "analyzed",
+						"type": "string"
+					},
+					"match_mapping_type": "string",
+					"match": "message"
+				}
+			}],
+			"_all": {
+				"enabled": true
+			},
+			"properties": {
+				"@timestamp": {
+					"type": "date"
+				},
+				"serviceId": {
+					"index": "not_analyzed",
+					"type": "string"
+				},
+				"serviceInstId": {
+					"index": "not_analyzed",
+					"type": "string"
+				},
+				"traceId": {
+					"index": "not_analyzed",
+					"type": "string"
+				},
+				"tracespanid": {
+					"index": "not_analyzed",
+					"type": "string"
+				},
+				"busisys": {
+					"index": "not_analyzed",
+					"type": "string"
+				},
+				"level": {
+					"index": "not_analyzed",
+					"type": "string"
+				},
+				"@version": {
+					"index": "not_analyzed",
+					"type": "string"
+				}
+			}
+		}
+	}
+}
+
+```
+
+### logstash启动停止
+
+> 启动
+
+```
+bin/logstash -f conf/trident-logstash.conf -r --verbose > console.log 2>&1 &
+```
+
+> 停止
+
+```
+ps -ef | grep logstash
+kill -9 pid
+```
 
 

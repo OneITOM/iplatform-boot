@@ -16,7 +16,6 @@
 | -------------------------- | -------------------------- |
 | auth-server-0.0.2.jar      | 主程序文件                 |
 | run.sh                     | 启停脚本                   |
-| bomc.jks                   | 证书文件                   |
 | static/images/login_bg.jpg | 登录页面背景图片（非必需） |
 
 ## 3. 启停
@@ -98,17 +97,25 @@ sh run.sh restart
 
 ### 4.3 从BOMC同步用户部门角色到服务
 
-| 参数名                                       | 必填 | 默认值 | 说明                                                         |
-| -------------------------------------------- | ---- | ------ | ------------------------------------------------------------ |
-| custom.datasource.enable                     | 是   | true   | 开启多数据源支持                                             |
-| custom.datasource.names=bomcbp               | 是   | bomcbp | 定义多数据源名称bomcbp                                       |
-| custom.datasource.bomcbp.dataSourceClassName | 是   |        | 定义数据源bomcbp的驱动名                                     |
-| custom.datasource.bomcbp.url                 | 是   |        | 定义数据源bomcbp的url                                        |
-| custom.datasource.bomcbp.username            | 是   |        | 定义数据源bomcbp的用户名                                     |
-| custom.datasource.bomcbp.password            | 是   |        | 定义数据源bomcbp的密码                                       |
-| spring.profiles.active                       | 是   | bomc   | 增加bomc到这个参数中，如果已经有其他参数，则逗号分隔，例如：spring.profiles.active=bomc,syncmongodb |
+| 参数名                                              | 必填 | 默认值 | 说明                                                         |
+| --------------------------------------------------- | ---- | ------ | ------------------------------------------------------------ |
+| spring.dynamicdatasource.enable                     | 是   | false  | 开启多数据源支持                                             |
+| spring.dynamicdatasource.names=bomcbp               | 是   | bomcbp | 定义多数据源名称bomcbp                                       |
+| spring.dynamicdatasource.bomcbp.dataSourceClassName | 是   |        | 定义数据源bomcbp的驱动名                                     |
+| spring.dynamicdatasource.bomcbp.url                 | 是   |        | 定义数据源bomcbp的url                                        |
+| spring.dynamicdatasource.bomcbp.username            | 是   |        | 定义数据源bomcbp的用户名                                     |
+| spring.dynamicdatasource.bomcbp.password            | 是   |        | 定义数据源bomcbp的密码                                       |
+| spring.profiles.active                              | 是   | bomc   | 增加bomc到这个参数中，如果已经有其他参数，则逗号分隔，例如：spring.profiles.active=bomc,syncmongodb |
 
-## 5. Docker
+## 5. 界面
+
+```
+https://127.0.0.1:9999/auth
+```
+
+![auth.png](images/AuthService/auth.png)
+
+## 6. Docker
 
 ```yaml
 version: '3.2'

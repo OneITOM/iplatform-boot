@@ -2,410 +2,231 @@
 
 > 作者 王立松
 
-通过本文档可以快速部署一个认证服务、注册服务，并开发一个你的SERVICE、UI服务，你可以看到服务是如何注册到注册中心，并通过认证服务登录后完成一个UI到SERVICE调用的样例
+通过本文档可以快速开发一个属于你的SERVICE、UI服务，你可以看到服务是如何注册到注册中心，并通过认证服务登录后完成一个UI到SERVICE调用的样例
 
-## 1. 准备
+## 1. 前提
 
-* 已安装发现服务
-* 已安装认证服务
-* 开发环境 JDK1.8+
-* 开发工具 Spring Tool Suite
+- [已安装发现服务](iplatform-common/DiscoveryService.md)
+- [已安装认证服务](iplatform-common/AuthService.md)
+- JDK1.8+
+- MAVEN3.5+
 
-## 2. 项目创建
+## 2. 项目构建
 
-### SERVICE创建
+- 项目信息
 
-1. 打开Spring Tool Suite，创建Spring Starter Project
+  ```properties
+  groupId=org.iplatform.myproject
+  artifactId=myproject
+  package=org.iplatform.myproject
+  version=0.0.1-SNAPSHOT
+  ```
 
-![](images/QuickStart/createpro1.png)
-   
-![](images/QuickStart/createpro2.png)
-   
-![](images/QuickStart/createpro3.png)
-   
-2. demo-service/pom.xml调整，调整后内容如下
+- 创建项目
 
-```xml
-<?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-	<modelVersion>4.0.0</modelVersion>
+  ```properties
+  mvn org.apache.maven.plugins:maven-archetype-plugin:2.4:generate \
+  -DgroupId=org.iplatform.myproject \
+  -DartifactId=myproject \
+  -Dpackage=org.iplatform.myproject \
+  -Dversion=0.0.1-SNAPSHOT \
+  -DarchetypeCatalog=http://127.0.0.1/nexus/content/repositories/releases \
+  -DarchetypeRepository=http://127.0.0.1/nexus/content/repositories/releases \
+  -DarchetypeGroupId=org.iplatform.archetypes \
+  -DarchetypeArtifactId=iplatform-all-archetype \
+  -DarchetypeVersion=0.0.8 \
+  -DinteractiveMode=false
+  ```
 
-	<groupId>org.iplatform</groupId>
-	<artifactId>demo-service</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
-	<packaging>jar</packaging>
+- 目录结构说明
 
-	<name>demo-service</name>
-	<description>demo-service</description>
-	
-	<parent>
-		<groupId>org.iplatform</groupId>
-		<artifactId>iplatform-parent</artifactId>
-		<version>0.0.7-SNAPSHOT</version>
-		<relativePath></relativePath>
-	</parent>
-	
-	<dependencies>
-		<dependency>
-			<groupId>org.iplatform</groupId>
-			<artifactId>iplatform-util</artifactId>
-			<exclusions>
-				<exclusion>
-					<artifactId>slf4j-log4j12</artifactId>
-					<groupId>org.slf4j</groupId>
-				</exclusion>
-			</exclusions>
-		</dependency>
-        <dependency>
-            <groupId>org.iplatform</groupId>
-            <artifactId>iplatform-service</artifactId>
-        </dependency>       
-	</dependencies>
+  | 目录结构                      | 说明                     |
+  | :---------------------------- | :----------------------- |
+  | myproject/config/local/run.sh | 启停脚本                 |
+  | myproject/service             | SERVICE服务              |
+  | myproject/ui                  | UI服务                   |
+  | myproject/util                | UI和SEERVICE公用的工具包 |
 
-	<build>
-		<plugins>
-			<plugin>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-maven-plugin</artifactId>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-surefire-plugin</artifactId>
-				<configuration>
-					<skipTests>true</skipTests>
-				</configuration>
-			</plugin>
-		</plugins>
-	</build>
+## 3. 文件修改
 
-	<repositories>
-		<repository>
-			<id>boco-nexus-public</id>
-			<name>Team Nexus Repository</name>
-			<url>http://111.204.35.232/nexus/content/groups/public</url>
-		</repository>
-	</repositories>
+### UTIL
 
-</project>
-```
-3. demo-service/src/main/resources/application.properties调整为application.yml，配置内容如下
-
-```
-discovery.server.address: https://localhost:8761/eureka/
-server:
-  port: 50090
-  host: localhost
-  contextPath: /demoservice
-```
-| 参数名                       | 说明                                                         |
-| --------------------------- | ------------------------------------------------------------ |
-| discovery.server.address    | 定义注册服务的地址，当集群模式时配置多个地址逗号分隔              |
-| server.host                 | 服务绑定IP                                                    |
-| server.port                 | 服务绑定端口                                                  |
-
-4. demo-service/src/main/resources下新增bootstrap.yml，配置内容如下
-
-```
-info:
-  app:
-    name: demo服务层
-    description: demo服务层
-    version: 0.0.1
-spring:
-  application:
-    name: demo-service
-```
-
-5. 测试类DemoServiceApplicationTests调整，调整后内容如下
-
-```java
-package org.iplatform.microservices.demoservice;
-
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-
-@RunWith(SpringJUnit4ClassRunner.class)
-@SpringBootTest
-public class DemoServiceApplicationTests {
-
-	@Test
-	public void contextLoads() {
-	}
-
-}
-```
-
-6. 主启动类DemoServiceApplication调整，调整后内容如下
-
-```java
-package org.iplatform.microservices.demoservice;
-
-import org.iplatform.microservices.service.IPlatformServiceApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.cache.annotation.EnableCaching;
-import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
-import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.EnableAspectJAutoProxy;
-import org.springframework.jms.annotation.EnableJms;
-import org.springframework.security.oauth2.config.annotation.web.configuration.EnableOAuth2Client;
-import org.springframework.security.oauth2.config.annotation.web.configuration.EnableResourceServer;
-import org.springframework.transaction.annotation.EnableTransactionManagement;
-
-@EnableOAuth2Client
-@SpringBootApplication
-@EnableTransactionManagement
-@EnableDiscoveryClient
-@EnableEurekaClient
-@EnableResourceServer
-@EnableJms
-@EnableCaching
-@EnableAspectJAutoProxy
-@ComponentScan(basePackages = {"org.iplatform.microservices"})
-public class DemoServiceApplication extends IPlatformServiceApplication {
-
-	public static void main(String[] args) throws Exception {
-		run(DemoServiceApplication.class, args);
-	}
-}
-```
-
-7. 新增TestService类，提供对外接口
-
-```java
-package org.iplatform.microservices.demoservice.service;
-
-import org.iplatform.microservices.core.http.RestResponse;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
-
-@Service
-@RestController
-@RequestMapping("/api/v1/test")
-public class TestService {
-
-	@RequestMapping(value = "/hello", method = RequestMethod.GET)
-	public ResponseEntity<RestResponse<String>> hello(@RequestParam(value="param") String param){
-		RestResponse<String> response = new RestResponse<String>();
-		response.setData("hello "+param+", I am TestService");
-	    response.setSuccess(Boolean.TRUE);
-	    return new ResponseEntity<>(response, HttpStatus.OK);
-	}
-	
-}
-```
-
-### UI创建
-
-1. 创建UI项目与SERVICE项目一致，只是名称和包名不同，service相关的内容需替换为ui
-
-2. demo-ui/pom.xml调整，调整后内容如下
+> 修改myproject/util/pom.xml，自定义项目名称myproject-util
 
 ```xml
-<?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-	<modelVersion>4.0.0</modelVersion>
-
-	<groupId>org.iplatform</groupId>
-	<artifactId>demo-ui</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
-	<packaging>jar</packaging>
-
-	<name>demo-ui</name>
-	<description>demo-ui</description>
-
-	<parent>
-		<groupId>org.iplatform</groupId>
-		<artifactId>iplatform-parent</artifactId>
-		<version>0.0.7-SNAPSHOT</version>
-		<relativePath></relativePath>
-	</parent>
-	
-	<dependencies>
-		<dependency>
-			<groupId>org.iplatform</groupId>
-			<artifactId>iplatform-util</artifactId>
-			<exclusions>
-				<exclusion>
-					<artifactId>slf4j-log4j12</artifactId>
-					<groupId>org.slf4j</groupId>
-				</exclusion>
-			</exclusions>
-		</dependency>
-        <dependency>
-            <groupId>org.iplatform</groupId>
-            <artifactId>iplatform-ui</artifactId>
-        </dependency>       
-	</dependencies>
-
-	<build>
-		<plugins>
-			<plugin>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-maven-plugin</artifactId>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-surefire-plugin</artifactId>
-				<configuration>
-					<skipTests>true</skipTests>
-				</configuration>
-			</plugin>
-		</plugins>
-	</build>
-
-	<repositories>
-		<repository>
-			<id>boco-nexus-public</id>
-			<name>Team Nexus Repository</name>
-			<url>http://111.204.35.232/nexus/content/groups/public</url>
-		</repository>
-	</repositories>
-
-</project>
-```
-3. demo-ui/src/main/resources/application.properties调整为application.yml，配置内容如下
-  
-```
-discovery.server.address: https://localhost:8761/eureka/
-server:
-  port: 50091
-  host: localhost
-  contextPath: /demoui
+<modelVersion>4.0.0</modelVersion>
+<groupId>org.iplatform.myproject</groupId>
+<artifactId>myproject-util</artifactId>
+<version>0.0.1-SNAPSHOT</version>
+<parent>
+    <groupId>org.iplatform.myproject</groupId>
+    <artifactId>myproject</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <relativePath>../</relativePath>
+</parent>
 ```
 
-4. demo-ui/src/main/resources下新增bootstrap.yml，配置内容如下
+### SERVICE
 
-```
-info:
-  app:
-    name: demoUI层
-    description: demoUI层
-    version: 0.0.1
-spring:
-  application:
-    name: demo-ui
-```
+> 修改myproject/service/pom.xml，自定义项目名称myproject-service，调整引用myproject-util
 
-5. 删除测试类DemoUiApplicationTests
-
-6. 主启动类DemoUiApplication调整，调整后内容如下
-
-```java
-package org.iplatform.microservices.demoui;
-
-import org.iplatform.microservices.ui.IPlatformUIApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.cache.annotation.EnableCaching;
-import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
-import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
-import org.springframework.cloud.netflix.feign.EnableFeignClients;
-import org.springframework.cloud.netflix.hystrix.EnableHystrix;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.EnableAspectJAutoProxy;
-import org.springframework.jms.annotation.EnableJms;
-import org.springframework.security.oauth2.config.annotation.web.configuration.EnableOAuth2Client;
-import org.springframework.security.oauth2.config.annotation.web.configuration.EnableResourceServer;
-import org.springframework.web.bind.annotation.RestController;
-
-@Configuration
-@SpringBootApplication
-@EnableDiscoveryClient
-@EnableEurekaClient
-@EnableResourceServer
-@EnableFeignClients
-@RestController
-@EnableHystrix
-@EnableOAuth2Client
-@EnableCaching
-@EnableJms
-@EnableAspectJAutoProxy
-@ComponentScan(basePackages = {"org.iplatform.microservices"})
-public class DemoUiApplication extends IPlatformUIApplication{
-
-	public static void main(String[] args) throws Exception {
-		run(DemoUiApplication.class, args);
-	}
-}
-
+```xml
+<modelVersion>4.0.0</modelVersion>
+<groupId>org.iplatform.myproject</groupId>
+<artifactId>myproject-service</artifactId>
+<version>0.0.1-SNAPSHOT</version>
+<name>myproject-service</name>
+<description>myproject-service</description>
+<packaging>jar</packaging>
+<dependencies>
+    <dependency>
+        <groupId>org.iplatform.myproject</groupId>
+        <artifactId>myproject-util</artifactId>
+        <version>0.0.1-SNAPSHOT</version>
+    </dependency>
+</dependencies>
 ```
 
-7. 新增IndexController和对应的demo-ui/src/main/resources/templates/index.html
+### UI
 
-```java
-package org.iplatform.microservices.demoservice.service;
+> 修改myproject/ui/pom.xml，自定义项目名称myproject-ui，调整引用myproject-util
 
-import org.iplatform.microservices.core.http.RestResponse;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
-
-@Service
-@RestController
-@RequestMapping("/api/v1/test")
-public class TestService {
-
-	@RequestMapping(value = "/hello", method = RequestMethod.GET)
-	public ResponseEntity<RestResponse<String>> hello(@RequestParam(value="param") String param){
-		RestResponse<String> response = new RestResponse<String>();
-		response.setData("hello "+param+", I am TestService");
-	    response.setSuccess(Boolean.TRUE);
-	    return new ResponseEntity<>(response, HttpStatus.OK);
-	}
-	
-}
+```xml
+<modelVersion>4.0.0</modelVersion>
+<groupId>org.iplatform.myproject</groupId>
+<artifactId>myproject-ui</artifactId>
+<version>0.0.1-SNAPSHOT</version>
+<name>myproject-ui</name>
+<description>myproject-ui</description>
+<packaging>jar</packaging>
+<parent>
+    <groupId>org.iplatform.myproject</groupId>
+    <artifactId>myproject</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <relativePath>../</relativePath>
+</parent>
+<dependencies>
+    <dependency>
+        <groupId>org.iplatform.myproject</groupId>
+        <artifactId>myproject-util</artifactId>
+        <version>0.0.1-SNAPSHOT</version>
+    </dependency>
+</dependencies>
 ```
 
-```html
-<!DOCTYPE html>
-<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org" 
-	xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout">
-<body>
-	<div th:text="${returndata}"></div>
-</body>
-</html>
-```
-8. 新增TestClient类，提供对service的访问
-```java
-package org.iplatform.microservices.demoui.feign;
+### RUN.SH
 
-import org.iplatform.microservices.core.http.RestResponse;
-import org.springframework.cloud.netflix.feign.FeignClient;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+> 修改项目名称、服务发现地址、服务IP、服务端口、contextPath等，其中contextPath必须配置，不可省略，7层负载均衡的实现依赖此参数
 
-@FeignClient("demo-service")
-public interface TestClient {
-	
-	@RequestMapping(value = "demoservice/api/v1/test/hello", method = RequestMethod.GET)
-	public ResponseEntity<RestResponse<String>> hello(@RequestParam(value = "param") String param);
-	
-}
+```properties
+PRONAMEUI=myproject-ui-0.0.1-SNAPSHOT.jar
+PRONAMESERVICE=myproject-service-0.0.1-SNAPSHOT.jar
+
+nohup java -Xmx1g -Xms1g -Xss256k -XX:OnOutOfMemoryError="kill -9 %p" -jar ${PRONAMESERVICE} \
+    --discovery.server.address="https://127.0.0.1:8761/eureka/" \
+    --server.host=127.0.0.1 \
+    --contextPath=myprojectservice \
+    --spring.profiles.active=prod >/dev/null 2>&1 &
+
+    nohup java -Xmx1g -Xms1g -Xss256k -XX:OnOutOfMemoryError="kill -9 %p" -jar ${PRONAMEUI} \
+    --discovery.server.address="https://127.0.0.1:8761/eureka/" \
+    --server.host=127.0.0.1 \
+    --contextPath=myprojectui \
+    --spring.profiles.active=prod >/dev/null 2>&1 &
 ```
 
-## 3. 服务启动
+## 4. 打包
 
-先启动demo-service，然后再启动demo-ui，启动方法：选中项目鼠标右键，选择Run As->Spring Boot App
+> myproject目录下执行打包命令
 
-## 4. 服务验证
+```shell
+mvn clean package
+```
 
-1. 访问服务发现链接 https://localhost:8761 在已注册的服务列表中可看到注册的demo-service和demo-ui服务
-2. 访问认证服务链接 https://localhost:9999/auth 跳转到登录页面
-3. 通过admin/admin登录后可以查到门户列表中的demo-service和demo-ui服务
-4. 门户列表中找到demo-ui服务，点击进入会调用service服务，同时将返回值展示到index.html中
+## 5. 部署
+
+1. 创建部署目录
+2. 复制myproject/service/target/myproject-service-0.0.1-SNAPSHOT.jar到部署目录下
+3. 复制myproject/ui/target/myproject-ui-0.0.1-SNAPSHOT.jar到部署目录下
+4. 复制run.sh到部署目录下
+
+## 6. 启停
+
+1. 启动服务
+
+   ```shell
+   sh run.sh start
+   
+   出现如下日志，代表启动成功
+   eureka.instance.metadataMap.instanceId=Document::myproject-service:8081
+   o.i.m.core.IPlatformApplication.run : 服务启动完毕
+   ```
+
+2. 停止服务
+
+   ```shell
+   sh run.sh stop
+   ```
+
+3. 重启服务
+
+   ```shell
+   sh run.sh restart
+   ```
+
+## 2. 验证
+
+1. 验证服务注册
+
+   > 访问注册中心 http://127.0.0.1:8761 ，查看已注册的服务列表
+
+   ![](images/QuickStart/createpro1.png)
+
+2. 验证服务认证
+
+   > 访问认证系统 https://127.0.0.1:9999/auth ，通过默认用户名密码登录，认证列表查找UI服务并进入
+
+   ![](images/QuickStart/createpro2.png)
+
+   ![](images/QuickStart/createpro3.png)
+
+3. 验证SERVICE服务接口
+
+   > curl请求返回json串
+
+   ```shell
+   [root@localhost opt]# curl -k "https://192.168.55.53:8081/myprojectservice/api/v1/hello?access_token=xx"
+   {"success":true,"message":null,"data":"Hi"}[root@localhost opt]# 
+   ```
+
+4. 验证UI到SERVICE服务调用
+
+   > curl请求返回字符串 Hi
+
+   ```shell
+   [root@localhost opt]# curl -k "https://192.168.55.53:8080/myprojectui/hello?access_token=xx"
+   Hi[root@localhost opt]# 
+   ```
+
+## 5. 骨架代码说明
+
+### SERVICE说明
+
+| 文件地址                                                  | 文件说明                             |
+| :-------------------------------------------------------- | :----------------------------------- |
+| org.iplatform.myproject.service.ServiceApplication.java   | 主启动类                             |
+| org.iplatform.myproject.service.service.IndexService.java | 接口类，提供对外接口                 |
+| src/main/resources/bootstrap.yml                          | 应用定义，包括应用名称、描述、版本等 |
+| src/main/resources/application.yml                        | 应用配置，包含IP地址、端口、数据源等 |
+
+### UI说明
+
+| 文件地址                                                     | 文件说明                                      |
+| :----------------------------------------------------------- | :-------------------------------------------- |
+| org.iplatform.myproject.ui.UIApplication.java                | 主启动类                                      |
+| org.iplatform.myproject.ui.config.MyprojectUISecurityConfiguration | 拦截器，自定义跳过认证拦截的路径              |
+| org.iplatform.myproject.ui/feign.IndexClient.java            | Feign客户端，通过Feign实现对SERVICE接口的调用 |
+| org.iplatform.myproject.ui.controller.IndexController        | 控制器                                        |
+| src/main/resources/bootstrap.yml                             | 应用定义，包括应用名称、描述、版本等          |
+| src/main/resources/application.yml                           | 应用配置，包含IP地址、端口、数据源等          |
+| src/main/resources/templates/index.html                      | 主页面，登录成功后跳转至主页面                |

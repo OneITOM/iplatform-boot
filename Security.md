@@ -2,11 +2,11 @@
 
 > 作者 张磊
 
-本文档主要讲解于项目安全相关的配置和开发指南
+本文档主说明项目安全保护相关的解决方案，以及已知漏洞的解决方法
 
-- [配置文件加密](#user-content-1)
-- Token
-- 角色鉴权
+- 安全保护
+  - [配置文件加密](#user-content-1.1)
+  - [RESTful API 限速](#user-content-1.2)
 - [安全漏洞](#user-content-2)
   - [SQL注入漏洞](#user-content-2.1)
   - [CSRF跨站请求伪造](#user-content-2.2)
@@ -17,7 +17,7 @@
 
 
 
-## <a id="1">1</a> 配置文件加密
+## <a id="1.1"></a>配置文件加密
 > 配置文件中或者启动参数的参数值可以使用加密方式配置
 
 例如以下是未加密的数据库密码配置参数
@@ -45,11 +45,43 @@ Copyright© BOCO 
 spring.datasource.password=ENC(mBaGBXPu1VFgECoBH5NGWeTdFLy79Ic5)
 ```
 
-## <a id="2">2</a> 安全漏洞
+## <a id="1.2"></a>RESTful API 限速
+
+> 可以通过@RateLimit注解实现限速保护，限速粒度是客户端IP+URL，当超过调用阀值设置后，这个IP对于相同的URL的调用将不再被受理，窗口期结束后自动恢复。
+
+limit 调用次数阀值
+
+duration 窗口期时长（也表示冷却期，当超过调用阀值后在duration定义的时间范围内将不能再调用）
+
+unit 窗口期时长单位
+
+onlyLimitThrow 只对异常调用进行限制
+
+onlyLimitThrowClass 异常类定义，不定义则对所有异常进行阀值计数
+
+* 1秒限制调用2次
+
+  ```java
+  @RateLimit(limit = 2, duration = 1, unit = TimeUnit.SECONDS)
+  ```
+
+* 1分钟限制调用60次
+
+  ```java
+  @RateLimit(limit = 60, duration = 1, unit = TimeUnit.MINUTES)
+  ```
+
+* 1分钟出现10次AuthException异常后进行访问限制
+
+  ```java
+  @RateLimit(limit = 10, duration = 1, unit = TimeUnit.MINUTES, onlyLimitThrow=Boolean.TRUE, onlyLimitThrowClass = {AuthException.class})
+  ```
+
+## <a id="3"></a>安全漏洞
 
 安全漏洞主要是目前已知的一些漏洞的配置或者开发注意事项，大部分漏洞在框架级都有默认配置
 
-### <a id="2.1">2.1</a> SQL注入漏洞
+### <a id="3.1"></a>SQL注入漏洞
 
 > 本框架使用的是Mybatis，所以SQL注入漏洞主要是针对此框架
 
@@ -86,7 +118,7 @@ String[] value() default {";","'","\"","\\(","\\)","and","or","union","where","l
 ```java
 @SQLInjection(policy = SQLInjectionPolicy.BREAK)
 ```
-### <a id="2.2">2.2</a> CSRF跨站请求伪造
+### <a id="3.2"></a>CSRF跨站请求伪造
 
 > 漏洞描述：发送请求的时候认为修改header中的Host或者referer信息，并在返回的消息头中看到这个修改后的Host，Referer信息
 
@@ -104,7 +136,7 @@ iplatform.tamperproofing.headerhost.enabled=true
 iplatform.tamperproofing.headerhost.whitelist=www.mysite.com:8761,www.mysite.org:8761
 ```
 
-### <a id="2.3">2.3</a> 点击劫持 X-Frame-Options DENY
+### <a id="3.3"></a>点击劫持 X-Frame-Options DENY
 
 > 目前框架中默认设置允许页面被第三方iframe嵌入，如果要禁止页面被第三方页面嵌入需要扩展HttpSecurity的configure方法，自定义策略
 
@@ -117,7 +149,7 @@ http.headers().frameOptions().deny();
 http.headers().frameOptions().disable()  
 ```
 
-### <a id="2.4">2.4</a> 不安全的HTTP方法
+### <a id="3.4"></a>不安全的HTTP方法
 
 > 检查原始测试响应的“Allow”头，并验证是否包含下列一个或多个不需要的选项：DELTE，SEARCE，COPY，MOVE，PROPFIND，PROPPATCH，MKCOL，LOCK，UNLOCK，PUT
 
@@ -128,13 +160,13 @@ curl -v -X OPTIONS http://127.0.0.1:5000
 Allow: HEAD, GET, OPTIONS
 ```
 
-* 通过参数配置允许哪些方法
+* 通过参数配置要禁用哪些方法
 
 ```properties
-server.tomcat.port-header=HEAD,PUT,DELETE,OPTIONS,TRACE,COPY,SEARCH,PROPFIND
+server.tomcat.disabled.methods=HEAD,OPTIONS,TRACE
 ```
 
-### <a id="2.5">2.5</a> SSL/TLS受诫礼(BAR-MITZVAH)攻击漏洞
+### <a id="3.5"></a>SSL/TLS受诫礼(BAR-MITZVAH)攻击漏洞
 
 > 这种攻击利用了一个RC4加密算法中的漏洞窃取通过SSL和TLS协议传输的机密数据。
 
@@ -148,7 +180,7 @@ server.ssl.enabled-protocols=TLSv1.2
 
 注意：以上算法需要JDK版本支持
 
-### <a id="2.7">2.6</a> Slow HTTP Denial of Service Attack漏洞
+### <a id="3.7"></a>Slow HTTP Denial of Service Attack漏洞
 
 > 利用的HTTP POST：POST的时候，指定一个非常大的content-length，然后以很低的速度发包，比如10-100s发一个字节，hold住这个连接不断开。这样当客户端连接多了后，占用住了webserver的所有可用连接，从而导致DDOS。
 
