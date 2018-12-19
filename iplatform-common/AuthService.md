@@ -109,8 +109,16 @@ sh run.sh restart
 
 ## 5. 界面
 
-```
+进入登录页面，登录后进入认证服务首页
+
+```shell
 https://127.0.0.1:9999/auth
+```
+
+进入登录页面，登录后跳转到目标页面
+
+```
+ https://127.0.0.1:9999/auth?redirect_uri=http://ip:port/xxx
 ```
 
 ![auth.png](images/AuthService/auth.png)
