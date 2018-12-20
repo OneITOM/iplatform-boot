@@ -2,7 +2,9 @@
 
 >  作者 张磊 2018-9-30
 
-IPLATFORM-BOOT 是以 SpringCloud 为核心的微服务开发框架，提供了基础的公共服务，手册中相关技术使用可以参考[样例代码](https://github.com/coolbeevip/iplatform-boot-example)
+IPLATFORM-BOOT 是以 SpringCloud 为核心的微服务开发框架，提供了基础的公共服务。
+
+手册中相关技术使用可以参考[样例代码](https://github.com/coolbeevip/iplatform-boot-example)
 
 
 
