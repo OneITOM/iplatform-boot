@@ -4,6 +4,10 @@
 
 IPLATFORM-BOOT 是以 SpringCloud 为核心的微服务开发框架，提供了基础的公共服务，手册中相关技术使用可以参考[样例代码](https://github.com/coolbeevip/iplatform-boot-example)
 
+
+
+![images/Architecture.png](images/Architecture.png)
+
 ## 1. 公共服务部署手册
 
 * [注册服务部署手册](iplatform-common/DiscoveryService.md)
