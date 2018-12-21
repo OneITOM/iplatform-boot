@@ -108,6 +108,36 @@ URL地址重写
 * 通过192.168.1.100地址打开auth页面中admin的地址变为 http://192.168.1.100/admin
 * 通过172.16.0.1地址打开auth页面中admin的地址变为 http://172.16.0.2:8763/admin
 
+> 通过代理访问页面时，可以使用Thymeleaf的ProxyURL.resolverAddress标签实现IP:PORT地址重写为代理地址
+
+用法同上，就是参数不同，这个方法接收IP和端口两个参数
+
+例如(IPV4)：
+
+```html
+<span th:text="${#ProxyURL.resolverURL('172.16.0.101','8080')}">
+```
+
+返回 
+
+```html
+<span>111.204.25.100:8080</span>
+```
+
+例如(IPV6)：
+
+```html
+<span th:text="${#ProxyURL.resolverURL('FEDC:BA98:7654:3210:FEDC:BA98:7654:3210','8080')}">
+```
+
+返回 
+
+```html
+<span>[FEDC:BA98:7654:3210:FEDC:BA98:7654:3210]:8080</span>
+```
+
+
+
 ## 8. Docker
 
 ```yaml
