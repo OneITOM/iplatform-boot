@@ -396,3 +396,25 @@ public void save(TestDO testDO){
     testMapper.insert(testDO);
 }
 ```
+## 10. SQL敏感词过滤
+
+### 10.1 功能开启
+
+> 通过配置的方式开启敏感词过滤功能，目前只实现了针对sql类型进行拦截，其他内容待扩展
+
+```properties
+# 开关，默认false
+iplatform.sql.danger.enabled: true
+# 拦截sql类型
+iplatform.sql.danger.sqltype: drop,truncate
+```
+
+### 10.2 功能说明
+
+> 敏感词过滤功能开启后，所有的sql执行均会被过滤，如果sql类型在拦截范围内，将终止sql的执行
+
+```
+sql拦截类型的支持
+
+alter、createindex、createtable、createview、delete、drop、execute、insert、merge、replace、select、truncate、update、upsert
+```
