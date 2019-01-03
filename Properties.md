@@ -285,9 +285,9 @@ eureka.client.register-with-eureka=false
 eureka.client.fetch-registry=false
 eureka.client.serviceUrl.defaultZone
 # 服务续约间隔时间
-eureka.instance.lease-renewal-interval-in-seconds=5
+eureka.instance.lease-renewal-interval-in-seconds=10
 # 服务续约到期时间 
-eureka.instance.lease-expiration-duration-in-seconds=10
+eureka.instance.lease-expiration-duration-in-seconds=90
 # 关闭自我保护模式
 eureka.server.enable-self-preservation=false
 # 扫描失效节点间隔
