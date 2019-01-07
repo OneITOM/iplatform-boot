@@ -23,7 +23,6 @@
 logger.kafka.enabled=true
 logger.kafka.bootstrapServers=localhost:9092
 logger.kafka.zookeeper=localhost:2181
-logger.kafka.partitions=20
 logger.kafka.replication=1
 ```
 
@@ -40,10 +39,6 @@ logger.kafka.bootstrapServers=localhost:9092
 logger.kafka.zookeeper=localhost:2181
 
 > 配置zookeeper地址（必填）
-
-logger.kafka.partitions=20
-
-> 分区数量（非必填）默认20，如果分区已经事先创建完毕，此处配置请确保和已经存在的topic一致
 
 logger.kafka.replication=1
 
@@ -166,6 +161,8 @@ tar -zxvf logtash-5.6.12.tar.gz
 ### logstash配置
 
 > logstash配置文件trident-logstash.conf
+>
+> consumer_threads的数量建议于分区数一致
 
 ```
 input {
