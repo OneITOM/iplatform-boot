@@ -156,7 +156,7 @@ ProducerConfig values:
 
 - jdk1.8
 - logstash-5.6.12.tar.gz
-- kafka-0.9.*及以上
+- kafka-0.10.*及以上
 - elasticsearch-2.4.*及以上
 
 ```
