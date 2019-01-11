@@ -155,6 +155,8 @@ Spring版本升级到4.2.9
 
 增加@RateLimit支持RESTful API访问限速
 
+增加SQL敏感词定义，默认不允许drop,truncate
+
 ### Bug修复
 
 修复无租户服务可以调用租户服务的BUG
@@ -194,8 +196,6 @@ Spring版本升级到4.2.9
 JDBC客户端分片
 
 分布式UUID生成器
-
-增加SQL敏感词定义，默认不允许drop table
 
 调用链跟踪-ActiveMQ、Redis、Kafka
 
