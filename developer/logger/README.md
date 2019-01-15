@@ -166,46 +166,36 @@ tar -zxvf logtash-5.6.12.tar.gz
 
 ```
 input {
-  
   kafka {
     bootstrap_servers => "127.0.0.1:9092"
     group_id => "logstash-trident-newgroup"
     topics_pattern => "iplatform.*"
-    consumer_threads => 20
+    consumer_threads => 5
     codec => "json"
     auto_offset_reset => "earliest"
     auto_commit_interval_ms => "5000"
     enable_auto_commit => "true"
   }
-
 }
 
 filter {
-
   mutate {
     rename => {
         "traceid" => "traceId"
     }
     lowercase => [ "busisys", "serviceId" ]
   }
-
 }
 
 output {
-
- # stdout {
- #     codec => rubydebug
- # }
-
   elasticsearch {
     hosts => ["10.22.1.236:9200"]
-    index => "%{busisys}-%{serviceId}-%{+YYYY.MM.dd}"
+    index => "iplatform-log-%{busisys}-%{serviceId}-%{+YYYY-MM-dd}"
     template_name => "trident-template"
     template => "/opt/logstash-5.6.12/conf/trident-template.json"
     template_overwrite => true
     document_type => "logs"
   }
-
 }
  
 ```
