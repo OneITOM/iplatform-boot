@@ -148,8 +148,21 @@ host.name=10.22.1.180
 log.dirs=/opt/BOCO/kafka_2.11-1.1.0/logs
 zookeeper.connect=10.22.1.180:2181,10.22.1.181:2181,10.22.1.182:2181
 message.max.bytes=10485760
-replica.fetch.max.bytes=10485760（此处两项配置增加kafka接收消息大小）
+#此处两项配置增加kafka接收消息大小
+replica.fetch.max.bytes=10485760
 advertised.host.name=10.22.1.180
+#默认分区数
+num.partitions=20
+#数据保留时长，单位小时
+log.retention.hours=72
+#Broker处理消息的最大线程数,建议为cpu核数+1
+num.network.threads=5
+#Broker处理磁盘IO的线程数,建议为cpu核数*2
+num.io.threads=8
+#每写入10000条数据时刷数据到磁盘
+log.flush.interval.messages=10000
+#每隔1秒刷数据到磁盘
+log.flush.interval.ms=1000
 ```
 
   说明：broker.id，取主机ip的最后几位，要求唯一
