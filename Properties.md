@@ -169,6 +169,10 @@ server.tomcat.accept-count=1000
 server.tomcat.max-http-header-size=65536
 # 禁用http方法
 server.tomcat.disabled.methods=OPTIONS,TRACE,HEAD
+# 启动压缩
+server.compression.enabled=true
+# 启用压缩最小字节数
+server.compression.min-response-size=2048
 ```
 
 ### Multipart

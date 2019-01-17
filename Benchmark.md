@@ -4,7 +4,7 @@
 
 1. [Kafka基准测试](benchmark/kafka.md)
 2. [ElasticSearch基准测试](benchmark/elasticsearch.md)
-3. 认证服务基准测试
+3. [认证服务基准测试](benchmark/auth.md)
 4. 注册服务基准测试
 5. 跟踪服务基准测试
 6. 消息服务基准测试
