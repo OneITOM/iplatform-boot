@@ -50,6 +50,23 @@ loglevel notice
 logfile "/opt/BOCO/redis-4.0.2/redis.log"
 #配置认证密码
 requirepass Bomc222
+stop-writes-on-bgsave-error no
+hash-max-zipmap-entries 64 
+hash-max-zipmap-value 512
+#存储策略
+save 900 1
+save 300 10
+save 60 10000
+#每秒一次同步磁盘
+appendfsync everysec
+#启用虚拟内存机制
+vm-enabled no
+#最大内存4G
+maxmemory 4294967296
+#关闭日志记录（严格不丢数据的场合应该配置成yes）
+appendonly no
+#最大客户端链接数
+maxclients 65535
 ```
 
 启动
