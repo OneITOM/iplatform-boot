@@ -162,6 +162,7 @@ spring.data.mongodb2.uri=mongodb://{username}:{password}@127.0.0.1/datashare
 ```properties
 # tomcat 最大并发线程
 server.tomcat.max-threads=1000
+server.tomcat.min-spare-threads:500
 # tomcat accept count
 server.tomcat.accept-count=1000
 # 消息头最大值
