@@ -62,11 +62,12 @@ sh run.sh restart
 
 *  单例模式参数
 
-| 参数名                                | 必填 | 默认值   | 说明                                                         |
-| ------------------------------------- | ---- | -------- | ------------------------------------------------------------ |
-| spring.redis.host                     | 是   |          | redis地址                               |
-| spring.redis.port                     | 是   |          | redis端口                                                    |
-| spring.redis.databas                  | 是   | 0        | redis库序号                                                  |
+| 参数名                | 必填 | 默认值 | 说明        |
+| --------------------- | ---- | ------ | ----------- |
+| spring.redis.host     | 是   |        | redis地址   |
+| spring.redis.port     | 是   |        | redis端口   |
+| spring.redis.databas  | 是   | 0      | redis库序号 |
+| spring.redis.password | 否   |        | redis密码   |
 
 * 哨兵模式参数
 
