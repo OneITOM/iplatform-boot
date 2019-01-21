@@ -48,7 +48,7 @@ sh run.sh restart
 | discovery.server.address         | 是   |        | 定义注册服务的地址，当集群模式时配置多个地址逗号分隔  discovery.server.address=https://192.168.0.1:8761/eureka/,https://192.168.0.2:8761/eureka/ |
 | server.host                      | 是   |        | 服务绑定IP                                                   |
 | server.port                      |      | 8764   | 服务绑定端口                                                 |
-| spring.cloud.config.enable       | 是   | true   | 开启集中配置功能                                             |
+| spring.cloud.config.enabled      | 是   | true   | 开启集中配置功能                                             |
 | spring.cloud.config.profile      | 是   |        | 集中配置环境名，例如：生产环境                               |
 | haproxy.file                     | 是   |        | haproxy.cfg 的文件全路径                                     |
 | haproxy.reload                   | 是   |        | reloadhaproxy.sh 文件全路径                                  |
