@@ -416,15 +416,14 @@ iplatform.sql.danger.sqltype: drop,truncate
 ```
 sql拦截类型的支持
 
-alter、createindex、createtable、createview、delete、drop、execute、insert、merge、replace、select、truncate、update、upsert
+alter、createindex、createtable、createview、delete、drop、execute、insert、merge、replace
+select、truncate、update、upsert
 ```
-## 11. 数据分片支持
+## 11. 数据分片及读写分离
 
-> 框架数据分片的支持基于[sharding-jdbc 3.1.0]("http://shardingsphere.io/document/current/cn/overview/")，研发人员可根据如下步骤实现数据的分库分表等操作
+> 框架内部集成了sharding-jdbc 3.1.0，研发人员可通过配置启用该功能，从而实现数据分片及读写分离
 
-### 11.1 前提
-
-> 添加依赖
+### 11.1 添加依赖
 
 ```xml
 <dependency>
@@ -434,114 +433,41 @@ alter、createindex、createtable、createview、delete、drop、execute、inser
 </dependency>
 ```
 
-> 功能启用
+### 11.2 功能启用
+
+> 启动脚本调整
 
 ```properties
-# 开关，默认false
+# sharding-jdbc开关，默认false
 sharding.jdbc.enable: true
-# 规则配置文件名称，默认sharding-jdbc
-sharding.jdbc.filename: sharding-jdbc
+# 读写分离场景时需设置为true，默认false
+sharding.jdbc.masterslave: false
 ```
 
-> 规则配置
+> 新增分片或读写分离配置sharding-jdbc.yml，与application.yml同级目录，配置内容参考场景样例
+>
+> 具体属性说明查看官网 https://shardingsphere.apache.org/document/current/cn/overview/
 
-```properties
-# application.yml同级目录创建sharding-jdbc.yml，具体规则配置如下
+### 11.3 场景说明
 
-shardingRule:
-  tables: #数据分片规则配置，可配置多个logic_table_name
-    <logic_table_name>: #逻辑表名称
-      actualDataNodes: #由数据源名 + 表名组成，以小数点分隔。多个表以逗号分隔，支持inline表达式。缺省表示使用已知数据源与逻辑表名称生成数据节点。用于广播表（即每个库中都需要一个同样的表用于关联查询，多为字典表）或只分库不分表且所有库的表结构完全一致的情况
-        
-      databaseStrategy: #分库策略，缺省表示使用默认分库策略，以下的分片策略只能选其一
-        standard: #用于单分片键的标准分片场景
-          shardingColumn: #分片列名称
-          preciseAlgorithmClassName: #精确分片算法类名称，用于=和IN。。该类需实现PreciseShardingAlgorithm接口并提供无参数的构造器
-          rangeAlgorithmClassName: #范围分片算法类名称，用于BETWEEN，可选。。该类需实现RangeShardingAlgorithm接口并提供无参数的构造器
-        complex: #用于多分片键的复合分片场景
-          shardingColumns: #分片列名称，多个列以逗号分隔
-          algorithmClassName: #复合分片算法类名称。该类需实现ComplexKeysShardingAlgorithm接口并提供无参数的构造器
-        inline: #行表达式分片策略
-          shardingColumn: #分片列名称
-          algorithmInlineExpression: #分片算法行表达式，需符合groovy语法
-        hint: #Hint分片策略
-          algorithmClassName: #Hint分片算法类名称。该类需实现HintShardingAlgorithm接口并提供无参数的构造器
-        none: #不分片
-      tableStrategy: #分表策略，同分库策略
-        
-      keyGeneratorColumnName: #自增列名称，缺省表示不使用自增主键生成器
-      keyGeneratorClassName: #自增列值生成器类名称。该类需实现KeyGenerator接口并提供无参数的构造器
-        
-      logicIndex: #逻辑索引名称，对于分表的Oracle/PostgreSQL数据库中DROP INDEX XXX语句，需要通过配置逻辑索引名称定位所执行SQL的真实分表
-  bindingTables: #绑定表规则列表
-  - <logic_table_name1, logic_table_name2, ...> 
-  - <logic_table_name3, logic_table_name4, ...>
-  - <logic_table_name_x, logic_table_name_y, ...>
-  bindingTables: #广播表规则列表
-  - table_name1
-  - table_name2
-  - table_name_x
-    
-  defaultDataSourceName: #未配置分片规则的表将通过默认数据源定位  
-  defaultDatabaseStrategy: #默认数据库分片策略，同分库策略
-  defaultTableStrategy: #默认表分片策略，同分库策略
-  defaultKeyGeneratorClassName: #默认自增列值生成器类名称，缺省使用io.shardingsphere.core.keygen.DefaultKeyGenerator。该类需实现KeyGenerator接口并提供无参数的构造器
-  
-  masterSlaveRules: #读写分离规则，详见读写分离部分
-    <data_source_name>: #数据源名称，需要与真实数据源匹配，可配置多个data_source_name
-      masterDataSourceName: #详见读写分离部分
-      slaveDataSourceNames: #详见读写分离部分
-      loadBalanceAlgorithmClassName: #详见读写分离部分
-      loadBalanceAlgorithmType: #详见读写分离部分
-      configMap: #用户自定义配置
-          key1: value1
-          key2: value2
-          keyx: valuex
-  
-props: #属性配置
-  sql.show: #是否开启SQL显示，默认值: false
-  executor.size: #工作线程数量，默认值: CPU核数
-  check.table.metadata.enabled: #是否在启动时检查分表元数据一致性，默认值: false
-  
-configMap: #用户自定义配置
-  key1: value1
-  key2: value2
-  keyx: valuex
-```
+> 场景样例地址 [https://github.com/OneITOM/iplatform-boot-example/tree/master/example-shardingjdbc]( https://github.com/OneITOM/iplatform-boot-example/tree/master/example-shardingjdbc)
 
-### 11.2 应用
+#### 分表场景
 
-> 添加注解@TargetDataSource(name="shardingds")到service的方法上，动态注入分片数据源
+> sharding-tables，对于访问频繁数据量大的表来说，如果要减少访问所需的时间，可以进行分表，具体的分表策略需自定义
 
-```java
-@TargetDataSource(name="shardingds")
-@RequestMapping(value = "/getOrders", method = RequestMethod.GET)
-public List<OrderEntity> getOrders() {
-    List<OrderEntity> orders = null;
-    try {
-        orders = orderMapper.getOrders();
-    } catch (Exception e) {
-        e.printStackTrace();
-    }
-    return orders;
-}
+#### 分库场景
 
-@TargetDataSource(name="shardingds")
-@RequestMapping(value = "/addOrder", method = RequestMethod.PUT)
-public OrderEntity addOrder(@RequestBody OrderEntity order) {
-    OrderEntity orderEntity = null;
-    try {
-        int count = orderMapper.insertOrder(order);
-        if (count > 0) {
-            orderEntity = order;
-        }
-    } catch (Exception e) {
-        e.printStackTrace();
-    }
-    return orderEntity;
-}
-```
+> sharding-databases，如果要提高数据库的写入能力，可以进行分库，具体的分库策略需自定义
 
-### 11.3 样例
+#### 分库分表场景
 
-> 样例地址 [https://github.com/OneITOM/iplatform-boot-example/tree/master/example-shardingjdbc]( https://github.com/OneITOM/iplatform-boot-example/tree/master/example-shardingjdbc)
+> sharding-databases-tables，同时支持分库分表
+
+#### 读写分离场景
+
+> master-slave，读写分离支持一主多从，增加、删除、更新操作使用主库，查询操作通过负载均衡策略疏导至不同从库，该场景需要在启动脚本中设置 sharding.jdbc.masterslave: true
+
+#### 分片+读写分离场景
+
+> sharding-master-slave，同时支持数据分片及读写分离
