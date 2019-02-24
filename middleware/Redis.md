@@ -24,32 +24,80 @@ wget http://download.redis.io/releases/redis-4.0.11.tar.gz
 cd /opt/aaa
 tar -xzvf redis-4.0.11.tar.gz
 ```
-3. 安装
+安装
 
 ```xml
 cd ./redis-4.0.11
 make
 ```
 
-4. 配置
+配置
 
-   配置文件路径redis-4.0.11/redis.conf
+> 配置文件路径redis-4.0.11/redis.conf
 
 ```bash
-#绑定本机IP
+# 只能通过本机访问
+protected-mode no
+
+# 客户端闲置多少秒后，断开连接，默认为300（秒）
+timeout 300
+
+# 绑定本机IP
 bind 192.168.1.51
-#绑定端口
+
+# 绑定端口
 port 6379
-#是否后台启动 no or yes
+
+# 是否后台启动 no or yes（docker内部不能配置成yes）
 daemonize yes
-#进程ID文件
-pidfile "/var/run/redis.pid"
-#日志级别 debug， verbose， notice， warning
+
+# 数据库个数 10
+databases 10
+
+# 进程ID文件
+pidfile "/var/run/redis_6379.pid"
+
+# 日志级别 debug， verbose， notice， warning
 loglevel notice
-#日志文件
-logfile "/opt/BOCO/redis-4.0.2/redis.log"
-#配置认证密码
+
+# 日志文件
+logfile "redis.log"
+
+# 当dump .rdb数据库的时候是否压缩数据对象
+rdbcompression yes
+
+# dump文件名
+dbfilename "dump.rdb"
+
+# 最大客户端链接数
+maxclients 1000
+
+# 配置认证密码
 requirepass Bomc222
+
+stop-writes-on-bgsave-error no
+
+# 存储策略
+save 900 1
+save 300 10
+save 60 10000
+
+# 每秒一次同步磁盘
+appendfsync everysec
+
+# 最大内存4G
+maxmemory 4294967296
+
+# 关闭日志记录（严格不丢数据的场合应该配置成yes）
+appendonly no
+```
+
+操作系统配置
+
+```shell
+echo "vm.overcommit_memory=1" > /etc/sysctl.conf 
+echo 1 > /proc/sys/vm/overcommit_memory
+echo 511 > /proc/sys/net/core/somaxconn
 ```
 
 启动

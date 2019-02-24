@@ -189,6 +189,8 @@ Spring版本升级到4.2.9
 
 跟踪服务Span存储到ES的时候在JSON根节点增加succeed，exception_class，optimize_warn_type，lc，serviceInstId属性
 
+支持了server.tomcat.accept-count参数
+
 
 
 # Roadmap

@@ -55,6 +55,9 @@ path.logs: /opt/BOCO/elk/elasticsearch-2.4.6/logs
 # 绑定IP
 network.host: 192.168.0.1
 http.port: 9200
+# 设置分片数量和副本数，分片数量建议为节点数*3，副本数建议为2～3
+index.number_of_shards: 9
+index.number_of_replicas: 2
 # 集群发现种子IP
 discovery.zen.ping.unicast.hosts: ["192.168.0.1", "192.168.0.2", "192.168.0.3"]
 
