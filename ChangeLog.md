@@ -167,6 +167,8 @@ Spring版本升级到4.2.9
 
 修复跟踪服务cs-cr时binaryAnnotations的sa不是目标服务名、ip、端口的BUG
 
+修复发现服务EurekaInstanceRenewedEvent中InstanceInfo属性为空的BUG
+
 ### 改进
 
 流量控制增加乒乓功能，如果没有流控大于1的服务，那么也可以调用流控等于0的服务
