@@ -254,7 +254,59 @@ public class IndexService {
 }
 ```
 
-## 7. 你需要知道的
+## 7. 多数据源支持
+
+当使用了多数据源配置后，可以通过设置 `flyway.dynamicdatasource.enabled=true`的方式开启多数据源的数据库版本管理功能，默认情况下所有的多数据源都将支持数据库版本管理
+
+默认多数据源脚本位置 `db/数据源名称/数据源厂家`，例如配置了如下多数据源：
+
+```yaml
+spring:
+  dynamicdatasource:
+    enable: true # 开启支持多数据源
+    names: db1,db2
+    bomcbp:
+      platform: oracle
+      dataSourceClassName: oracle.jdbc.driver.OracleDriver
+      url: jdbc:oracle:thin:@127.0.0.1:1521:mydb1
+      username: user
+      password: pwd
+    authdb:
+      platform: mysql
+      dataSourceClassName: com.mysql.jdbc.Driver
+      url: "jdbc:mysql://127.0.0.1:3306/mydb2"
+      username: user
+      password: pwd
+```
+
+db1 的脚本存放路径为 `db/db1/oracle`
+db2 的脚本存放路径为 `db/db2/mysql`
+
+**注意：**当使用多数据源进行数据库版本管理的时候，多数据源必须配置 `spring.dynamicdatasource.xxx.platform` 参数
+
+* 指定动态数据源进行版本管理
+  有的时候不是所有的动态数据源都需要再本服务进行数据库版本管理，那么可以通过参数 `flyway.dynamicdatasource.names` 指定哪个数据源进行版本管理，例如 db1 进行版本管理(多个逗号分隔)：
+  ```properites
+  flyway.dynamicdatasource.names=db1
+  ```
+* 动态数据源Flyway个性化参数
+  默认情况下动态数据源的 flyway 参数与主数据源的 flyway 参数相同，但是 `locations` 不同。如果想为动态数据源单独定义 flyway 参数可以采用如下方式，例如单独定义 db1 的参数如下：
+  ```yaml
+  flyway:
+    ...
+    dynamicdatasource:
+      enabled: true
+      names: db1
+    db1:
+      baseline-on-migrate: true
+      baseline-description: init
+      baseline-version: 0
+      locations: db/db1/${spring.datasource.platform}
+      clean-on-validation-error: true
+      table: flyway_schema_${spring.application.name}
+  ```
+
+## 8. 你需要知道的
 
 一旦SQL脚本使用版本管理，那么就不能随意修改已经发布的版本文件，后续修改只能采用版本迭代方式，在使用中需要注意以下几点
 

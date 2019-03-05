@@ -193,11 +193,13 @@ Spring版本升级到4.2.9
 
 支持了server.tomcat.accept-count参数
 
+数据库版本管理支持动态数据源
+
+集成sharding-jdbc支持客户端数据库分片
+
 
 
 # Roadmap
-
-JDBC客户端分片
 
 分布式UUID生成器
 
