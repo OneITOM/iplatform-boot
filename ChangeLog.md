@@ -195,7 +195,21 @@ Spring版本升级到4.2.9
 
 数据库版本管理支持动态数据源
 
-集成sharding-jdbc支持客户端数据库分片
+集成sharding-jdbc支持客户端数据库分片组件
+
+
+
+## iplatform-boot 1.1.0
+
+### 新功能
+
+### BUG修复
+
+### 改进
+
+重构模块，增加单独的依赖管理模块
+
+创建 Edgware 分支，升级 spring boot 版本到 1.5.16
 
 
 
