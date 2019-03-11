@@ -116,12 +116,12 @@ https://127.0.0.1:9999/auth
 ![auth.png](images/AuthService/auth.png)
 
 ## 6. 插件安装
-> 目录下新建plugins目录，放入插件jar包，如auth-server-plugin-xxxx.jar
+* 目录下新建plugins目录，放入插件jar包，如auth-server-plugin-xxxx.jar
 
-> 修改启动脚本 run.sh 中 ,增加load.path
+* 修改启动脚本 run.sh 中 ,增加load.path
 
 -Dloader.path="./plugins"
-> 修改启动脚本 run.sh 中 ,增加插件启动参数，xxxx表示项目简写
+* 修改启动脚本 run.sh 中 ,增加插件启动参数，xxxx表示项目简写
 
 | 参数名                                | 必填 | 默认值   | 说明                                                         |
 | ------------------------------------- | ---- | -------- | ------------------------------------------------------------ |
