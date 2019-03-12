@@ -197,6 +197,8 @@ Spring版本升级到4.2.9
 
 集成sharding-jdbc支持客户端数据库分片组件
 
+基于数据库的分布式锁支持通过参数 `iplatform.scheduled.lock.jdbc.tablename` 自定义表名，默认表名为 `IPLATFORM_LOCK`
+
 
 
 ## iplatform-boot 1.1.0
