@@ -297,13 +297,13 @@ db2 的脚本存放路径为 `db/db2/mysql`
     dynamicdatasource:
       enabled: true
       names: db1
-    db1:
-      baseline-on-migrate: true
-      baseline-description: init
-      baseline-version: 0
-      locations: db/db1/${spring.datasource.platform}
-      clean-on-validation-error: true
-      table: flyway_schema_${spring.application.name}
+      db1:
+        baseline-on-migrate: true
+        baseline-description: init
+        baseline-version: 0
+        locations: db/db1/${spring.datasource.platform}
+        clean-on-validation-error: true
+        table: flyway_schema_${spring.application.name}
   ```
 
 ## 8. 你需要知道的
