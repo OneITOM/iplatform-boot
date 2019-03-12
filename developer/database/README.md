@@ -396,3 +396,78 @@ public void save(TestDO testDO){
     testMapper.insert(testDO);
 }
 ```
+## 10. SQL敏感词过滤
+
+### 10.1 功能开启
+
+> 通过配置的方式开启敏感词过滤功能，目前只实现了针对sql类型进行拦截，其他内容待扩展
+
+```properties
+# 开关，默认false
+iplatform.sql.danger.enabled: true
+# 拦截sql类型
+iplatform.sql.danger.sqltype: drop,truncate
+```
+
+### 10.2 功能说明
+
+> 敏感词过滤功能开启后，所有的sql执行均会被过滤，如果sql类型在拦截范围内，将终止sql的执行
+
+```
+sql拦截类型的支持
+
+alter、createindex、createtable、createview、delete、drop、execute、insert、merge、replace
+select、truncate、update、upsert
+```
+## 11. 数据分片及读写分离
+
+> 框架内部集成了sharding-jdbc 3.1.0，研发人员可通过配置启用该功能，从而实现数据分片及读写分离
+
+### 11.1 添加依赖
+
+```xml
+<dependency>
+    <groupId>io.shardingsphere</groupId>
+    <artifactId>sharding-jdbc-core</artifactId>
+    <version>3.1.0</version>
+</dependency>
+```
+
+### 11.2 功能启用
+
+> 启动脚本调整
+
+```properties
+# sharding-jdbc开关，默认false
+sharding.jdbc.enable: true
+# 读写分离场景时需设置为true，默认false
+sharding.jdbc.masterslave: false
+```
+
+> 新增分片或读写分离配置sharding-jdbc.yml，与application.yml同级目录，配置内容参考场景样例
+>
+> 具体属性说明查看官网 https://shardingsphere.apache.org/document/current/cn/overview/
+
+### 11.3 场景说明
+
+> 场景样例地址 [https://github.com/OneITOM/iplatform-boot-example/tree/master/example-shardingjdbc]( https://github.com/OneITOM/iplatform-boot-example/tree/master/example-shardingjdbc)
+
+#### 分表场景
+
+> sharding-tables，对于访问频繁数据量大的表来说，如果要减少访问所需的时间，可以进行分表，具体的分表策略需自定义
+
+#### 分库场景
+
+> sharding-databases，如果要提高数据库的写入能力，可以进行分库，具体的分库策略需自定义
+
+#### 分库分表场景
+
+> sharding-databases-tables，同时支持分库分表
+
+#### 读写分离场景
+
+> master-slave，读写分离支持一主多从，增加、删除、更新操作使用主库，查询操作通过负载均衡策略疏导至不同从库，该场景需要在启动脚本中设置 sharding.jdbc.masterslave: true
+
+#### 分片+读写分离场景
+
+> sharding-master-slave，同时支持数据分片及读写分离
