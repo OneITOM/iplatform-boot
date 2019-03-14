@@ -167,6 +167,8 @@ Spring版本升级到4.2.9
 
 修复跟踪服务cs-cr时binaryAnnotations的sa不是目标服务名、ip、端口的BUG
 
+修复发现服务EurekaInstanceRenewedEvent中InstanceInfo属性为空的BUG
+
 ### 改进
 
 流量控制增加乒乓功能，如果没有流控大于1的服务，那么也可以调用流控等于0的服务
@@ -191,11 +193,29 @@ Spring版本升级到4.2.9
 
 支持了server.tomcat.accept-count参数
 
+数据库版本管理支持动态数据源
 
+集成sharding-jdbc支持客户端数据库分片组件
+
+基于数据库的分布式锁支持通过参数 `iplatform.scheduled.lock.jdbc.tablename` 自定义表名，默认表名为 `IPLATFORM_LOCK`
+
+
+
+## iplatform-boot 1.1.0
+
+### 新功能
+
+集成hazelcast的嵌入分布式缓存
+
+### BUG修复
+
+### 改进
+
+重构模块，增加单独的依赖管理模块
+
+创建 Edgware 分支，升级 spring boot 版本到 1.5.16
 
 # Roadmap
-
-JDBC客户端分片
 
 分布式UUID生成器
 
