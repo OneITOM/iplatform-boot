@@ -16,20 +16,20 @@
 
 2. 将代码克隆到本地
 
-```
+```bash
 git clone https://github.com/<your_github_name>/iplatform-boot.git
 ```
 
 3. 添加 OneITOM/iplatform-boot 远程地址
 
-```
+```bash
 cd iplatform-boot
 git remote add upstream https://github.com/OneITOM/iplatform-boot.git
 ```
 
 4. 查看本地关联的远程地址
 
-```
+```bash
 git remote -v
 origin	https://github.com/<your_github_name>/iplatform-boot.git (fetch)
 origin	https://github.com/<your_github_name>/iplatform-boot.git (push)
@@ -39,8 +39,8 @@ upstream	https://github.com/OneITOM/iplatform-boot.git (push)
 
 ### 修改代码并提交
 
-> **注意：**尽量避免直接在master上修改代码，保持一个可持续同步的使用方法应该如下
->
+**注意：**尽量避免直接在master上修改代码，保持一个可持续同步的使用方法应该如下
+
 > 1. 同步 OneITOM/iplatform-boot 的 master 到你本地 master
 > 2. 在你本地 master 上创建分支
 > 3. 在分支上进行修改
@@ -60,14 +60,14 @@ upstream	https://github.com/OneITOM/iplatform-boot.git (push)
 
    > 创建完毕后可以通过 git branch 查看当前是在哪个分支，当前工作分支名前会有一个 `*` 号
 
-    ```
+    ```bash
     git checkout -b <your_branch_name>
     ```
 
 3. 进行代码修改
 4. 提交代码到本地仓库
 
-    ```
+    ```bash
     git add .
     git commit -a -m "<you_commit_message>"
     ```
