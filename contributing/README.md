@@ -41,16 +41,16 @@ upstream	https://github.com/OneITOM/iplatform-boot.git (push)
 
 > **注意：**尽量避免直接在master上修改代码，保持一个可持续同步的使用方法应该如下
 >
-> 1. 同步 OneITOM/iplatform 的 master 到你本地 master
+> 1. 同步 OneITOM/iplatform-boot 的 master 到你本地 master
 > 2. 在你本地 master 上创建分支
 > 3. 在分支上进行修改
 > 4. 提交分支到你的 Github
 > 5. 进入你的 Github 页面提交 PR
 > 6. 等待你的 PR 被 OneITOM/iplatform-boot 合并
-> 7. 同步 OneITOM/iplatform 的 master 到你本地 master
+> 7. 同步 OneITOM/iplatform-boot 的 master 到你本地 master
 > 8. 推送你本地 master 到你的 Github 的 master 
 
-1. 同步 OneITOM/iplatform 的 master 到你本地 master
+1. 同步 OneITOM/iplatform-boot 的 master 到你本地 master
 
     ```bash
     git pull upstream master
