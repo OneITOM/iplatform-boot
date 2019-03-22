@@ -1,4 +1,4 @@
-# IPLATFORM-BOOT
+# REIPLATFORM-BOOT
 
 >  作者 张磊 2018-9-30
 
@@ -99,5 +99,7 @@ IPLATFORM-BOOT 是以 SpringCloud 为核心的微服务开发框架，提供了�
 * [Spring Boot 1.3.5 Reference Guid](https://docs.spring.io/spring-boot/docs/1.3.5.RELEASE/reference/html/)
 
 ## 6.贡献者
+
+详情可浏览[提交指南](contributing/README.md)
 
 文档：[coderwls](https://github.com/coderwls) [duzhen](https://github.com/duzhen020623) [Yu Shengqiang](https://github.com/ShefronYudy) [yubowinner](https://github.com/yubowinner) [liuxinan](https://github.com/liuxinan)
