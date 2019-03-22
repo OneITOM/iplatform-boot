@@ -88,6 +88,7 @@ IPLATFORM-BOOT 是以 SpringCloud 为核心的微服务开发框架，提供了�
 
 - [微服务管控平台部署手册](product/triden/README.md)
 - [微服务管控平台集成](product/triden/API.md)
+- [自动化引擎集成手册](product/automatic/README.md)
 
 ## 5. 附件
 
@@ -99,4 +100,4 @@ IPLATFORM-BOOT 是以 SpringCloud 为核心的微服务开发框架，提供了�
 
 ## 6.贡献者
 
-文档：[coderwls](https://github.com/coderwls) [duzhen](https://github.com/duzhen020623) [Yu Shengqiang](https://github.com/ShefronYudy) [yubowinner](https://github.com/yubowinner)
+文档：[coderwls](https://github.com/coderwls) [duzhen](https://github.com/duzhen020623) [Yu Shengqiang](https://github.com/ShefronYudy) [yubowinner](https://github.com/yubowinner) [liuxinan](https://github.com/liuxinan)
