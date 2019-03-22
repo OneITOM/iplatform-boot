@@ -6,5 +6,5 @@
 
 ## 开发手册
 
-- [预案执行接口](product/automatic/API/预案执行接口.md)
-- [任务执行接口](product/automatic/API/任务执行.md)
+- [预案执行接口](API/预案执行接口.md)
+- [任务执行接口](API/任务执行.md)
