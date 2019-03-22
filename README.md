@@ -19,6 +19,7 @@ IPLATFORM-BOOT 是以 SpringCloud 为核心的微服务开发框架，提供了�
 * [监控服务部署手册](iplatform-common/AdminService.md)
 * [通知服务部署手册](iplatform-common/NotifyService.md)
 * [访问代理服务部署手册](iplatform-common/DiscoveryHAProxy.md)
+* [分布式事务中间件手册](iplatform-common/ServiceCombAlpha.md)
 
 ## 2. 开发手册
 
@@ -64,6 +65,7 @@ IPLATFORM-BOOT 是以 SpringCloud 为核心的微服务开发框架，提供了�
   * [多租户配置手册](developer/multitenant/README.md)
   * [通知服务集成手册](developer/notify/README.md)
   * [断路器集成手册](developer/hystrix/README.md)
+  * [分布式事务集成手册](developer/distributedtransactions/README.md)
 * 其他
 
   * [日志标准化](Logs.md)
