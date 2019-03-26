@@ -124,7 +124,22 @@ https://127.0.0.1:9999/auth
 
 ![auth.png](images/AuthService/auth.png)
 
-## 6. Docker
+## 6. 插件安装
+* 目录下新建plugins目录，放入插件jar包，如auth-server-plugin-xxxx.jar
+
+* 修改启动脚本 run.sh 中 ,增加load.path
+
+-Dloader.path="./plugins"
+* 修改启动脚本 run.sh 中 ,增加插件启动参数，xxxx表示项目简写
+
+| 参数名                                | 必填 | 默认值   | 说明                                                         |
+| ------------------------------------ | ---- | -------- | ------------------------------------------------------------ |
+| plugins.xxxx.4a.auth.url             | 是   |          | 定义插件的第三方认证地址,http://127.0.0.1:8080/sso  |
+| plugins.xxxx.4a.synch.url            | 是   |          | 定义插件的第三方用户和组织同步地址 ,http://127.0.0.1/adminicenter                                        |
+| plugins.xxxx.4a.enabled              |  是  |   false  | 启用插件参数                                               |
+
+
+## 7. Docker
 
 ```yaml
 version: '3.2'
