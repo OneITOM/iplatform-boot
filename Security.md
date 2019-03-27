@@ -48,6 +48,8 @@ spring.datasource.password=ENC(mBaGBXPu1VFgECoBH5NGWeTdFLy79Ic5)
 ## <a id="1.2"></a>RESTful API 限速
 
 > 可以通过@RateLimit注解实现限速保护，限速粒度是客户端IP+URL，当超过调用阀值设置后，这个IP对于相同的URL的调用将不再被受理，窗口期结束后自动恢复。
+>
+> 另外可以通过实现org.iplatform.microservices.core.limit.controller.provide.IRateLimitProvide接口，然后自动注入的方式进行自定义限制。重写方法putLimit实现增加限制，removeLimit删除限制，get方法实现自定义限制处理(如通过request对象获取IP、接口、用户等信息作为限制条件),样例见下方自定义限制实现，通过接口+IP限制访问频率。
 
 limit 调用次数阀值
 
@@ -58,6 +60,8 @@ unit 窗口期时长单位
 onlyLimitThrow 只对异常调用进行限制
 
 onlyLimitThrowClass 异常类定义，不定义则对所有异常进行阀值计数
+
+rateLimitType 限制类型，包括RateLimitType.COUNT和RateLimitType.WINDOW，默认为RateLimitType.WINDOW，COUNT为时间范围计数，WINDOW为滑动时间窗口计数
 
 * 1秒限制调用2次
 
@@ -75,6 +79,47 @@ onlyLimitThrowClass 异常类定义，不定义则对所有异常进行阀值计
 
   ```java
   @RateLimit(limit = 10, duration = 1, unit = TimeUnit.MINUTES, onlyLimitThrow=Boolean.TRUE, onlyLimitThrowClass = {AuthException.class})
+  ```
+
+- 自定义限制实现
+
+  ```java
+  @Component
+  public class RateLimitProvide implements IRateLimitProvide {
+  
+    private Map<String, RateLimitProvideBean> limitMap = new ConcurrentHashMap<>();
+  
+    @Override
+    public RateLimitProvideBean get(String key) {
+      return limitMap.get(key);
+    }
+  
+    @Override
+    public RateLimitProvideBean get(HttpServletRequest request) {
+      String ip = request.getHeader("X-FORWARDED-FOR");
+      if (ip == null || ip.trim().length() == 0) {
+        ip = request.getRemoteHost();
+      }
+      String url = request.getRequestURI();
+      String key = String.format("req:limit:%s:%s", url, ip);
+      return limitMap.get(key);
+    }
+  
+    @Override
+    public void putLimit(String key, int limit, long duration, TimeUnit unit) {
+      RateLimitProvideBean bean = new RateLimitProvideBean();
+      bean.setKey(key);
+      bean.setLimit(limit);
+      bean.setUnit(unit);
+      bean.setDuration(duration);
+      limitMap.put(key, bean);
+    }
+  
+    @Override
+    public void removeLimit(String key) {
+      limitMap.remove(key);
+    }
+  }
   ```
 
 ## <a id="3"></a>安全漏洞
