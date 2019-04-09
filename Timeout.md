@@ -15,13 +15,13 @@ ribbon.MaxAutoRetries=0
 hystrix.command.default.execution.isolation.thread.timeoutInMilliseconds=180000
 ```
 
-Ribbon 是 RestTemplate调用时的超时设置
+Ribbon 是 RestTemplate 调用时的超时设置
 
-Hystrix 是短路器控制的超时设置，这个设置还和断路器重试次数有关，这个配置一定要大与 Ribbon 的配置，推荐公式 `(1 + ribbon.MaxAutoRetries + ribbon.MaxAutoRetriesNextServer) * ReadTimeout`
+Hystrix 是断路器控制的超时设置，这个设置还和断路器重试次数有关，这个配置一定要大与 Ribbon 的配置，推荐公式 `(1 + ribbon.MaxAutoRetries + ribbon.MaxAutoRetriesNextServer) * ReadTimeout`
 
 ## 定制某个方法的超时
 
-有的时候部分 SERVICE 接口的时常比较长，那么久需要针对某个接口单独定义超时时常，假设以下方法耗时较长，平均大概在2分钟才能返回
+有的时候部分 SERVICE 接口的时常比较长，那么就需要针对某个接口单独定义超时时常，假设以下方法耗时较长，平均大概在2分钟才能返回
 
 IndexClient.class
 
