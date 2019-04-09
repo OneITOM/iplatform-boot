@@ -8,13 +8,16 @@ UI 调用 SERVICE 相关的超时参数有如下几个，默认值如下
 # Ribbon 超时
 ribbon.ConnectTimeout=10000
 ribbon.ReadTimeout=60000
+ribbon.MaxAutoRetriesNextServer=1
+ribbon.MaxAutoRetries=0
+
 # 断路器超时
 hystrix.command.default.execution.isolation.thread.timeoutInMilliseconds=180000
 ```
 
 Ribbon 是 RestTemplate调用时的超时设置
 
-Hystrix 是短路器控制的超时设置，这个设置还和断路器重试次数有关，这个配置一定要大与 Ribbon 的配置
+Hystrix 是短路器控制的超时设置，这个设置还和断路器重试次数有关，这个配置一定要大与 Ribbon 的配置，推荐公式 `(1 + ribbon.MaxAutoRetries + ribbon.MaxAutoRetriesNextServer) * ReadTimeout`
 
 ## 定制某个方法的超时
 
@@ -35,7 +38,10 @@ public interface IndexClient {
 单独配置这个方法的超时参数如下：
 
 ```yaml
-example-service#/exampleservice/api/v1/hello.ribbon.ReadTimeout: 120000
+example-service#/exampleservice/api/v1/hello:
+	ribbon:
+		ConnectTimeout: 10000
+		ReadTimeout: 120000
 
 hystrix:
   command:

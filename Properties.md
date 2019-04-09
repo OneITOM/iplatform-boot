@@ -245,6 +245,7 @@ server.ssl.enabled-protocols=TLSv1.2
 ```properties
 # Fegin自动重试次数
 ribbon.MaxAutoRetries=0
+ribbon.MaxAutoRetriesNextServer=1
 ribbon.ConnectTimeout=10000
 ribbon.ReadTimeout=60000
 ```
