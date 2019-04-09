@@ -209,6 +209,8 @@ Spring版本升级到4.2.9
 
 支持为 @FeginClient 方法单独配置超时[参数](Timeout.md)
 
+支持自定义 @RateLimit 实现
+
 ### BUG修复
 
 ### 改进
