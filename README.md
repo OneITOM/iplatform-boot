@@ -91,8 +91,9 @@ IPLATFORM-BOOT 是以 SpringCloud 为核心的微服务开发框架，提供了�
 - [微服务管控平台集成](product/triden/API.md)
 - [自动化引擎集成手册](product/automatic/README.md)
 
-## 5. 附件
+## 5. 其他
 
+* [风格指南](StyleGuide.md)
 * [框架参数说明](Properties.md)
 * [基准测试](Benchmark.md)
 * [IPv6 Support](IPv6.md)
