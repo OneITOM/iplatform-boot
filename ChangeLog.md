@@ -215,6 +215,8 @@ Spring版本升级到4.2.9
 
 ### BUG修复
 
+mongo自动装配增加 `spring.data.mongodb.uri` 判断
+
 ### 改进
 
 重构模块，增加单独的依赖管理模块
