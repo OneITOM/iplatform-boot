@@ -39,7 +39,7 @@ sh run.sh restart
 
 | 参数名                      | 必填 | 默认值 | 说明                                                         |
 | --------------------------- | ---- | ------ | ------------------------------------------------------------ |
-| discovery.server.address    | 是   |        | 定义注册服务的地址，当集群模式时配置多个地址逗号分隔  discovery.server.address=https://192.168.0.1:8761/eureka/,https://192.168.0.2:8761/eureka/ |
+| discovery.server.address    | 是   |        | 定义注册服务的地址，当集群模式时配置多个地址逗号分隔  discovery.server.address=http://192.168.0.1:8761/eureka/,http://192.168.0.2:8761/eureka/ |
 | server.host                 | 是   |        | 服务绑定IP                                                   |
 | server.port                 |      | 8761   | 服务绑定端口                                                 |
 | spring.data.mongodb.uri     | 是   |        | 集中配置存储mongodb地址，mongodb://localhost/config-db        |
