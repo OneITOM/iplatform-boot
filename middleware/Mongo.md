@@ -79,7 +79,7 @@
 
 5. 设置开机启动脚本
 
-   vi /etc/rc.d/init.d/mongod，（注意：以下脚本中的useradmin，adminpassword为管理员的用户名密码）
+   vi /etc/rc.d/init.d/mongod
 
    ```bash
    #!/bin/sh
