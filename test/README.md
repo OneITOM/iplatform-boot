@@ -2,17 +2,15 @@
 
 ## 集成测试
 
-> 集成测试可以提高研发人员测试效率，理解产品处理逻辑，需要对一下工具包的用法有一个基本了解
+> 集成测试可以提高研发人员测试效率，理解产品处理逻辑
 >
-> [Mockito](https://github.com/mockito/mockito)
->
-> [Awaitility](https://github.com/awaitility/awaitility)
->
-> [Hamcrest](https://github.com/hamcrest/JavaHamcrest)
->
-> [Powermock](https://github.com/powermock/powermock)
->
-> 以下说明样例来自于文档服务
+
+相关库
+
+* [Mockito](https://github.com/mockito/mockito)
+* [Awaitility](https://github.com/awaitility/awaitility)
+* [Hamcrest](https://github.com/hamcrest/JavaHamcrest)
+* [Powermock](https://github.com/powermock/powermock)
 
 增加依赖库
 
