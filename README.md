@@ -72,7 +72,7 @@ IPLATFORM-BOOT 是以 SpringCloud 为核心的微服务开发框架，提供了�
   * [安全开发手册](Security.md)
   * [Docker](Dockerfile.md)
   * [关于超时配置](Timeout.md)
-  * 自动化测试
+  * [自动化测试](test/README.md)
 
 ## 3. 中间件部署手册
 
