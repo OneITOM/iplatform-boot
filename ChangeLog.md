@@ -215,7 +215,13 @@ Spring版本升级到4.2.9
 
 ### BUG修复
 
-mongo自动装配增加 `spring.data.mongodb.uri` 判断
+mongo自动装配增加 `spring.data.mongodb.uri` 和 `spring.data.mongodb.host`  判断
+
+flyway自动装配时增加 `spring.datasource` 参数判断
+
+解决 `server.port=0` 和 `spring.cloud.config.enabled=true` 时随机端口始终无法生成问题
+
+新增 0iplatform-fixed 模块，同类不同包时 war 加载顺序问题 
 
 ### 改进
 
