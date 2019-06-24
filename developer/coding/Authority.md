@@ -140,7 +140,132 @@ public String test(ModelMap map) throws Exception {
 <div th:text="${user.departments}">所属部门</div>
 ```
 
-### 4. 忽略鉴权
+### 4. 功能点鉴权
+
+> 功能点鉴权框架只提供页面标签，方法注解组件能力支持，并不提供功能点初始化和判断的实现，研发人员需要自己实现具体逻辑
+
+#### 自定义功能点服务
+
+新建自一个服务 MyFunctionIdStorage 实现 FunctionIdStorage 接口，并实现 hasFuncID 方法
+
+```java
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
+import org.springframework.stereotype.Component;
+
+@Component
+public class MyFunctionIdStorage implements FunctionIdStorage {
+
+  //存活时间
+  private long timetolive = 60 * 1000;
+  //过期时间
+  private long expiredate = 0;
+
+  private Map<String, Set<String>> userFuncIds = new HashMap<>();
+
+  @Override
+  public boolean hasFuncID(String userId, String funcId) {
+    if (expiredate == 0 || System.currentTimeMillis() > expiredate) {
+      this.syncFuncIds(userId);
+    }
+    if (userFuncIds.containsKey(userId)) {
+      Set<String> userSet = userFuncIds.get(userId);
+      if (userSet != null) {
+        if (userSet.contains(funcId)) {
+          return true;
+        } else {
+          return false;
+        }
+      } else {
+        return false;
+      }
+    } else {
+      return false;
+    }
+  }
+
+  private void syncFuncIds(String userId) {
+    // 此处获取真实用户功能点集合
+    Set<String> userSet = new HashSet<>();
+    userSet.add("100");
+    userSet.add("101");
+    userFuncIds.put(userId, userSet);
+    expiredate = System.currentTimeMillis() + timetolive;
+  }
+}
+```
+
+#### 页面鉴权标签
+
+在页面上通过标签实现页面元素的鉴权
+
+* 单功能点鉴权
+
+  ```html
+  <li th:if="${@iplatformSecurity.hasFuncID('100')}">
+      <!-- 具有功能点 100 才可以看见此片段-->           
+  </li>  
+  ```
+
+- 多功能点或鉴权
+
+  ```html
+  <li th:if="${@iplatformSecurity.hasFuncID('100') || @iplatformSecurity.hasFuncID('101')}">
+      <!-- 具有功能点 100 或 101 才可以看见此片段-->           
+  </li>  
+  ```
+
+- 多功能点与鉴权
+
+  ```html
+  <li th:if="${@iplatformSecurity.hasFuncID('100') && @iplatformSecurity.hasFuncID('101')}">
+      <!-- 具有功能点 100 和 101 才可以看见此片段-->           
+  </li>  
+  ```
+
+#### 方法鉴权注解
+
+在方法上通过注解实现功能点鉴权
+
+* 单功能点鉴权
+
+  ```java
+  @PreAuthorize("@iplatformSecurity.hasFuncID('100')")
+  public void somthing(ModelMap map) throws AuthException {
+    //具有功能点 100 的用户可以进入此方法
+  }
+  ```
+
+* 多功能点或鉴权
+
+  ```java
+  @PreAuthorize("@iplatformSecurity.hasFuncID('100') || @iplatformSecurity.hasFuncID('101')")
+  public void somthing(ModelMap map) throws AuthException {
+    //具有功能点 100 或 101 的用户可以进入此方法
+  }
+  ```
+
+* 多功能点与鉴权
+
+  ```java
+  @PreAuthorize("@iplatformSecurity.hasFuncID('100') && @iplatformSecurity.hasFuncID('101')")
+  public void somthing(ModelMap map) throws AuthException {
+    //具有功能点 100 和 101 的用户可以进入此方法
+  }
+  ```
+
+* 与SpringSecurity 结合使用
+
+  ```java
+  @PreAuthorize("hasRole('ROLE_ADMIN') && @iplatformSecurity.hasFuncID('100')")
+  public void somthing(ModelMap map) throws AuthException {
+    //具有功能点 100 和 并且是管理员角色 ROLE_ADMIN 的用户可以进入此方法
+  }
+  ```
+
+### 5. 忽略鉴权
 
 > 每个项目可以通过扩展WebSecurityConfigurerAdapter类实现忽略path的定义
 
