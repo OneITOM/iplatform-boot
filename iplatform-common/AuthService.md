@@ -14,7 +14,7 @@
 
 | 文件名                     | 说明                       |
 | -------------------------- | -------------------------- |
-| auth-server-0.0.2.jar      | 主程序文件                 |
+| auth-server-1.1.0.100.jar  | 主程序文件                 |
 | run.sh                     | 启停脚本                   |
 | static/images/login_bg.jpg | 登录页面背景图片（非必需） |
 
@@ -42,20 +42,22 @@ sh run.sh restart
 
 > 所有的参数都定义在启动脚本 run.sh 中 
 
-| 参数名                                | 必填 | 默认值   | 说明                                                         |
-| ------------------------------------- | ---- | -------- | ------------------------------------------------------------ |
-| discovery.server.address              | 是   |          | 定义注册服务的地址，当集群模式时配置多个地址逗号分隔  discovery.server.address=https://192.168.0.1:8761/eureka/,https://192.168.0.2:8761/eureka/ |
-| server.host                           | 是   |          | 服务绑定IP                                                   |
-| server.port                           |      | 9999     | 服务绑定端口                                                 |
-| spring.cloud.config.enable            | 是   | true     | 开启集中配置功能                                             |
-| spring.cloud.config.profile           | 是   |          | 集中配置环境名，例如：生产环境                               |
-| spring.datasource.platform            | 是   |          | 数据库平台类型配置，例如：mysql                              |
-| spring.datasource.dataSourceClassName | 是   |          | 数据库JDBC驱动，例如：com.mysql.jdbc.Driver                  |
-| spring.datasource.url                 | 是   |          | 数据库URL，例如：jdbc:mysql://oneitom-mysql:3306/authdb?useUnicode=true&characterEncoding=utf-8&autoReconnect=true |
-| spring.datasource.username            | 是   |          | 数据库用户名                                                 |
-| spring.datasource.password            | 是   |          | 数据库密码                                                   |
-| authserver.tokenStoreType             | 是   | redis    | Token存储方式                                                |
-
+| 参数名                                | 必填 | 默认值 | 说明                                                         |
+| ------------------------------------- | ---- | ------ | ------------------------------------------------------------ |
+| discovery.server.address              | 是   |        | 定义注册服务的地址，当集群模式时配置多个地址逗号分隔  discovery.server.address=https://192.168.0.1:8761/eureka/,https://192.168.0.2:8761/eureka/ |
+| server.host                           | 是   |        | 服务绑定IP                                                   |
+| server.port                           |      | 9999   | 服务绑定端口                                                 |
+| spring.cloud.config.enable            | 是   | true   | 开启集中配置功能                                             |
+| spring.cloud.config.profile           | 是   |        | 集中配置环境名，例如：生产环境                               |
+| spring.datasource.platform            | 是   |        | 数据库平台类型配置，例如：mysql                              |
+| spring.datasource.dataSourceClassName | 是   |        | 数据库JDBC驱动，例如：com.mysql.jdbc.Driver                  |
+| spring.datasource.url                 | 是   |        | 数据库URL，例如：jdbc:mysql://oneitom-mysql:3306/authdb?useUnicode=true&characterEncoding=utf-8&autoReconnect=true |
+| spring.datasource.username            | 是   |        | 数据库用户名                                                 |
+| spring.datasource.password            | 是   |        | 数据库密码                                                   |
+| authserver.tokenStoreType             | 是   | redis  | Token存储方式                                                |
+| login.enabled                         | 否   | true  | 启动登录页面                                                |
+| login.home.enabled             | 否   | true  | 启用首页开关                                           |
+| login.security.code             | 否   | true  | 启用登录图形验证码                                           |
 ### 4.1 Redis参数配置
 
 > Redis连接方式分别为单例，哨兵，集群三种，生产环境不能使用单例方式，这三种方式的配置参数稍有不同，不能混合使用
@@ -145,7 +147,7 @@ https://127.0.0.1:9999/auth
 version: '3.2'
 services:
   oneitom-auth:
-    image: boco/oneitom-auth:0.0.1
+    image: boco/oneitom-auth:1.1.0.100
     hostname: oneitom-auth
     container_name: oneitom-auth
     restart: always
