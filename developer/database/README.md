@@ -30,8 +30,8 @@ spring.datasource.test-while-idle=true
 spring.datasource.time-between-eviction-runs-millis=300000
 # 空闲链接清除间隔(非必填，默认30s)
 spring.datasource.min-evictable-idle-time-millis=30000
-# 检查空闲链接SQL（非必填，默认SELECT 1）
-spring.datasource.validation-query='SELECT 1'
+# 检查空闲链接SQL（oracle必填SELECT 1 FROM DUAL，覆盖默认的SELECT 1，mysql非必填）
+spring.datasource.validation-query='SELECT 1 FROM DUAL'
 # 最大并发连接数(非必填，默认100)
 spring.datasource.max-active=100
 # 最大空闲连接数(非必填，默认5)

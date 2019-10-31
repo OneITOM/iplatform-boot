@@ -19,7 +19,7 @@
   groupId=org.iplatform.myproject
   artifactId=myproject
   package=org.iplatform.myproject
-  version=0.0.1-SNAPSHOT
+  version=1.0.0.100
   ```
 
 - 创建项目
@@ -29,12 +29,12 @@
   -DgroupId=org.iplatform.myproject \
   -DartifactId=myproject \
   -Dpackage=org.iplatform.myproject \
-  -Dversion=0.0.1-SNAPSHOT \
+  -Dversion=1.0.0.100 \
   -DarchetypeCatalog=http://127.0.0.1/nexus/content/repositories/releases \
   -DarchetypeRepository=http://127.0.0.1/nexus/content/repositories/releases \
   -DarchetypeGroupId=org.iplatform.archetypes \
   -DarchetypeArtifactId=iplatform-all-archetype \
-  -DarchetypeVersion=0.0.8 \
+  -DarchetypeVersion=1.0.0.100 \
   -DinteractiveMode=false
   ```
 
@@ -57,11 +57,11 @@
 <modelVersion>4.0.0</modelVersion>
 <groupId>org.iplatform.myproject</groupId>
 <artifactId>myproject-util</artifactId>
-<version>0.0.1-SNAPSHOT</version>
+<version>1.0.0.100</version>
 <parent>
     <groupId>org.iplatform.myproject</groupId>
     <artifactId>myproject</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>1.0.0.100</version>
     <relativePath>../</relativePath>
 </parent>
 ```
@@ -74,7 +74,7 @@
 <modelVersion>4.0.0</modelVersion>
 <groupId>org.iplatform.myproject</groupId>
 <artifactId>myproject-service</artifactId>
-<version>0.0.1-SNAPSHOT</version>
+<version>1.0.0.100</version>
 <name>myproject-service</name>
 <description>myproject-service</description>
 <packaging>jar</packaging>
@@ -82,7 +82,7 @@
     <dependency>
         <groupId>org.iplatform.myproject</groupId>
         <artifactId>myproject-util</artifactId>
-        <version>0.0.1-SNAPSHOT</version>
+        <version>1.0.0.100</version>
     </dependency>
 </dependencies>
 ```
@@ -95,21 +95,21 @@
 <modelVersion>4.0.0</modelVersion>
 <groupId>org.iplatform.myproject</groupId>
 <artifactId>myproject-ui</artifactId>
-<version>0.0.1-SNAPSHOT</version>
+<version>1.0.0.100</version>
 <name>myproject-ui</name>
 <description>myproject-ui</description>
 <packaging>jar</packaging>
 <parent>
     <groupId>org.iplatform.myproject</groupId>
     <artifactId>myproject</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>1.0.0.100</version>
     <relativePath>../</relativePath>
 </parent>
 <dependencies>
     <dependency>
         <groupId>org.iplatform.myproject</groupId>
         <artifactId>myproject-util</artifactId>
-        <version>0.0.1-SNAPSHOT</version>
+        <version>1.0.0.100</version>
     </dependency>
 </dependencies>
 ```
@@ -119,17 +119,17 @@
 > 修改项目名称、服务发现地址、服务IP、服务端口、contextPath等，其中contextPath必须配置，不可省略，7层负载均衡的实现依赖此参数
 
 ```properties
-PRONAMEUI=myproject-ui-0.0.1-SNAPSHOT.jar
-PRONAMESERVICE=myproject-service-0.0.1-SNAPSHOT.jar
+PRONAMEUI=myproject-ui-1.0.0.100.jar
+PRONAMESERVICE=myproject-service-1.0.0.100.jar
 
 nohup java -Xmx1g -Xms1g -Xss256k -XX:OnOutOfMemoryError="kill -9 %p" -jar ${PRONAMESERVICE} \
-    --discovery.server.address="https://127.0.0.1:8761/eureka/" \
+    --discovery.server.address="http://127.0.0.1:8761/eureka/" \
     --server.host=127.0.0.1 \
     --contextPath=myprojectservice \
     --spring.profiles.active=prod >/dev/null 2>&1 &
 
     nohup java -Xmx1g -Xms1g -Xss256k -XX:OnOutOfMemoryError="kill -9 %p" -jar ${PRONAMEUI} \
-    --discovery.server.address="https://127.0.0.1:8761/eureka/" \
+    --discovery.server.address="http://127.0.0.1:8761/eureka/" \
     --server.host=127.0.0.1 \
     --contextPath=myprojectui \
     --spring.profiles.active=prod >/dev/null 2>&1 &
@@ -146,8 +146,8 @@ mvn clean package
 ## 5. 部署
 
 1. 创建部署目录
-2. 复制myproject/service/target/myproject-service-0.0.1-SNAPSHOT.jar到部署目录下
-3. 复制myproject/ui/target/myproject-ui-0.0.1-SNAPSHOT.jar到部署目录下
+2. 复制myproject/service/target/myproject-service-1.0.0.100.jar到部署目录下
+3. 复制myproject/ui/target/myproject-ui-1.0.0.100.jar到部署目录下
 4. 复制run.sh到部署目录下
 
 ## 6. 启停
